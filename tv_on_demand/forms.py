@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from mmutils.forms import BRDateTimeField
-from tv_on_demand.models import Structure
+from tv_on_demand.models import Structure, StructureRow
 
 class StructureForm(forms.ModelForm):
     date_start = BRDateTimeField(label=_('date start'), required=False)
@@ -22,3 +22,26 @@ class StructureForm(forms.ModelForm):
     
     class Meta:
         model = Structure
+
+
+class StructureRowForm(forms.ModelForm):
+    date_start = BRDateTimeField(label=_('date start'), required=True)
+    date_end = BRDateTimeField(label=_('date end'), required=True)
+    
+    def clean(self):
+        gdata = lambda key: self.cleaned_data.get(key, '')
+        ct_number = lambda key: gdata(key) and 1 or 0
+        total_content = ct_number('entry') + ct_number('mediafile') + ct_number('question')
+        
+        if total_content < 1:
+            raise forms.ValidationError(_('you must pick a row content: mediafile, entry or question'))        
+
+        if total_content > 1:
+            raise forms.ValidationError(_('you cannot pick more than one row content'))
+        
+        
+        return self.cleaned_data
+        
+    
+    class Meta:
+        model = StructureRow

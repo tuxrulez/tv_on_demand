@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.core.exceptions import ValidationError
 from mediafiles.models import MediaFile
 from quizzes.models import Question
 from news.models import ENTRY_TYPES
@@ -53,4 +54,4 @@ class StructureRow(MPTTModel):
         
     def __unicode__(self):
         return self.title
-        
+      

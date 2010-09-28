@@ -65,8 +65,7 @@ class StructureRowModelTest(TestCase):
         question = Question.objects.all()[0]
         instance = create_structurerow(mediafile=mediafile, question=question)
         
-        self.assertEqual(StructureRow.objects.count(), 1)
-    
-    
+        self.assertEqual(StructureRow.objects.count(), 1)        
+  
     
         
