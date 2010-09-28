@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
 from django.test import TestCase
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from tv_on_demand.models import Structure, StructureRow
 from mediafiles.models import MediaFile
@@ -10,6 +11,11 @@ from quizzes.models import Question
 #helpers
 now = datetime.now()
 later = datetime.now() + timedelta(days=10)
+
+def create_user(username='nobody'):
+    email = '%s@somedomain.com' %username
+    return User.objects.create_user(username=username, password='123', email=email)
+
 
 def create_structure(name='test name', template='test.swf', **kwargs):
     data = {'name': name, 'template': template}
@@ -27,8 +33,10 @@ def create_structurerow(structure=None, title='test title', label='test label',\
             'date_end': date_end, 'entry': entry, 'order': order}
     data.update(**kwargs)
     
-    return StructureRow.objects.create(**data)
+    instance = StructureRow.objects.create(**data)
+    instance.users.add(create_user())
 
+    return instance
 
 
 class StructureModelTest(TestCase):

@@ -3,3 +3,10 @@ DEPENDS:
 	mediafiles
     quizzes
     django-mptt
+    mmutils
+
+INSTRUCTIONS:
+    add the app at your INSTALLED_APPS (settings)
+    add the following url at the top of your main url file:
+    
+        include('^admin/', include('tv_on_demand.urls')),

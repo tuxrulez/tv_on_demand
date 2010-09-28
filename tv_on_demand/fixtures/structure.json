@@ -1,0 +1,24 @@
+[
+    {
+        "pk": 1, 
+        "model": "tv_on_demand.structure", 
+        "fields": {
+            "external_id": null, 
+            "template": "tv_on_demand/structure/template/radio.swf", 
+            "object_id": null, 
+            "content_type": null, 
+            "name": "Structure 1"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tv_on_demand.structure", 
+        "fields": {
+            "external_id": null, 
+            "template": "tv_on_demand/structure/template/radio_1.swf", 
+            "object_id": null, 
+            "content_type": null, 
+            "name": "Structure 2"
+        }
+    }
+]

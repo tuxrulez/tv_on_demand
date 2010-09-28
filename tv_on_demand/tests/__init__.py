@@ -3,3 +3,4 @@
 from tv_on_demand.tests.models import *
 from tv_on_demand.tests.admin import *
 from tv_on_demand.tests.views import *
+from tv_on_demand.tests.forms import *

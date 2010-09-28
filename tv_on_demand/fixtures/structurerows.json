@@ -1,0 +1,86 @@
+[
+    {
+        "pk": 1, 
+        "model": "tv_on_demand.structurerow", 
+        "fields": {
+            "rght": 8, 
+            "level": 0, 
+            "parent": null, 
+            "title": "structure 1 root", 
+            "date_end": "2090-12-19 11:54:15", 
+            "date_start": "2010-09-27 11:53:56", 
+            "question": null, 
+            "mediafile": null, 
+            "lft": 1, 
+            "tree_id": 1, 
+            "entry": "latest", 
+            "label": "structuture 1 root description", 
+            "external_id": null, 
+            "order": 0, 
+            "structure": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tv_on_demand.structurerow", 
+        "fields": {
+            "rght": 3, 
+            "level": 1, 
+            "parent": 1, 
+            "title": "structure 1 root-child", 
+            "date_end": "2090-09-27 11:59:46", 
+            "date_start": "2010-09-27 11:59:43", 
+            "question": null, 
+            "mediafile": null, 
+            "lft": 2, 
+            "tree_id": 1, 
+            "entry": "latest", 
+            "label": "structure 1 root-child description", 
+            "external_id": null, 
+            "order": 0, 
+            "structure": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tv_on_demand.structurerow", 
+        "fields": {
+            "rght": 7, 
+            "level": 1, 
+            "parent": 1, 
+            "title": "structure 1 root-child2", 
+            "date_end": "2090-09-27 12:00:41", 
+            "date_start": "2010-09-27 12:00:40", 
+            "question": null, 
+            "mediafile": null, 
+            "lft": 4, 
+            "tree_id": 1, 
+            "entry": "forecast", 
+            "label": "structure 1 root-child2", 
+            "external_id": null, 
+            "order": 1, 
+            "structure": 1
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "tv_on_demand.structurerow", 
+        "fields": {
+            "rght": 6, 
+            "level": 2, 
+            "parent": 3, 
+            "title": "structure 1 root-child2-child", 
+            "date_end": "2090-09-27 12:01:43", 
+            "date_start": "2010-09-27 12:01:38", 
+            "question": null, 
+            "mediafile": null, 
+            "lft": 5, 
+            "tree_id": 1, 
+            "entry": "transit", 
+            "label": "structure 1 root-child2-child description", 
+            "external_id": null, 
+            "order": 0, 
+            "structure": 1
+        }
+    }
+]

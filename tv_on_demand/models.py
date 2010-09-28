@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import mptt
 from mptt.models import MPTTModel
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -42,6 +42,7 @@ class StructureRow(MPTTModel):
     date_end = models.DateTimeField(_('date end'))
     external_id = models.PositiveIntegerField(_('external id'), null=True, blank=True)
     order = models.PositiveIntegerField(_('order'))
+    users = models.ManyToManyField(User, verbose_name=_('allowed users'), null=True, blank=True)
     
     class Meta:
         verbose_name = _('row')
