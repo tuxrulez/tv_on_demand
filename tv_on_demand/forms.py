@@ -37,8 +37,7 @@ class StructureRowForm(forms.ModelForm):
             raise forms.ValidationError(_('you must pick a row content: mediafile, entry or question'))        
 
         if total_content > 1:
-            raise forms.ValidationError(_('you cannot pick more than one row content'))
-        
+            raise forms.ValidationError(_('you cannot pick more than one row content'))        
         
         return self.cleaned_data
         

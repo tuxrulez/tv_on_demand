@@ -6,12 +6,13 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
 from tv_on_demand.forms import StructureForm, StructureRowForm
-from tv_on_demand.models import Structure
+from tv_on_demand.models import Structure, StructureRow
 
 @permission_required('tv_on_demand.add_structure')
 @permission_required('tv_on_demand.change_structure')
 @permission_required('tv_on_demand.add_structurerow')
 @permission_required('tv_on_demand.change_structurerow')
+@permission_required('tv_on_demand.delete_structurerow')
 def structure_add(request):
     context = {}
     response = simple.direct_to_template(request,
@@ -21,10 +22,13 @@ def structure_add(request):
     return response
 
 
-def generic_structure_ajax(request, **kwargs):
+def generic_structure_ajax(request, modelform, **kwargs):
+    if not request.is_ajax():
+        return HttpResponseForbidden('forbbiden')
+        
     json_data = {}
     if request.POST:
-        form = StructureForm(request.POST, request.FILES, **kwargs)
+        form = modelform(request.POST, request.FILES, **kwargs)
         
         if form.is_valid():
             instance = form.save()
@@ -33,46 +37,40 @@ def generic_structure_ajax(request, **kwargs):
             json_data['errors'] = form.errors.items()
 
     return HttpResponse(simplejson.dumps(json_data))
+    
 
 
 @permission_required('tv_on_demand.add_structure')    
-def structure_ajax_add(request):
-    if not request.is_ajax():
-        return HttpResponseForbidden('forbbiden')
-    
-    return generic_structure_ajax(request)
+def structure_ajax_add(request):    
+    return generic_structure_ajax(request, StructureForm)
     
 
 @permission_required('tv_on_demand.change_structure')
-def structure_ajax_change(request, object_id):
-    if not request.is_ajax():
-        return HttpResponseForbidden('forbidden')
-        
-    structure = get_object_or_404(Structure, pk=object_id)
-    
-    return generic_structure_ajax(request, instance=structure)
+def structure_ajax_change(request, object_id):        
+    structure = get_object_or_404(Structure, pk=object_id)    
+    return generic_structure_ajax(request, StructureForm, instance=structure)
 
 
 @permission_required('tv_on_demand.add_structurerow')
 def structurerow_ajax_add(request):
+    return generic_structure_ajax(request, StructureRowForm)
+    
+    
+@permission_required('tv_on_demand.change_structurerow')
+def structurerow_ajax_change(request, object_id):       
+    structurerow = get_object_or_404(StructureRow, pk=object_id)       
+    return generic_structure_ajax(request, StructureRowForm, instance=structurerow)
+    
+
+@permission_required('tv_on_demand.delete_structurerow')
+def structurerow_ajax_delete(request, object_id):
     if not request.is_ajax():
         return HttpResponseForbidden('forbidden')
     
-    json_data = {}
-    if request.POST:
-        form = StructureRowForm(request.POST)
-        
-        if form.is_valid():
-            instance = form.save()           
-            json_data = instance.serialize()
-            
-        else:
-            json_data['errors'] = form.errors.items()
+    instance = get_object_or_404(StructureRow, pk=object_id)
+    instance.delete()
     
-    response = HttpResponse(simplejson.dumps(json_data))
-    return response
-    
-    
+    return HttpResponse('hello')
     
     
     

@@ -22,8 +22,9 @@ class StructureViewTest(TestCase):
         change_structure_perm = Permission.objects.get(codename='change_structure')
         add_row_perm = Permission.objects.get(codename='add_structurerow')
         change_row_perm = Permission.objects.get(codename='change_structurerow')
+        delete_row_perm = Permission.objects.get(codename='delete_structurerow')
         self.user.user_permissions.add(add_structure_perm, change_structure_perm,
-                                       add_row_perm, change_row_perm)
+                                       add_row_perm, change_row_perm, delete_row_perm)
         
         self.client.login(username=self.userdata['username'], password=self.userdata['password'])        
     
@@ -130,19 +131,21 @@ class StructureNoPermissions(TestCase):
 
 class StructureRowViewTest(TestCase):
     
-    fixtures = ['structures.json', 'mediafiles.json']    
+    fixtures = ['structures.json', 'mediafiles.json', 'structurerows.json']    
     userdata = {'username': 'admin', 'password': '123', 'email': 'admin@admin.com'}
     
     def setUp(self):
         self.user = User.objects.create_user(**self.userdata)
         add_perm = Permission.objects.get(codename='add_structurerow')
-        self.user.user_permissions.add(add_perm)
+        change_perm = Permission.objects.get(codename='change_structurerow')
+        delete_perm = Permission.objects.get(codename='delete_structurerow')
+        self.user.user_permissions.add(add_perm, change_perm, delete_perm)
         self.client.login(username=self.userdata['username'], password=self.userdata['password'])
         
         structure = Structure.objects.all()[0]
         mediafile = MediaFile.objects.all()[0]
         
-        self.default_data = {'structure': structure.pk, 'title': 'test title', 'label': 'test label',
+        self.default_data = {'structure': structure.pk, 'title': 'test title xdv8', 'label': 'test label',
                              'mediafile': mediafile.pk, 'date_start': '14/05/1989 14:15',
                              'date_end': '21/12/2098 21:10', 'order': 0, 'users': [self.user.pk]}    
     
@@ -167,7 +170,7 @@ class StructureRowViewTest(TestCase):
         data = self.default_data
         response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         
-        self.assertEqual(StructureRow.objects.count(), 1)
+        self.assertEqual(StructureRow.objects.filter(title=data['title']).count(), 1)
         self.assertContains(response, data['title'])
         self.assertContains(response, data['label'])
         self.assertContains(response, data['date_start'])
@@ -186,11 +189,53 @@ class StructureRowViewTest(TestCase):
         data['order'] = None
         response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         
-        self.assertEqual(StructureRow.objects.count(), 0)
-        self.assertContains(response, 'errors')        
+        self.assertEqual(StructureRow.objects.filter(title=data['title']).count(), 0)
+        self.assertContains(response, 'errors')
         
-
+    def test_ajax_change_response(self):
+        structurerow = StructureRow.objects.all()[0]
+        url = reverse('tod_structurerow_ajax_change', args=[structurerow.pk])
+        data = self.default_data
+        data['title'] = 'new title is gozo clown =D'
+        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['title'], StructureRow.objects.get(pk=structurerow.pk).title)
+        
+    def test_wrong_ajax_change(self):
+        structurerow = StructureRow.objects.all()[0]
+        url = reverse('tod_structurerow_ajax_change', args=[structurerow.pk])
+        data = self.default_data
+        response = self.client.post(url, data)
+        
+        self.assertEqual(response.status_code, 403)
+        
+    def test_wrong_id_ajax_change(self):
+        url = reverse('tod_structurerow_ajax_change', args=[666])
+        data = self.default_data
+        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        
+        self.assertEqual(response.status_code, 404)
+        
+    def test_ajax_delete_response(self):
+        structurerow = StructureRow.objects.all()[0]
+        url = reverse('tod_structurerow_ajax_delete', args=[structurerow.pk])
+        response = self.client.post(url, {}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(StructureRow.objects.filter(pk=structurerow.pk).count(), 0)
+        
+    def test_wrong_ajax_delete(self):
+        url = reverse('tod_structurerow_ajax_delete', args=[666])
+        response = self.client.post(url, {}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        
+        self.assertEqual(response.status_code, 404)
+        
+        
+        
 class StructureRowNoPermissions(TestCase):
+    
+    fixtures = ['structurerows.json']
     
     def test_ajax_add_response(self):
         url = reverse('tod_structurerow_ajax_add')
@@ -198,3 +243,27 @@ class StructureRowNoPermissions(TestCase):
         response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         
         self.assertEqual(response.status_code, 302)
+        
+    def test_ajax_change_response(self):
+        structurerow = StructureRow.objects.all()[0]
+        url = reverse('tod_structurerow_ajax_change', args=[structurerow.pk])
+        data = {}
+        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        
+        self.assertEqual(response.status_code, 302)
+        
+    def test_ajax_delete_response(self):
+        structurerow = StructureRow.objects.all()[0]
+        url = reverse('tod_structurerow_ajax_delete', args=[structurerow.pk])
+        response = self.client.post(url, {}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(StructureRow.objects.filter(pk=structurerow.pk).count(), 1)
+        
+        
+        
+        
+        
+        
+
+        
