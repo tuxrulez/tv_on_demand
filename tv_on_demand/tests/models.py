@@ -65,7 +65,14 @@ class StructureRowModelTest(TestCase):
         question = Question.objects.all()[0]
         instance = create_structurerow(mediafile=mediafile, question=question)
         
-        self.assertEqual(StructureRow.objects.count(), 1)        
+        self.assertEqual(StructureRow.objects.count(), 1)
+
+
+    def test_br_datetime(self):
+        instance = create_structurerow()
+        date_start_output = instance.br_datetime('date_start')
+        
+        self.assertEqual(date_start_output, instance.date_start.strftime('%d/%m/%Y %H:%M'))
   
     
         

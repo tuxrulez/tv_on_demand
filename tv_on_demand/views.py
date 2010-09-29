@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
-from tv_on_demand.forms import StructureForm
+from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure
 
 @permission_required('tv_on_demand.add_structure')
@@ -28,10 +28,7 @@ def generic_structure_ajax(request, **kwargs):
         
         if form.is_valid():
             instance = form.save()
-            json_data['id'] = instance.pk
-            json_data['name'] = instance.name
-            json_data['template'] = instance.template.url
-        
+            json_data = instance.serialize()        
         else:
             json_data['errors'] = form.errors.items()
 
@@ -61,7 +58,19 @@ def structurerow_ajax_add(request):
     if not request.is_ajax():
         return HttpResponseForbidden('forbidden')
     
-    return HttpResponse('hello') 
+    json_data = {}
+    if request.POST:
+        form = StructureRowForm(request.POST)
+        
+        if form.is_valid():
+            instance = form.save()           
+            json_data = instance.serialize()
+            
+        else:
+            json_data['errors'] = form.errors.items()
+    
+    response = HttpResponse(simplejson.dumps(json_data))
+    return response
     
     
     

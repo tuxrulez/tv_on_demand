@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Permission
 from mediafiles.models import MediaFile
-from tv_on_demand.models import Structure
+from tv_on_demand.models import Structure, StructureRow
 
 FILEPATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -142,13 +142,13 @@ class StructureRowViewTest(TestCase):
         structure = Structure.objects.all()[0]
         mediafile = MediaFile.objects.all()[0]
         
-        self.default_data = {'structure': structure, 'title': 'test title', 'label': 'test label',
-                             'mediafile': mediafile, 'date_start': '14/05/1989 14:15',
+        self.default_data = {'structure': structure.pk, 'title': 'test title', 'label': 'test label',
+                             'mediafile': mediafile.pk, 'date_start': '14/05/1989 14:15',
                              'date_end': '21/12/2098 21:10', 'order': 0, 'users': [self.user.pk]}    
     
     def test_ajax_add_response(self):
         url = reverse('tod_structurerow_ajax_add')
-        data = {}
+        data = self.default_data
         response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         
         self.assertEqual(response.status_code, 200)
@@ -156,7 +156,7 @@ class StructureRowViewTest(TestCase):
         
     def test_wrong_ajax_add_response(self):
         url = reverse('tod_structurerow_ajax_add')
-        data = {}
+        data = self.default_data
         response = self.client.post(url, data)
         
         self.assertEqual(response.status_code, 403)
@@ -164,9 +164,31 @@ class StructureRowViewTest(TestCase):
         
     def test_ajax_add_save(self):
         url = reverse('tod_structurerow_ajax_add')
-        data = {}
+        data = self.default_data
+        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         
-
+        self.assertEqual(StructureRow.objects.count(), 1)
+        self.assertContains(response, data['title'])
+        self.assertContains(response, data['label'])
+        self.assertContains(response, data['date_start'])
+        self.assertContains(response, data['date_end'])
+        self.assertContains(response, 'order')
+        self.assertContains(response, 'users')
+        self.assertContains(response, 'structure')
+        self.assertContains(response, 'mediafile')
+        self.assertContains(response, 'entry')
+        self.assertContains(response, 'question')
+        self.assertContains(response, 'parent')
+    
+    def test_wrong_ajax_add_save(self):
+        url = reverse('tod_structurerow_ajax_add')
+        data = self.default_data
+        data['order'] = None
+        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        
+        self.assertEqual(StructureRow.objects.count(), 0)
+        self.assertContains(response, 'errors')        
+        
 
 class StructureRowNoPermissions(TestCase):
     
@@ -176,38 +198,3 @@ class StructureRowNoPermissions(TestCase):
         response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         
         self.assertEqual(response.status_code, 302)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-    
-        

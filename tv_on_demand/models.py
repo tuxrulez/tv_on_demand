@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.core.exceptions import ValidationError
+from mmutils.common import auto_serialize
 from mediafiles.models import MediaFile
 from quizzes.models import Question
 from news.models import ENTRY_TYPES
@@ -29,6 +30,9 @@ class Structure(models.Model):
         
     def __unicode__(self):
         return self.name
+        
+    def serialize(self):
+        return auto_serialize(self)
         
         
 class StructureRow(MPTTModel):
@@ -54,4 +58,13 @@ class StructureRow(MPTTModel):
         
     def __unicode__(self):
         return self.title
+        
+    def br_datetime(self, field):
+        value = getattr(self, field)
+        return value.strftime('%d/%m/%Y %H:%M')
+        
+    def serialize(self):
+        return auto_serialize(self, datetime_format='%d/%m/%Y %H:%M')   
+    
+    
       
