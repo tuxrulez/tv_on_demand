@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.views.generic import simple
+from django.views.generic.create_update import create_object, update_object
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
@@ -14,13 +14,19 @@ from tv_on_demand.models import Structure, StructureRow
 @permission_required('tv_on_demand.change_structurerow')
 @permission_required('tv_on_demand.delete_structurerow')
 def structure_add(request):
-    context = {}
-    response = simple.direct_to_template(request,
-                                         extra_context=context,
-                                         template='tv_on_demand/structure_form.html')
-
+    response = create_object(request, form_class=StructureForm)
     return response
-
+    
+@permission_required('tv_on_demand.add_structure')
+@permission_required('tv_on_demand.change_structure')
+@permission_required('tv_on_demand.add_structurerow')
+@permission_required('tv_on_demand.change_structurerow')
+@permission_required('tv_on_demand.delete_structurerow')    
+def structure_change(request, object_id):
+    response = update_object(request, form_class=StructureForm,
+                             object_id=object_id)
+    return response
+    
 
 def generic_structure_ajax(request, modelform, **kwargs):
     if not request.is_ajax():
@@ -37,18 +43,6 @@ def generic_structure_ajax(request, modelform, **kwargs):
             json_data['errors'] = form.errors.items()
 
     return HttpResponse(simplejson.dumps(json_data))
-    
-
-
-@permission_required('tv_on_demand.add_structure')    
-def structure_ajax_add(request):    
-    return generic_structure_ajax(request, StructureForm)
-    
-
-@permission_required('tv_on_demand.change_structure')
-def structure_ajax_change(request, object_id):        
-    structure = get_object_or_404(Structure, pk=object_id)    
-    return generic_structure_ajax(request, StructureForm, instance=structure)
 
 
 @permission_required('tv_on_demand.add_structurerow')

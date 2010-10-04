@@ -34,6 +34,10 @@ class Structure(models.Model):
     def serialize(self):
         return auto_serialize(self)
         
+    @models.permalink
+    def get_absolute_url(self):
+        return ('admin:tv_on_demand_structure_change', [self.pk])
+        
         
 class StructureRow(MPTTModel):
     structure = models.ForeignKey(Structure, verbose_name=_('structure'))

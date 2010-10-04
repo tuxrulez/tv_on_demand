@@ -22,6 +22,7 @@ class StructureForm(forms.ModelForm):
     
     class Meta:
         model = Structure
+        exclude = ('content_type', 'object_id', 'external_id')
 
 
 class StructureRowForm(forms.ModelForm):

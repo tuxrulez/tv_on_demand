@@ -26,80 +26,36 @@ class StructureViewTest(TestCase):
         self.user.user_permissions.add(add_structure_perm, change_structure_perm,
                                        add_row_perm, change_row_perm, delete_row_perm)
         
-        self.client.login(username=self.userdata['username'], password=self.userdata['password'])        
+        self.client.login(username=self.userdata['username'], password=self.userdata['password'])
+        self.template = open(os.path.join(FILEPATH, 'files', 'sample.swf'), 'rb')
+        self.default_data = {'name': 'test add', 'template': self.template}
+        
     
-    def test_add(self):
+    def test_add_response(self):
         url = reverse('admin:tv_on_demand_structure_add')
         response = self.client.get(url)
         
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'tv_on_demand/structure_form.html')
+        self.assertTemplateUsed(response, 'tv_on_demand/structure_form.html')      
         
-    def test_ajax_add(self):
-        url = reverse('tod_structure_ajax_add')
-        data = {}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         
-        self.assertEqual(response.status_code, 200)
+    def test_add_post(self):
+        url = reverse('admin:tv_on_demand_structure_add')
+        response = self.client.post(url, self.default_data)
+
+        structure_instance = Structure.objects.get(name=self.default_data['name'])
+        self.assertTrue(structure_instance)
         
-    def test_wrong_ajax_add(self):
-        url = reverse('tod_structure_ajax_add')
-        data = {}
+    def test_change_post(self):
+        instance = Structure.objects.all()[0]
+        url = reverse('admin:tv_on_demand_structure_change', args=[instance.pk])
+        data = {'name': 'changed name'}
         response = self.client.post(url, data)
         
-        self.assertEqual(response.status_code, 403)
-        
-    def test_save(self):
-        url = reverse('tod_structure_ajax_add')
-        tmpl = open(os.path.join(FILEPATH, 'files', 'sample.swf'), 'rb')
-        data = {'name': 'test melancia', 'template': tmpl}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        
-        self.assertTrue(Structure.objects.filter(name=data['name']))
-        self.assertContains(response, data['name'])
-        self.assertContains(response, data['template'].name.split('.')[-1])
-        self.assertContains(response, 'id')
-        
-    def test_save_errors(self):
-        url = reverse('tod_structure_ajax_add')
-        data = {'name': 'test abacaxi'}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        
-        self.assertFalse(Structure.objects.filter(name=data['name']))
-        self.assertContains(response, 'errors')
-        
-    def test_ajax_change(self):
-        structure = Structure.objects.all()[0]
-        url = reverse('tod_structure_ajax_change', args=[structure.pk])
-        data = {}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        
-        self.assertEqual(response.status_code, 200)
-        
-    def test_wrong_ajax_change(self):
-        structure = Structure.objects.all()[0]
-        url = reverse('tod_structure_ajax_change', args=[structure.pk])
-        data = {}
-        response = self.client.post(url, data)
-        
-        self.assertEqual(response.status_code, 403)
-        
-    def test_wrong_id_ajax_change(self):
-        url = reverse('tod_structure_ajax_change', args=[666])
-        data = {}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        
-        self.assertEqual(response.status_code, 404)
-        
-    def test_save_change(self):
-        instance = Structure.objects.create(name='test structure', template='tpl.swf')
-        url = reverse('tod_structure_ajax_change', args=[instance.pk])
-        data = {'name': 'new structure name'}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        
-        new_instance = Structure.objects.get(pk=instance.pk)
-        self.assertEqual(data['name'], new_instance.name)
-        self.assertEqual(instance.template, new_instance.template)
+        structure = Structure.objects.get(pk=instance.pk)
+        self.assertEqual(structure.name, data['name'])
+        self.assertEqual(structure.template, instance.template)
+ 
         
         
 class StructureNoPermissions(TestCase):
@@ -108,23 +64,20 @@ class StructureNoPermissions(TestCase):
     
     def test_add(self):
         url = reverse('admin:tv_on_demand_structure_add')
-        response = self.client.get(url)
-        
-        self.assertEqual(response.status_code, 302)
-        
-    def test_ajax_add(self):
-        url = reverse('tod_structure_ajax_add')
         data = {}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = self.client.post(url, data)
         
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)        
         
-    def test_ajax_change(self):
-        structure = Structure.objects.all()[0]
-        url = reverse('tod_structure_ajax_change', args=[structure.pk])
-        data = {}
-        response = self.client.post(url, data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+    def test_change(self):
+        instance = Structure.objects.all()[0]
+        url = reverse('admin:tv_on_demand_structure_change', args=[instance.pk])
+        data = {'name': 'another changed name'}
+        response = self.client.post(url, data)
         
+        structure = Structure.objects.get(pk=instance.pk)
+        
+        self.assertEqual(structure.name, instance.name)
         self.assertEqual(response.status_code, 302)
         
  

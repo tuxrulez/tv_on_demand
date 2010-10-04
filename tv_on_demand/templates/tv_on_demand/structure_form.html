@@ -1,0 +1,82 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n structure_tags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="/media/style/tooltip.css" />
+    <link rel="stylesheet" type="text/css" href="/media/style/tv_on_demand.css" />
+
+    <script type="text/javascript" src="/media/js/j.js"></script>
+    <script type="text/javascript" src="/media/js/j.mask.js"></script>
+    <script type="text/javascript" src="/media/js/j.bgiframe.js"></script>
+    <script type="text/javascript" src="/media/js/j.dimensions.js"></script>
+    <script type="text/javascript" src="/media/js/j.tooltip.js"></script>
+
+    <script type="text/javascript" src="/media/js/tv_on_demand.js"></script>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="../../../">Início</a> &rsaquo;
+     <a href="../../">Tv_On_Demand</a> &rsaquo; 
+     <a href="../">Structure</a> 
+</div>
+{% endblock %}
+
+{% block content %}
+    <div id="tv-on-demand">
+        <div id="cont">
+            <h1>TV On Demand - {% trans 'Structure' %}</h1>
+
+            <h2>{% trans 'Structure configuration' %}</h2>
+            <div id="structure-frame">               
+
+                <form method="post" action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        {% if object %}
+                            {% structure_as_p form 'users' object %}
+                        {% else %}
+                            {% structure_as_p form 'users' %}
+                            <span class="no-extra-fields">True</span>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {% structure_as_p form 'name,template,date_start,date_end' %}
+                        <p class="buttons">
+                            <input type="submit" value="{% trans 'Save' %}" name="structure_save" id="id_structure_save" /> <br />
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+        
+            {% if object %}
+            <h2>{% trans 'Structure montage' %}</h2>
+            <div id="rows-frame">
+                <div>
+                    <h2>
+                        <span>{% trans 'menu' %}</span>
+                        <em>
+                            <a href="#" class="level-add">{% trans 'Level' %} [+]</a> / 
+                            <a href="#" class="row-add">{% trans 'Item' %} [+]</a> /
+                            <a href="#" class="level-rm">{% trans 'Level' %} [-]</a>
+                        </em>
+                    </h2>
+                    <ul>
+                        <li>
+                            <img src="/media/style/image.png" alt="image" />
+                        </li>     
+                    </ul>
+                </div>
+
+               
+            {% endif %}
+            <!--
+            <div id="status-bar">
+            </div>
+            -->
+        </div>
+    </div>
+{% endblock %}

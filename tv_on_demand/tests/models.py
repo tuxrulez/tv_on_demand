@@ -55,6 +55,11 @@ class StructureModelTest(TestCase):
         self.assertEqual(instance.content_object.pk, related_object.pk)
         
 
+    def test_parmalink(self):
+        instance = create_structure()        
+        self.assertTrue(instance.get_absolute_url())
+        
+
 
 class StructureRowModelTest(TestCase):
     
