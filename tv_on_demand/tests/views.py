@@ -133,7 +133,6 @@ class StructureRowViewTest(TestCase):
         self.assertContains(response, 'structure')
         self.assertContains(response, 'mediafile')
         self.assertContains(response, 'entry')
-        self.assertContains(response, 'question')
         self.assertContains(response, 'parent')
     
     def test_wrong_ajax_add_save(self):

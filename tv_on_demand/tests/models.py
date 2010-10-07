@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from tv_on_demand.models import Structure, StructureRow
 from mediafiles.models import MediaFile
-from quizzes.models import Question
 
 #helpers
 now = datetime.now()
@@ -67,8 +66,7 @@ class StructureRowModelTest(TestCase):
     
     def test_creation(self):
         mediafile = MediaFile.objects.all()[0]
-        question = Question.objects.all()[0]
-        instance = create_structurerow(mediafile=mediafile, question=question)
+        instance = create_structurerow(mediafile=mediafile)
         
         self.assertEqual(StructureRow.objects.count(), 1)
 

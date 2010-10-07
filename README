@@ -1,7 +1,6 @@
 DEPENDS:
     news
-	mediafiles
-    quizzes
+    mediafiles
     django-mptt
     mmutils
 

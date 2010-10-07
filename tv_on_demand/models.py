@@ -9,7 +9,6 @@ from django.contrib.contenttypes import generic
 from django.core.exceptions import ValidationError
 from mmutils.common import auto_serialize
 from mediafiles.models import MediaFile
-from quizzes.models import Question
 from news.models import ENTRY_TYPES
 
 
@@ -45,7 +44,6 @@ class StructureRow(MPTTModel):
     title = models.CharField(_('title'), max_length=100)
     label = models.CharField(_('description'), max_length=100, null=True, blank=True)
     mediafile = models.ForeignKey(MediaFile, verbose_name=_('media'), null=True, blank=True)
-    question = models.ForeignKey(Question, verbose_name=_('question'), null=True, blank=True)
     entry = models.CharField(_('entry'), max_length=45, null=True, blank=True, choices=ENTRY_TYPES)
     date_start = models.DateTimeField(_('date start'))
     date_end = models.DateTimeField(_('date end'))

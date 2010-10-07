@@ -32,10 +32,10 @@ class StructureRowForm(forms.ModelForm):
     def clean(self):
         gdata = lambda key: self.cleaned_data.get(key, '')
         ct_number = lambda key: gdata(key) and 1 or 0
-        total_content = ct_number('entry') + ct_number('mediafile') + ct_number('question')
+        total_content = ct_number('entry') + ct_number('mediafile')
         
         if total_content < 1:
-            raise forms.ValidationError(_('you must pick a row content: mediafile, entry or question'))        
+            raise forms.ValidationError(_('you must pick a row content: mediafile or entry'))        
 
         if total_content > 1:
             raise forms.ValidationError(_('you cannot pick more than one row content'))        
