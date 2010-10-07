@@ -42,7 +42,7 @@ class StructureRow(MPTTModel):
     structure = models.ForeignKey(Structure, verbose_name=_('structure'))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
     title = models.CharField(_('title'), max_length=100)
-    label = models.CharField(_('description'), max_length=100, null=True, blank=True)
+    label = models.TextField(_('description'), null=True, blank=True)
     mediafile = models.ForeignKey(MediaFile, verbose_name=_('media'), null=True, blank=True)
     entry = models.CharField(_('entry'), max_length=45, null=True, blank=True, choices=ENTRY_TYPES)
     date_start = models.DateTimeField(_('date start'))

@@ -24,7 +24,8 @@ def structure_add(request):
 @permission_required('tv_on_demand.delete_structurerow')    
 def structure_change(request, object_id):
     response = update_object(request, form_class=StructureForm,
-                             object_id=object_id)
+                             object_id=object_id,
+                             extra_context={'row_form': StructureRowForm()})
     return response
     
 
@@ -64,7 +65,7 @@ def structurerow_ajax_delete(request, object_id):
     instance = get_object_or_404(StructureRow, pk=object_id)
     instance.delete()
     
-    return HttpResponse('hello')
+    return HttpResponse('deleted')
     
     
     

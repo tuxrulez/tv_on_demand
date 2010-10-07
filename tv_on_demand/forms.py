@@ -26,8 +26,12 @@ class StructureForm(forms.ModelForm):
 
 
 class StructureRowForm(forms.ModelForm):
-    date_start = BRDateTimeField(label=_('date start'), required=True)
-    date_end = BRDateTimeField(label=_('date end'), required=True)
+    date_start = BRDateTimeField(label=_('date start'))
+    date_end = BRDateTimeField(label=_('date end'))
+    structure = forms.ModelChoiceField(queryset=Structure.objects.all(),
+                                       widget=forms.Select(attrs={'style': 'display: none;'}))
+    external_id = forms.CharField(widget=forms.HiddenInput, required=False)
+    order = forms.CharField(widget=forms.HiddenInput)
     
     def clean(self):
         gdata = lambda key: self.cleaned_data.get(key, '')

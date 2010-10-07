@@ -99,7 +99,7 @@ class StructureRowViewTest(TestCase):
         mediafile = MediaFile.objects.all()[0]
         
         self.default_data = {'structure': structure.pk, 'title': 'test title xdv8', 'label': 'test label',
-                             'mediafile': mediafile.pk, 'date_start': '14/05/1989 14:15',
+                             'mediafile': mediafile.pk, 'date_start': '14/05/1989 14:15', 'external_id': 0,
                              'date_end': '21/12/2098 21:10', 'order': 0, 'users': [self.user.pk]}    
     
     def test_ajax_add_response(self):
