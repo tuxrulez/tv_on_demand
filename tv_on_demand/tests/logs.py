@@ -19,7 +19,7 @@ class HistoryLogTest(TestCase):
     fixtures = ['log_structures.json','log_structurerows.json']
 
     def make_command(self):
-        command = 'python %s/manage.py generate_logs' % settings.MODPATH
+        command = 'python %s/manage.py generate_tod_logs' % settings.MODPATH
         result = commands.getstatusoutput(command)
         return result
 
