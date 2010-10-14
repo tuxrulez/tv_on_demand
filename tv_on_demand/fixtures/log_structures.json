@@ -1,0 +1,13 @@
+[
+    {
+        "pk": 50, 
+        "model": "tv_on_demand.structure", 
+        "fields": {
+            "external_id": "5", 
+            "template": "tv_on_demand/structure/template/test.swf", 
+            "object_id": null, 
+            "content_type": null, 
+            "name": "Structure 50"
+        }
+    }
+]
