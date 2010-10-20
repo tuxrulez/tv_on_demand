@@ -3,6 +3,10 @@ DEPENDS:
     mediafiles
     django-mptt
     mmutils
+    elementtree
+
+SETTINGS DEPENDS:
+    MODPATH # the full path of your project root
 
 INSTRUCTIONS:
     add the app at your INSTALLED_APPS (settings)

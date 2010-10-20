@@ -30,6 +30,8 @@ class StructureRowForm(forms.ModelForm):
     date_end = BRDateTimeField(label=_('date end'))
     structure = forms.ModelChoiceField(queryset=Structure.objects.all(),
                                        widget=forms.Select(attrs={'style': 'display: none;'}))
+    parent = forms.ModelChoiceField(queryset=StructureRow.objects.all(), required=False,
+                                    widget=forms.Select(attrs={'style': 'display: none;'}))
     external_id = forms.CharField(widget=forms.HiddenInput, required=False)
     order = forms.CharField(widget=forms.HiddenInput)
     
