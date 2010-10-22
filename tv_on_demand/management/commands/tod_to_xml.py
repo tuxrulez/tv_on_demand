@@ -10,12 +10,13 @@ class Command(BaseCommand):
     '''
 
     model_ref = None
-    instance = None    
+    instance = None
+    rootpath = None
 
     def handle(self, **options):
         if not self.instance:
             raise NotImplementedError, 'you should provide a structure instance'
         
-        exporter = TodToXml(self.instance, model_ref=self.model_ref)
+        exporter = TodToXml(self.instance, model_ref=self.model_ref,rootpath=self.rootpath)
         exporter.save()
 

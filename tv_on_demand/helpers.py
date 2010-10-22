@@ -72,7 +72,7 @@ class ExportToLog(object):
         
 class TodToXml(object):
 
-    def __init__(self, structure, model_ref=None):
+    def __init__(self, structure, model_ref=None, rootpath=None):
         ''' structure: a instance of Structure model to export
             model_ref: Should be a related model like a foreign key to Structure, if given
                        it will customize the save_path like <your_project_path>/exporter/tv_on_demand/<module_name>
@@ -80,6 +80,7 @@ class TodToXml(object):
             usage: exporter = TodToXml(structure_instance, model_ref=MyRelatedModel)
                    exporter.save()
         '''
+        self.rootpath = rootpath
         self.structure = structure
         self.model_ref = model_ref
         self.opts = self.structure._meta
@@ -87,11 +88,15 @@ class TodToXml(object):
         self.xml_path = self._set_xml_path()
     
     def _set_path(self):
-        path = os.path.join(settings.MODPATH, 'exporter', self.opts.app_label)
-        
-        ref_opts = getattr(self.model_ref, '_meta', None)
-        if ref_opts:
-            path = os.path.join(path, ref_opts.module_name)        
+
+        if not self.rootpath:
+            path = os.path.join(settings.MODPATH, 'exporter', self.opts.app_label)
+            
+            ref_opts = getattr(self.model_ref, '_meta', None)
+            if ref_opts:
+                path = os.path.join(path, ref_opts.module_name)
+        else:
+            path = os.path.join(settings.MODPATH, self.rootpath)
         
         return path
         
