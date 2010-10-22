@@ -101,7 +101,7 @@ class TodToXml(object):
         return path
         
     def _set_xml_path(self):
-        return os.path.join(self.save_path, '%s_%d.xml' %(self.opts.module_name, self.structure.pk))
+        return os.path.join(self.save_path, '%s.xml' %(self.opts.module_name))
         
         
     def _parse_rows(self, row_queryset, parent_node):

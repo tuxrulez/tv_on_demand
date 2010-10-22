@@ -92,7 +92,7 @@ class TestTodToXml(TestCase):
         self.assertEqual(custom_exporter.save_path, custom_expected_path)
         
     def test_xml_path(self):
-        expected_path = os.path.join(self.exporter.save_path, 'structure_%d.xml' %self.structure_instance.pk)
+        expected_path = os.path.join(self.exporter.save_path, 'structure.xml')
         
         self.assertEqual(self.exporter.xml_path, expected_path)
         
