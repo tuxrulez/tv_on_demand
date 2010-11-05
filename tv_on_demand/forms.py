@@ -32,7 +32,7 @@ class StructureRowForm(forms.ModelForm):
                                        widget=forms.Select(attrs={'style': 'display: none;'}))
     parent = forms.ModelChoiceField(queryset=StructureRow.objects.all(), required=False,
                                     widget=forms.Select(attrs={'style': 'display: none;'}))
-    external_id = forms.CharField(widget=forms.HiddenInput, required=False)
+    external_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
     order = forms.CharField(widget=forms.HiddenInput)
     
     def clean(self):
