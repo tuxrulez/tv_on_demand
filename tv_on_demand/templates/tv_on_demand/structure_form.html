@@ -57,7 +57,9 @@
 
 
             <div id="rows-frame">
+				<!-- LEVEL -->
                 <div>
+					<!-- MENU -->
                     <h2>
                         <span>Menu</span>
                         <em>
@@ -75,45 +77,21 @@
 								Descrição<br /> <input type="text" name="fake_description" /> <br />
                                 Data de início<br /> <input type="text" name="fake_date_start" /> <br />
                                 Data de término<br /> <input type="text" name="fake_date_end" /> <br />
-                                <input type="hidden" name="fake_id" />
-                                <input type="button" name="save_menu" value="Salvar" class="save" /> 
+                                <input type="hidden" name="fake_media_id" />
+                                <input type="hidden" name="fake_order" value="0" /> 
+                                <input type="hidden" name="fake_object_id" value="" />
+                                <input type="button" name="save_menu" value="Salvar" class="save" />
+
 							</span>
                         </p>
                     </h2>
+                    <!-- END OF MENU -->
 
-                    <ul>
-                        <li>
-                            <a href="#" class="media-link" target="_blank"><img src="/media/style/unknown.png" alt="image" /></a> <br />
-                            <a href="#" class="properties">Editar</a> / 
-                            <a href="#" class="row-rm">Remover</a>
-                            
-                            {% comment %}
-                            <!--
-                            <form method="post" action="unknown" class="ghost">
-                                {{ row_form.as_p }}
-                            </form>
-                            -->
-                            {% endcomment %}
-                            
-                            <p class="edit ghost">
-                                <strong>Selecione um tipo de item</strong> <br />
-                                <a href="/admin/mediafiles/mediafile/" class="select-media">Mídia</a> <br />
-                                <a href="#" class="select-entry">Notícia</a> <br /> <br />
-
-                                <span class="ghost">
-                                    Título<br /> <input type="text" name="fake_title" /> <br />
-                                    Descrição<br /> <input type="text" name="fake_description" /> <br />
-                                    Data de início<br /> <input type="text" name="fake_date_start" /> <br />
-                                    Data de término<br /> <input type="text" name="fake_date_end" /> <br />
-                                    <input type="hidden" name="fake_id" />
-                                    <input type="button" name="save" value="Salvar" class="save" /> 
-                                </span>
-                            </p>
-
-                        </li>     
-                    </ul>                
-
+					<!-- items -->
+                    <ul></ul> 
+					<!-- end of items -->
                 </div>
+                <!-- END OF LEVEL -->
 
                
             {% endif %}
