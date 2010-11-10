@@ -81,7 +81,6 @@
                                 <input type="hidden" name="fake_order" value="0" /> 
                                 <input type="hidden" name="fake_object_id" value="" />
                                 <input type="button" name="save_menu" value="Salvar" class="save" />
-
 							</span>
                         </p>
                     </h2>
@@ -89,16 +88,15 @@
 
 					<!-- items -->
                     <ul></ul> 
-					<!-- end of items -->
+					<!-- end of items -->		
+
                 </div>
                 <!-- END OF LEVEL -->
-
                
+				<p class="ghost">
+					{{ row_form.entry }}
+				</p>
             {% endif %}
-            <!--
-            <div id="status-bar">
-            </div>
-            -->
         </div>
     </div>
 {% endblock %}

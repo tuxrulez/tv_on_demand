@@ -40,7 +40,10 @@ def generic_structure_ajax(request, modelform, **kwargs):
         if form.is_valid():
             instance = form.save()
             json_data = instance.serialize()
-            json_data['media_type'] = instance.mediafile.media_type       
+            if instance.mediafile:
+                json_data['media_type'] = instance.mediafile.media_type
+            else:
+                json_data['media_type'] = ''
         else:
             json_data['errors'] = form.errors.items()
 
