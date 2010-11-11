@@ -9,8 +9,6 @@ from tv_on_demand.models import Structure, StructureRow
 class StructureForm(forms.ModelForm):
     date_start = BRDateTimeField(label=_('date start'), required=False)
     date_end = BRDateTimeField(label=_('date end'), required=False)
-    users = forms.ModelMultipleChoiceField(label=_('allowed users'), queryset=User.objects.all(),
-                                           required=False)
     
     def clean_template(self):
         template = self.cleaned_data.get('template', '')
