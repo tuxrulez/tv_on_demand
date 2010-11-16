@@ -121,13 +121,13 @@ def parse_rows(queryset):
             row_content += '<div>'
             row_content += menu_content(row)
             
-            children_items = row.get_children().exclude(mediafile__media_type='menu')
+            children_items = row.get_children().exclude(mediafile__media_type='menu').order_by('order')
             if children_items:
                 row_content += '<ul>'
                 row_content += parse_rows(children_items)
                 row_content += '</ul>'
             
-            children_menus = row.get_children().filter(mediafile__media_type='menu')
+            children_menus = row.get_children().filter(mediafile__media_type='menu').order_by('order')
             if children_menus:
                 row_content += parse_rows(children_menus)
                         
@@ -144,7 +144,7 @@ def parse_rows(queryset):
 @register.tag
 @quick_tag
 def load_structurerows(context, structure_instance):
-    rows = structure_instance.structurerow_set.filter(parent=None)
+    rows = structure_instance.structurerow_set.filter(parent=None).order_by('order')
     if not rows:
         context['rows_output'] = ''
         return ''
