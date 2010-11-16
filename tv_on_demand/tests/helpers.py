@@ -66,7 +66,7 @@ class HistoryLogTest(TestCase):
 
 class TestTodToXml(TestCase):
     
-    fixtures = ['structurerows.json', 'structure.json']
+    fixtures = ['structurerows.json', 'structures.json']
     
     def setUp(self):
         self.structure_instance = Structure.objects.all()[0]

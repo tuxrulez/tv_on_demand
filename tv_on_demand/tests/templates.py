@@ -3,9 +3,12 @@
 from django.test import TestCase
 from django.template import Template, Context
 from tv_on_demand.forms import StructureForm
+from tv_on_demand.models import Structure
 
 
 class StructureTemplateTest(TestCase):
+    
+    fixtures = ['structures.json', 'structurerows.json', 'mediafiles.json']
     
     def render(self, extra_context={}):
         t = Template('''{% load structure_tags %}
@@ -27,3 +30,15 @@ class StructureTemplateTest(TestCase):
         rendered = self.render({'form': StructureForm(data)})
        
         self.assertTrue('error' in rendered)
+
+    def test_load_rows(self):
+        structure = Structure.objects.all()[0]
+        
+        t = Template('''{% load structure_tags %}
+        {% load_structurerows structure %}
+        ''')
+        c = Context({'structure': structure})
+        content = t.render(c)
+        
+        for row in structure.structurerow_set.all():
+            self.assertTrue(row.title in content)

@@ -54,9 +54,15 @@
         
             {% if object %}
             <h2>{% trans 'Structure montage' %}</h2>      
-
+    
 
             <div id="rows-frame">
+                {% load_structurerows object %}
+                <p class="ghost">
+					{{ row_form.entry }}
+				</p>
+                
+                {% if not rows_output %}
 				<!-- LEVEL -->
                 <div>
 					<!-- MENU -->
@@ -92,12 +98,12 @@
 					<!-- end of items -->		
 
                 </div>
-                <!-- END OF LEVEL -->
-               
-				<p class="ghost">
-					{{ row_form.entry }}
-				</p>
+                <!-- END OF LEVEL -->               
+
+            {% else %}
+                {{ rows_output|safe }}    
             {% endif %}
         </div>
+        {% endif %}
     </div>
 {% endblock %}
