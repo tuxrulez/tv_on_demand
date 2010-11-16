@@ -26,9 +26,9 @@ def item_content(instance):
    
     for entry in ENTRY_TYPES:
         if instance.entry == entry[0]:
-            entry_content += '<option value="%s" selected="selected">%s</option>' %(entry[0], entry[1].format())
+            entry_content += '<option value="%s" selected="selected">%s</option>' %(entry[0], entry[1])
         else:
-            entry_content += '<option value="%s">%s</option>' %(entry[0], entry[1].format())    
+            entry_content += '<option value="%s">%s</option>' %(entry[0], entry[1])    
     entry_content += '</select>'
     
     content = u'''
