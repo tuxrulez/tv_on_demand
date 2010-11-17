@@ -123,7 +123,7 @@ class TodToXml(object):
             mf = row.mediafile
             if mf:
                 ElementTree.SubElement(parent_node, 'mediafile', id=str(mf.pk), media_type=mf.media_type,
-                                       title=mf.title, label=mf.label, path=mf.url, created=fix_date(mf.created))
+                                       title=mf.title, label=mf.label, path=mf.path, created=fix_date(mf.created))
             else:
                 ElementTree.SubElement(parent_node, 'mediafile')
                 
