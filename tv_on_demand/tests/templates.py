@@ -39,6 +39,3 @@ class StructureTemplateTest(TestCase):
         ''')
         c = Context({'structure': structure})
         content = t.render(c)
-        
-        for row in structure.structurerow_set.all():
-            self.assertTrue(row.title in content)
