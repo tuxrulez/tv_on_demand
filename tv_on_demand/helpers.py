@@ -123,7 +123,7 @@ class TodToXml(object):
             mf = row.mediafile
             if mf:
                 try:
-                    real_path = mf.path.path
+                    real_path = mf.path.url
                 except ValueError:
                     real_path = ''
                 
