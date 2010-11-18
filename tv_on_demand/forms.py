@@ -10,14 +10,6 @@ class StructureForm(forms.ModelForm):
     date_start = BRDateTimeField(label=_('date start'), required=False)
     date_end = BRDateTimeField(label=_('date end'), required=False)
     
-    def clean_template(self):
-        template = self.cleaned_data.get('template', '')
-        if template.name.split('.')[-1] != 'swf':
-            raise forms.ValidationError(_('template must be a swf file'))        
-        
-        return template
-    
-    
     class Meta:
         model = Structure
         exclude = ('content_type', 'object_id', 'external_id')

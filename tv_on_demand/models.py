@@ -15,7 +15,7 @@ from news.models import ENTRY_TYPES
 
 class Skin(models.Model):
     title = models.CharField(_('title'), max_length=45)
-    slug = models.SlugField(max_length=45)
+    slug = models.SlugField(max_length=45, editable=False)
     css_style = models.FileField(_('css file'), max_length=150, upload_to='tv_on_demand/skin/css_style')
     external_id = models.PositiveIntegerField(_('external id'), null=True, blank=True)
     
@@ -36,7 +36,7 @@ class Structure(models.Model):
                                      null=True, blank=True)
     object_id = models.PositiveSmallIntegerField(_('object id'), null=True, blank=True)    
     name = models.CharField(_('name'), max_length=100)
-    template = models.FileField(_('template'), max_length=255, upload_to='tv_on_demand/structure/template')
+    skin = models.ForeignKey(Skin, verbose_name=_('skin'))
     external_id = models.PositiveIntegerField(_('external id'), null=True, blank=True)
     
     content_object = generic.GenericForeignKey(ct_field='content_type', fk_field='object_id')
