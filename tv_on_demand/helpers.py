@@ -155,8 +155,15 @@ class TodToXml(object):
         structure_id.text = str(instance.pk)
         structure_name = ElementTree.SubElement(root, 'name')
         structure_name.text = instance.name
-        structure_template = ElementTree.SubElement(root, 'template')
-        structure_template.text = instance.template.path
+        structure_skin = ElementTree.SubElement(root, 'skin')
+        structure_skin_title = ElementTree.SubElement(structure_skin, 'title')
+        structure_skin_title.text = instance.skin.title
+        structure_skin_slug = ElementTree.SubElement(structure_skin, 'slug')
+        structure_skin_slug.text = instance.skin.slug
+        structure_skin_css_style = ElementTree.SubElement(structure_skin, 'css_style')
+        structure_skin_css_style.text = instance.skin.css_style.url
+        structure_skin_external_id = ElementTree.SubElement(structure_skin, 'external_id')
+        structure_skin_external_id.text = str(instance.skin.pk)
 
         row_qs = instance.structurerow_set.filter(parent=None)
         self._parse_rows(row_qs, root)

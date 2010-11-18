@@ -5,13 +5,13 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Permission
 from mediafiles.models import MediaFile
-from tv_on_demand.models import Structure, StructureRow
+from tv_on_demand.models import Structure, StructureRow, Skin
 
 FILEPATH = os.path.abspath(os.path.dirname(__file__))
 
 class StructureViewTest(TestCase):
     
-    fixtures = ['structures.json']
+    fixtures = ['structures.json', 'skins.json']
     userdata = {'username': 'admin', 'password': 'admin123',
                 'email': 'admin@admin.com'}
                 
@@ -27,8 +27,8 @@ class StructureViewTest(TestCase):
                                        add_row_perm, change_row_perm, delete_row_perm)
         
         self.client.login(username=self.userdata['username'], password=self.userdata['password'])
-        self.template = open(os.path.join(FILEPATH, 'files', 'sample.swf'), 'rb')
-        self.default_data = {'name': 'test add', 'template': self.template}
+        self.skin = Skin.objects.all()[0]
+        self.default_data = {'name': 'test add', 'skin': self.skin.pk}
         
     
     def test_add_response(self):
@@ -49,12 +49,12 @@ class StructureViewTest(TestCase):
     def test_change_post(self):
         instance = Structure.objects.all()[0]
         url = reverse('admin:tv_on_demand_structure_change', args=[instance.pk])
-        data = {'name': 'changed name'}
+        data = {'name': 'changed name', 'skin': self.skin.pk}
         response = self.client.post(url, data)
         
         structure = Structure.objects.get(pk=instance.pk)
         self.assertEqual(structure.name, data['name'])
-        self.assertEqual(structure.template, instance.template)
+        self.assertEqual(structure.skin, instance.skin)
  
         
         
