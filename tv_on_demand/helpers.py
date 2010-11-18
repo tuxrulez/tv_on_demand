@@ -130,15 +130,15 @@ class TodToXml(object):
                 ElementTree.SubElement(row_element, 'mediafile', id=str(mf.pk), media_type=mf.media_type,
                                        title=mf.title, label=mf.label, path=real_path, created=fix_date(mf.created))
             else:
-                ElementTree.SubElement(parent_node, 'mediafile')
+                ElementTree.SubElement(row_element, 'mediafile')
                 
-            row_date_start = ElementTree.SubElement(parent_node, 'date_start')
+            row_date_start = ElementTree.SubElement(row_element, 'date_start')
             row_date_start.text = fix_date(row.date_start)
-            row_date_end = ElementTree.SubElement(parent_node, 'date_end')
+            row_date_end = ElementTree.SubElement(row_element, 'date_end')
             row_date_end.text = fix_date(row.date_end)
             
             for user in row.users.all():
-                row_user = ElementTree.SubElement(parent_node, 'user', username=user.username, password=user.password,
+                row_user = ElementTree.SubElement(row_element, 'user', username=user.username, password=user.password,
                                                   email=user.email)
             
             children_qs = row.get_children()            
