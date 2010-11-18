@@ -127,7 +127,7 @@ class TodToXml(object):
                 except ValueError:
                     real_path = ''
                 
-                ElementTree.SubElement(parent_node, 'mediafile', id=str(mf.pk), media_type=mf.media_type,
+                ElementTree.SubElement(row_element, 'mediafile', id=str(mf.pk), media_type=mf.media_type,
                                        title=mf.title, label=mf.label, path=real_path, created=fix_date(mf.created))
             else:
                 ElementTree.SubElement(parent_node, 'mediafile')

@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 from datetime import datetime, timedelta
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from tv_on_demand.models import Structure, StructureRow
+from tv_on_demand.models import Structure, StructureRow, Skin
 from mediafiles.models import MediaFile
 
 #helpers
 now = datetime.now()
 later = datetime.now() + timedelta(days=10)
+
+TESTPATH = os.path.abspath(os.path.dirname(__file__))
 
 def create_user(username='nobody'):
     email = '%s@somedomain.com' %username
@@ -76,6 +79,15 @@ class StructureRowModelTest(TestCase):
         date_start_output = instance.br_datetime('date_start')
         
         self.assertEqual(date_start_output, instance.date_start.strftime('%d/%m/%Y %H:%M'))
+        
+        
+class SkinModelTest(TestCase):
+    
+    def test_creation(self):   
+        instance = Skin.objects.create(title='Test Skin', css_style='test.css')        
+        self.assertEqual(Skin.objects.count(), 1)
+    
+    
   
     
         

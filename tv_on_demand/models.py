@@ -7,9 +7,28 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.core.exceptions import ValidationError
+from django.template.defaultfilters import slugify
 from mmutils.common import auto_serialize
 from mediafiles.models import MediaFile
 from news.models import ENTRY_TYPES
+
+
+class Skin(models.Model):
+    title = models.CharField(_('title'), max_length=45)
+    slug = models.SlugField(max_length=45)
+    css_style = models.FileField(_('css file'), max_length=150, upload_to='tv_on_demand/skin/css_style')
+    external_id = models.PositiveIntegerField(_('external id'), null=True, blank=True)
+    
+    class Meta:
+        verbose_name = _('skin')
+        verbose_name_plural = _('skins')
+        
+    def __unicode__(self):
+        return self.title
+        
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Skin, self).save(*args, **kwargs)
 
 
 class Structure(models.Model):
