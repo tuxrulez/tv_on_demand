@@ -1,0 +1,32 @@
+[
+    {
+        "pk": 1, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "external_id": null, 
+            "slug": "red-skin", 
+            "css_style": "tv_on_demand/skin/css_style/sample.css", 
+            "title": "Red Skin"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "external_id": null, 
+            "slug": "blue-skin", 
+            "css_style": "tv_on_demand/skin/css_style/sample_1.css", 
+            "title": "Blue Skin"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "external_id": null, 
+            "slug": "green-skin", 
+            "css_style": "tv_on_demand/skin/css_style/sample_2.css", 
+            "title": "Green Skin"
+        }
+    }
+]
