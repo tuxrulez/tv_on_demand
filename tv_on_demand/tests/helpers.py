@@ -7,8 +7,9 @@ from datetime import date
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
+from mediafiles.models import MediaFile
 from tv_on_demand.models import Structure,StructureRow,Skin
-from tv_on_demand.helpers import ExportToLog, TodToXml
+from tv_on_demand.helpers import ExportToLog, TodToXml, XmlToTod
 
 
 class TestTodToXml(TestCase):
@@ -67,3 +68,44 @@ class TestTodToXml(TestCase):
 
        self.clean_path()
 
+       
+class TestXmlToTod(TestCase):
+    
+    fixtures = ['mediafiles.json', 'structures.json', 'structurerows.json',
+                'skins.json']
+                
+    def test_import(self):
+        structure = Structure.objects.all()[0]
+        ini_mediafiles_number = structure.structurerow_set.filter(mediafile__isnull=False).count()
+        ini_rows_number = structure.structurerow_set.all().count()
+        exporter = TodToXml(structure=structure)
+        exporter.save()
+        
+        # clean all data
+        Skin.objects.all().delete()
+        MediaFile.objects.all().delete()
+        Structure.objects.all().delete()
+        StructureRow.objects.all().delete()
+        
+        importer = XmlToTod(xml_path=exporter.xml_path)
+        importer.save()
+        
+        self.assertEqual(Skin.objects.count(), 1)
+        self.assertEqual(Structure.objects.count(), 1)
+        
+        new_skin = Skin.objects.all()[0]
+        new_structure = Structure.objects.all()[0]
+        
+        self.assertEqual(new_skin.external_id, structure.skin.pk)
+        self.assertEqual(new_skin.title, structure.skin.title)
+        self.assertEqual(new_skin.slug, structure.skin.slug)
+        self.assertEqual(new_skin.css_style, structure.skin.css_style)
+        self.assertEqual(new_structure.external_id, structure.pk)
+        self.assertEqual(new_structure.skin.slug, structure.skin.slug)
+        self.assertEqual(new_structure.name, structure.name)
+
+        self.assertEqual(StructureRow.objects.count(), ini_rows_number)
+        self.assertEqual(new_structure.structurerow_set.filter(mediafile__isnull=False).count(), ini_mediafiles_number)       
+        
+        # clean trash
+        os.remove(exporter.xml_path)
