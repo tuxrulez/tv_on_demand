@@ -203,7 +203,7 @@ class XmlToTod(object):
             row_data['parent'] = row.find('parent').text
             if row_data['parent']:
                 try:
-                    row_data['parent'] = StructureRow.objects.get(pk=int(row_data['parent']))
+                    row_data['parent'] = StructureRow.objects.get(external_id=int(row_data['parent']))
                 except StructureRow.DoesNotExist:
                     continue
             
@@ -225,7 +225,7 @@ class XmlToTod(object):
                 media_data['media_type'] = get_mdata('media_type')
                 media_data['created'] = get_mdata('created')
                 media_data['path'] = self.fix_media_url(get_mdata('path'))
-                
+                                
                 media_instance, media_created = MediaFile.objects.get_or_create(external_id=int(media_id), defaults=media_data)
                 if media_created:
                     media_instance.title = media_data['title']
@@ -242,7 +242,7 @@ class XmlToTod(object):
             row_instance, row_created = StructureRow.objects.get_or_create(external_id=row_id, defaults=row_data)
             if not row_created:
                 row_instance.title = row_data['title']
-                row_data.parent = row_data['parent']
+                row_instance.parent = row_data['parent']
                 row_instance.label = row_data['label']
                 row_instance.entry = row_data['entry']
                 row_instance.order = row_data['order']
