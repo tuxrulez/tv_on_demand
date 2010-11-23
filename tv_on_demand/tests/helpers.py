@@ -59,6 +59,8 @@ class TestTodToXml(TestCase):
        self.assertTrue(self.structure_instance.name in content)
        self.assertTrue('skin' in content)
        self.assertTrue(self.structure_instance.skin.css_style.url in content)
+       self.assertTrue('company_logo' in content)
+       self.assertTrue(self.structure_instance.skin.company_logo.url in content)
        
        for row in self.structure_instance.structurerow_set.all():
            self.assertTrue('title' in content)
