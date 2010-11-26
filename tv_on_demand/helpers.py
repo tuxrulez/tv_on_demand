@@ -128,9 +128,13 @@ class TodToXml(object):
                     real_path = mf.path.url
                 except ValueError:
                     real_path = ''
-                
+                try:
+                    video_image_url = mf.video_image.url
+                except ValueError:
+                    video_image_url = ''               
                 ElementTree.SubElement(row_element, 'mediafile', id=str(mf.pk), media_type=mf.media_type,
-                                       title=mf.title, label=mf.label, path=real_path, created=fix_date(mf.created))
+                                       title=mf.title, label=mf.label, path=real_path, created=fix_date(mf.created), 
+                                       video_image=video_image_url)
             else:
                 ElementTree.SubElement(row_element, 'mediafile')
                 
@@ -227,6 +231,7 @@ class XmlToTod(object):
                 media_data['media_type'] = get_mdata('media_type')
                 media_data['created'] = get_mdata('created')
                 media_data['path'] = self.fix_media_url(get_mdata('path'))
+                media_data['video_image'] = self.fix_media_url(get_mdata('video_image'))
                                 
                 media_instance, media_created = MediaFile.objects.get_or_create(external_id=int(media_id), defaults=media_data)
                 if media_created:
@@ -234,6 +239,7 @@ class XmlToTod(object):
                     media_instance.label = media_data['label']
                     media_instance.media_type = media_data['media_type']
                     media_instance.path = media_data['path']
+                    media_instance.video_image = media_data['video_image']
                     media_instance.save()
                     
                 row_data['mediafile'] = media_instance
