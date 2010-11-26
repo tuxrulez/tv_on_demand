@@ -276,12 +276,14 @@ class XmlToTod(object):
         skin_data['title'] = skin.find('title').text
         skin_data['slug'] = skin.find('slug').text
         skin_data['css_style'] = self.fix_media_url(skin.find('css_style').text)
+        skin_data['company_logo'] = self.fix_media_url(skin.find('company_logo').text)
         
         skin_instance, skin_created = Skin.objects.get_or_create(external_id=skin_external_id, defaults=skin_data)
         if not skin_created:
             skin_instance.title = skin_data['title']
             skin_instance.slug = skin_data['slug']
             skin_instance.css_style = skin_data['css_style']
+            skin_instance.company_logo = skin_data['company_logo']
             skin_instance.save()
         
         data['skin'] = skin_instance
