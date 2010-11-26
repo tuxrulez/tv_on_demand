@@ -17,7 +17,7 @@ class Skin(models.Model):
     title = models.CharField(_('title'), max_length=45)
     slug = models.SlugField(max_length=45, editable=False)
     css_style = models.FileField(_('css file'), max_length=150, upload_to='tv_on_demand/skin/css_style')
-    company_logo = models.FileField(_('company logo'), max_length=15, upload_to='tv_on_demand/skin/company_logo',
+    company_logo = models.FileField(_('company logo'), upload_to='tv_on_demand/skin/company_logo',
                                     null=True, blank=True)
     external_id = models.PositiveIntegerField(_('external id'), null=True, blank=True)
     
