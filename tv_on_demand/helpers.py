@@ -168,7 +168,8 @@ class TodToXml(object):
         structure_skin_css_style = ElementTree.SubElement(structure_skin, 'css_style')
         structure_skin_css_style.text = instance.skin.css_style.url
         structure_skin_logo = ElementTree.SubElement(structure_skin, 'company_logo')
-        structure_skin_logo.text = instance.skin.company_logo.url
+        if instance.skin.company_logo:
+            structure_skin_logo.text = instance.skin.company_logo.url
         structure_skin_external_id = ElementTree.SubElement(structure_skin, 'external_id')
         structure_skin_external_id.text = str(instance.skin.pk)
 
