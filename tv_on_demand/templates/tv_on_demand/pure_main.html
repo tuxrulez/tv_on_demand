@@ -1,0 +1,11 @@
+    <h2 class="main-breadcrumbs">SELECIONE O CANAL DESEJADO:</h2>
+    
+    <ul class="main">
+        {% for row in root_rows %}
+            <li>
+                <a href="{% url tod_children row.pk %}">
+                    {{ row.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>

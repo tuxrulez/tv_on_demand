@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.views.generic.create_update import create_object, update_object
+from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
@@ -71,7 +72,29 @@ def structurerow_ajax_delete(request, object_id):
     
     return HttpResponse('deleted')
     
+def generic_main(request, template='tv_on_demand/main.html'):
+    root_rows = StructureRow.objects.filter(parent=None).order_by('order')
+    context = {'root_rows': root_rows}
     
+    response = direct_to_template(request, template=template, extra_context=context)
+    return response    
+    
+    
+def main(request):
+    return generic_main(request)
+    
+
+def pure_main(request):
+    return generic_main(request, template='tv_on_demand/pure_main.html')
+    
+
+def children_of(request, father_id):
+    father_row = get_object_or_404(StructureRow, pk=father_id)
+    rows = father_row.children.all()    
+    context = {'rows': rows, 'father_row': father_row}
+    
+    response = direct_to_template(request, template='tv_on_demand/rows.html', extra_context=context)
+    return response
     
     
     

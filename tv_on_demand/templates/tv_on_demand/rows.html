@@ -1,0 +1,31 @@
+<h2 class="row">{{ father_row.title }}:</h2>
+
+<ul class="row">
+    {% for row in rows %}
+        <li class="{{ row.mediafile.media_type|default:'entry' }}">
+            {% if row.children.all %}
+                <a href="{% url tod_children row.pk %}">
+                    {{ row.title }}
+                    {% if row.label %}
+                        <span>{{ row.label }}</span>
+                    {% endif %}
+                </a>
+            {% else %}
+                {{ row.title }}
+                {% if row.label %}
+                    <span>{{ row.label }}</span>
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+<p class="back">
+    <a href="{% if father_row.parent %}
+                {% url tod_children father_row.parent.pk %}
+             {% else %}
+                {% url tod_pure_main %}
+             {% endif %}">
+        Voltar
+    </a>
+</p>

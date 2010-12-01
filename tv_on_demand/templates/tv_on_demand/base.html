@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>MegaMidia Box - Mobox</title>
+    <link rel="stylesheet" href="{{ structure.skin.css_style.url }}" type="text/css" />
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            {% block header %}
+                {% if structure.skin.company_logo %}
+                <h1>
+                    <img src="{{ structure.skin.company_logo.url }}" alt="company logo" />
+                </h1>
+                {% endif %}
+            {% endblock %}
+        </div>    
+       
+        <div id="content">      
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="/media/js/j.js"></script>
+    <script type="text/javascript" src="/media/js/base.js"></script>
+</body>
+
+</html>
