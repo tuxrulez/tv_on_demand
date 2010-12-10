@@ -1,0 +1,55 @@
+{% load thumbnail %}
+<h2 class="row">{{ father_row.title }}:</h2>
+<div class="video-list">
+    <p>
+        {{ selected_row.title }}
+        <span>{{ selected_row.label|default:"" }}</span>
+    </p>
+
+    <div>
+        <embed type="application/x-vlc-plugin" id="vlc" class="video" autoplay="yes"
+               loop="no" volume="100" width="750" height="600" target="{% url mediafiles_serve selected_row.mediafile.pk %}" />
+               
+        <ul class="controls">
+            <li>
+                <a href="#" class="play">Play</a>
+            </li>
+            <li>
+                <a href="#" class="pause">Pause</a>
+            </li>
+            <!--
+            TODO: se fizer um stop e em seguida um play, o vídeo abre em uma nova janela.
+            <li>
+                <a href="#" class="stop">Stop</a>
+            </li>
+            -->
+            <li>
+                <a href="#" class="fullscreen">[ + ]</a>
+            </li>
+        </ul>
+    </div>
+    
+    <ul>
+        {% for row in rows %}
+            <li class="{% if row.id == selected_row.id %}on{% endif %} menu">
+                <a href="{% url tod_video_list father_row.pk row.pk %}">
+                    {% thumbnail row.mediafile.video_image "130x80" crop='center' as thumb %}
+                        <img src="{{ thumb.url }}" alt="" />
+                    {% endthumbnail %}
+                    <span>{{ row.title }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <p class="back menu">
+        <a href="{% if rows.0.parent %}
+                    {% url tod_children rows.0.parent.pk %}
+                {% else %}
+                    {% url tod_pure_main %}
+                {% endif %}">
+            Voltar
+        </a>
+    </p>
+
+</div>
