@@ -32,7 +32,7 @@
     <ul>
         {% for row in rows %}
             <li class="{% if row.id == selected_row.id %}on{% endif %} menu">
-                <a href="{% url tod_video_list father_row.pk row.pk %}">
+                <a href="{% url tod_serve_video father_row.pk row.pk %}">
                     {% thumbnail row.mediafile.video_image "130x80" crop='center' as thumb %}
                         <img src="{{ thumb.url }}" alt="" />
                     {% endthumbnail %}

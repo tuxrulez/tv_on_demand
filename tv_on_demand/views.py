@@ -97,4 +97,18 @@ def children_of(request, father_id):
     return response
     
     
+def serve_video(request, row_id, video_id):
+    cur_row = get_object_or_404(StructureRow, pk=row_id)
+    rows = cur_row.children.filter(mediafile__media_type='video')
+    selected_row = get_object_or_404(StructureRow, pk=video_id)
+    
+    context = {'rows': rows, 'selected_row': selected_row, 'father_row': cur_row}
+    response = direct_to_template(request, template='tv_on_demand/video_list.html', extra_context=context)
+    return response
+    
+    
+    
+    
+    
+    
     

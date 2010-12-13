@@ -1,8 +1,9 @@
+{% load thumbnail %}
 <h2 class="row">{{ father_row.title }}:</h2>
 
 <ul class="row">
     {% for row in rows %}
-        <li class="{{ row.mediafile.media_type|default:'entry' }}">
+        <li class="{{ row.mediafile.media_type|default:'entry' }} menu">
             {% if row.children.all %}
                 <a href="{% url tod_children row.pk %}">
                     {{ row.title }}
@@ -11,16 +12,28 @@
                     {% endif %}
                 </a>
             {% else %}
-                {{ row.title }}
-                {% if row.label %}
-                    <span>{{ row.label }}</span>
+                {% if row.mediafile.media_type == 'video' %}
+                    <a href="{% url tod_serve_video father_row.pk row.pk %}">
+                        {{ row.title }}
+                        {% thumbnail row.mediafile.video_image "200x140" crop='center' as thumb %}
+                            <img src="{{ thumb.url }}" alt="" />
+                        {% endthumbnail %}
+                        {% if row.label %}
+                            <span>{{ row.label }}</span>
+                        {% endif %}
+                    </a>               
+                {% else %}
+                    {{ row.title }}
+                    {% if row.label %}
+                        <span>{{ row.label }}</span>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </li>
     {% endfor %}
 </ul>
 
-<p class="back">
+<p class="back menu">
     <a href="{% if father_row.parent %}
                 {% url tod_children father_row.parent.pk %}
              {% else %}
