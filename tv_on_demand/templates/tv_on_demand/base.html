@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -12,7 +13,9 @@
             {% block header %}
                 {% if structure.skin.company_logo %}
                 <h1>
-                    <img src="{{ structure.skin.company_logo.url }}" alt="company logo" />
+                    {% thumbnail structure.skin.company_logo "160x260" as thumb %}
+                        <img src="{{ thumb.url }}" alt="company logo" />
+                    {% endthumbnail %}
                 </h1>
                 {% endif %}
             {% endblock %}
