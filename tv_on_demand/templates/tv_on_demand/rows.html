@@ -1,15 +1,12 @@
 {% load thumbnail %}
 <h2 class="row">{{ father_row.title }}:</h2>
 
-<ul class="row">
+<ul class="row {{ rows.0.mediafile.media_type|default:'entry' }}">
     {% for row in rows %}
         <li class="{{ row.mediafile.media_type|default:'entry' }} menu">
             {% if row.children.all %}
                 <a href="{% url tod_children row.pk %}">
                     {{ row.title }}
-                    {% if row.label %}
-                        <span>{{ row.label }}</span>
-                    {% endif %}
                 </a>
             {% else %}
                 {% if row.mediafile.media_type == 'video' %}
@@ -18,15 +15,9 @@
                         {% thumbnail row.mediafile.video_image "200x140" crop='center' as thumb %}
                             <img src="{{ thumb.url }}" alt="" />
                         {% endthumbnail %}
-                        {% if row.label %}
-                            <span>{{ row.label }}</span>
-                        {% endif %}
                     </a>               
                 {% else %}
                     {{ row.title }}
-                    {% if row.label %}
-                        <span>{{ row.label }}</span>
-                    {% endif %}
                 {% endif %}
             {% endif %}
         </li>
