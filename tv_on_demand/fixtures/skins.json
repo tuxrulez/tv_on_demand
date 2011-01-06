@@ -5,9 +5,7 @@
         "fields": {
             "external_id": null, 
             "slug": "red-skin", 
-            "css_style": "tv_on_demand/skin/css_style/sample.css", 
-            "title": "Red Skin",
-            "company_logo": "red_logo.png"
+            "title": "Red Skin"
         }
     }, 
     {
@@ -16,9 +14,7 @@
         "fields": {
             "external_id": null, 
             "slug": "blue-skin", 
-            "css_style": "tv_on_demand/skin/css_style/sample_1.css", 
-            "title": "Blue Skin",
-            "company_logo": "blue_logo.png"
+            "title": "Blue Skin"
         }
     }, 
     {
@@ -27,9 +23,7 @@
         "fields": {
             "external_id": null, 
             "slug": "green-skin", 
-            "css_style": "tv_on_demand/skin/css_style/sample_2.css", 
-            "title": "Green Skin",
-            "company_logo": "green_logo.png"
+            "title": "Green Skin"
         }
     }
 ]

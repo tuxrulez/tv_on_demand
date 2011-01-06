@@ -57,10 +57,6 @@ class TestTodToXml(TestCase):
        self.assertTrue(str(self.structure_instance.pk) in content)
        self.assertTrue('name' in content)
        self.assertTrue(self.structure_instance.name in content)
-       self.assertTrue('skin' in content)
-       self.assertTrue(self.structure_instance.skin.css_style.url in content)
-       self.assertTrue('company_logo' in content)
-       self.assertTrue(self.structure_instance.skin.company_logo.url in content)
        
        for row in self.structure_instance.structurerow_set.all():
            self.assertTrue('title' in content)
@@ -101,7 +97,6 @@ class TestXmlToTod(TestCase):
         self.assertEqual(new_skin.external_id, structure.skin.pk)
         self.assertEqual(new_skin.title, structure.skin.title)
         self.assertEqual(new_skin.slug, structure.skin.slug)
-        self.assertEqual(new_skin.css_style, structure.skin.css_style)
         self.assertEqual(new_structure.external_id, structure.pk)
         self.assertEqual(new_structure.skin.slug, structure.skin.slug)
         self.assertEqual(new_structure.name, structure.name)

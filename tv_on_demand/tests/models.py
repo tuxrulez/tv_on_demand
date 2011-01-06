@@ -93,7 +93,7 @@ class StructureRowModelTest(TestCase):
 class SkinModelTest(TestCase):
     
     def test_creation(self):
-        instance = Skin.objects.create(title='Test Skin', css_style='test.css', company_logo='logo.png')
+        instance = Skin.objects.create(title='Test Skin')
         
         self.assertEqual(Skin.objects.count(), 1)
     
