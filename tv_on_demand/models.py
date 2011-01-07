@@ -28,6 +28,9 @@ class Skin(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Skin, self).save(*args, **kwargs)
+        
+    def logo_url(self):
+        return 'skins/%s/logo.jpg' % self.slug
 
 
 class Structure(models.Model):

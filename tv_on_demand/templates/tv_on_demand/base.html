@@ -4,20 +4,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>MegaMidia Box - Mobox</title>
-    <link rel="stylesheet" href="{{ structure.skin.css_style.url }}" type="text/css" />
+    <link rel="stylesheet" href="/media/skins/{{ structure.skin.slug }}/base.css" type="text/css" />
 </head>
 
 <body>
     <div id="container">
         <div id="header">
             {% block header %}
-                {% if structure.skin.company_logo %}
                 <h1>
-                    {% thumbnail structure.skin.company_logo "160x260" as thumb %}
+                    {% thumbnail structure.skin.logo_url "160x260" as thumb %}
                         <img src="{{ thumb.url }}" alt="company logo" />
                     {% endthumbnail %}
                 </h1>
-                {% endif %}
             {% endblock %}
         </div>    
        

@@ -3,7 +3,7 @@
     <ul class="main">
         {% for row in root_rows %}
             <li class="menu">
-                <a href="{% url tod_children row.pk %}">
+                <a href="{% url tod_children row.pk %}" class="keynav_btn">
                     {{ row.title }}
                 </a>
             </li>

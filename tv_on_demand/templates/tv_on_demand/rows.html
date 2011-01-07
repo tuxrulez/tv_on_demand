@@ -5,7 +5,7 @@
     {% for row in rows %}
         <li class="{{ row.mediafile.media_type|default:'entry' }} menu">
             {% if row.children.all %}
-                <a href="{% url tod_children row.pk %}">
+                <a href="{% url tod_children row.pk %}" class="keynav_btn">
                     {{ row.title }}
                 </a>
             {% else %}
