@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 from mptt.models import MPTTModel
 from django.db import models
 from django.contrib.auth.models import User
@@ -8,6 +9,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify
+from django.conf import settings
+from sorl.thumbnail import get_thumbnail
 from mmutils.common import auto_serialize
 from mediafiles.models import MediaFile
 from news.models import ENTRY_TYPES
@@ -29,9 +32,11 @@ class Skin(models.Model):
         self.slug = slugify(self.title)
         super(Skin, self).save(*args, **kwargs)
         
-    def logo_url(self):
-        return 'skins/%s/logo.jpg' % self.slug
-
+    def logo_thumb(self):
+        logo_file = os.path.join(settings.MEDIA_ROOT, 'skins', self.slug, 'logo.jpg')
+        thumb = get_thumbnail(logo_file, '160x260', quality=99)                
+        return thumb
+        
 
 class Structure(models.Model):
     content_type = models.ForeignKey(ContentType, verbose_name=_('content type'),

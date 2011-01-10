@@ -12,9 +12,7 @@
         <div id="header">
             {% block header %}
                 <h1>
-                    {% thumbnail structure.skin.logo_url "160x260" as thumb %}
-                        <img src="{{ thumb.url }}" alt="company logo" />
-                    {% endthumbnail %}
+                    <img src="{{ structure.skin.logo_thumb.url }}" alt="company logo" />
                 </h1>
             {% endblock %}
         </div>    
