@@ -51,52 +51,48 @@
                 </form>
             </div>
 
-        
             {% if object %}
-            <h2>{% trans 'Structure montage' %}</h2>      
-    
+            <h2>{% trans 'Structure montage' %}</h2>
 
             <div id="rows-frame">
                 {% load_structurerows object %}
                 <p class="ghost">
-					{{ row_form.entry }}
-				</p>
+                    {{ row_form.entry }}
+                </p>
                 
                 {% if not rows_output %}
-				<!-- LEVEL -->
+                <!-- LEVEL -->
                 <div>
-					<!-- MENU -->
+                    <!-- MENU -->
                     <h2>
                         <span>Menu</span>
                         <em>
-							<a href="#" class="menu-properties" title="editar esse item">Editar</a> / 
+                            <a href="#" class="menu-properties" title="editar esse item">Editar</a> / 
                             <a href="#" class="level-add" title="adicionar nível">{% trans 'Level' %} [+]</a> / 
                             <a href="#" class="row-add" title="adicionar item">{% trans 'Item' %} [+]</a> /
                             <a href="#" class="level-rm" title="remover este nível">{% trans 'Level' %} [-]</a>
                         </em>
                         
                         <p class="ghost">
-							<a href="/admin/mediafiles/mediafile/?media_type__exact=menu" class="select-media">Selecionar um menu</a> <br /><br />
-
-							<span class="ghost">
-								Título<br /> <input type="text" name="fake_title" /> <br />
-								Descrição<br /> <input type="text" name="fake_description" /> <br />
-								Usuários permitidos<br /> {{ row_form.users }}<br />
+                            <a href="/admin/mediafiles/mediafile/?media_type__exact=menu" class="select-media">Selecionar um menu</a> <br/><br/>
+                            <span class="ghost">
+                                Título<br /> <input type="text" name="fake_title" /> <br />
+                                Descrição<br /> <input type="text" name="fake_description" /> <br />
+                                Usuários permitidos<br /> {{ row_form.users }}<br />
                                 Data de início<br /> <input type="text" name="fake_date_start" /> <br />
                                 Data de término<br /> <input type="text" name="fake_date_end" /> <br />
                                 <input type="hidden" name="fake_media_id" />
                                 <input type="hidden" name="fake_order" value="0" /> 
                                 <input type="hidden" name="fake_object_id" value="" />
                                 <input type="button" name="save_menu" value="Salvar" class="save" />
-							</span>
+                            </span>
                         </p>
                     </h2>
                     <!-- END OF MENU -->
 
-					<!-- items -->
+                    <!-- items -->
                     <ul></ul> 
-					<!-- end of items -->		
-
+                    <!-- end of items -->		
                 </div>
                 <!-- END OF LEVEL -->               
 

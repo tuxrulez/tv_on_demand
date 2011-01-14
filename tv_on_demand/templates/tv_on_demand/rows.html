@@ -25,11 +25,13 @@
 </ul>
 
 <p class="back menu">
-    <a href="{% if father_row.parent %}
-                {% url tod_children father_row.parent.pk %}
-             {% else %}
-                {% url tod_pure_main %}
-             {% endif %}">
-        Voltar
-    </a>
+    <div class="back-menu">
+        <a href="{% if father_row.parent %}
+                    {% url tod_children father_row.parent.pk %}
+                 {% else %}
+                    {% url tod_pure_main %}
+                 {% endif %}">
+            Voltar
+        </a>
+    </div>
 </p>
