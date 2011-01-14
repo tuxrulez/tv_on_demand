@@ -25,7 +25,6 @@
 </ul>
 
 <p class="back menu">
-    <div class="back-menu">
         <a href="{% if father_row.parent %}
                     {% url tod_children father_row.parent.pk %}
                  {% else %}
@@ -33,5 +32,4 @@
                  {% endif %}">
             Voltar
         </a>
-    </div>
 </p>
