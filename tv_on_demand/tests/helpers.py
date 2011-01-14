@@ -3,13 +3,14 @@
 
 import os
 import commands
+import time
 from datetime import date
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from mediafiles.models import MediaFile
 from tv_on_demand.models import Structure,StructureRow,Skin
-from tv_on_demand.helpers import ExportToLog, TodToXml, XmlToTod
+from tv_on_demand.helpers import ExportToLog, TodToXml, XmlToTod, LiveFileReader
 
 
 class TestTodToXml(TestCase):
@@ -106,3 +107,61 @@ class TestXmlToTod(TestCase):
         
         # clean trash
         os.remove(exporter.xml_path)
+        
+        
+class TestLiveFileReader(TestCase):
+    
+    def create_file(self, name='some_name', ext='avi', part='0001', content_loop=9999):
+        file_dir = os.path.join(settings.MODPATH, 'importer', 'tv_on_demand', 'live')
+        if not os.path.exists(file_dir):
+            os.makedirs(file_dir)
+            
+        filename = '%s.%s.%s' %(name, ext, part)
+        file_path = os.path.join(file_dir, filename)
+        
+        video_file = open(file_path, 'wb')
+        for i in range(content_loop):
+            video_file.write('fake content\n')
+        video_file.close()
+        
+        return file_path
+        
+        
+    def test_selector(self):
+        invalidfile_by_time = self.create_file(part='0055')
+        time.sleep(4)
+        validfile_one = self.create_file()
+        time.sleep(1)
+        validfile_two = self.create_file(part='0002')
+        time.sleep(1)
+        invalidfile_by_size = self.create_file(part='0066', content_loop=1)
+        time.sleep(1)
+        invalid_by_ext = self.create_file(part='0077', ext='jpg')     
+        
+        # mock para diminuir o tempo de validade do arquivo para 3 segundos
+        # facilitando assim os testes
+        old_live_tv_file_time = getattr(settings, 'LIVE_TV_FILE_TIME', None)
+        old_live_tv_file_size = getattr(settings, 'LIVE_TV_FILE_SIZE', None)
+        settings.LIVE_TV_FILE_TIME = 3
+        # o tamanho mínimo será a metade de um arquivo válido gerado
+        settings.LIVE_TV_FILE_SIZE = os.path.getsize(validfile_one) / 2        
+
+        live_reader = LiveFileReader()
+        live_reader.select_file()
+        
+        self.assertEqual(live_reader.file_path, validfile_two)
+        self.assertEqual(live_reader.file_name, 'some_name.avi.0002')
+        
+        settings.LIVE_TV_FILE_TIME = old_live_tv_file_time
+        settings.LIVE_TV_FILE_SIZE = old_live_tv_file_size
+        
+        # limpa o lixo
+        os.remove(invalidfile_by_time)
+        os.remove(validfile_one)
+        os.remove(invalidfile_by_size)
+        os.remove(validfile_two)
+        os.remove(invalid_by_ext)
+        
+        
+        
+    

@@ -15,4 +15,6 @@ urlpatterns = patterns('tv_on_demand.views',
         name='tod_structurerow_ajax_change'),
     url(r'^tv_on_demand/structurerow/ajax-delete/(?P<object_id>\d+)/$', 'structurerow_ajax_delete',
         name='tod_structurerow_ajax_delete'),
+    url(r'^tv_on_demand/live-media/(?P<filename>.+)/$', 'live_media', name='tod_live_media'),
+    url(r'^tv_on_demand/live/$', 'live', name='tod_live'),
 )

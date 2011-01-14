@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
+from django.conf import settings
 from django.views.generic.create_update import create_object, update_object
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import permission_required
@@ -8,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import simplejson
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
+from tv_on_demand.helpers import LiveFileReader
 
 @permission_required('tv_on_demand.add_structure')
 @permission_required('tv_on_demand.change_structure')
@@ -105,6 +108,37 @@ def serve_video(request, row_id, video_id):
     context = {'rows': rows, 'selected_row': selected_row, 'father_row': cur_row}
     response = direct_to_template(request, template='tv_on_demand/video_list.html', extra_context=context)
     return response
+    
+    
+def live_media(request, filename):
+    # serve um vídeo direto do diretório importer/tv_on_demand/live
+    # baseado no nome do arquivo via GET
+    file_path = os.path.join(settings.MODPATH, 'importer', 'tv_on_demand', 'live', filename)
+  
+    if not os.path.exists(file_path):
+        return HttpResponseForbidden('file does not exist')
+        
+    file_ext = filename.split('.')[-2]
+    if file_ext == 'avi':
+        mime_type = 'video/x-msvideo'
+    else:
+        mime_type = 'video/mpeg'
+    
+    file_media = open(file_path, 'r').read()
+    
+    response = HttpResponse(file_media, mimetype=mime_type)
+    return response
+    
+    
+def live(request):
+    live_reader = LiveFileReader()
+    live_reader.select_file()
+    
+    context = {'live_filename': live_reader.file_name or 'nofile'}
+    response = direct_to_template(request, template='tv_on_demand/live.html', extra_context=context)
+    
+    return response
+    
     
     
     
