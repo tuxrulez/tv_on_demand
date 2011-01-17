@@ -14,15 +14,15 @@
         <a href="{% url tod_pure_main %}"%> Inicio </a>
     </p>
 </span>
-<div>
 <ul class="row {{ rows.0.mediafile.media_type|default:'entry' }}">
+<div class="main_menu_box_container">
     {% for row in rows %}
         <li class="{{ row.mediafile.media_type|default:'entry' }} menu">
                 {% ifequal row.mediafile.media_type 'video'%}
                     <div class="video_box" id="video_box">
                 {% endifequal %} 
                 {% if row.children.all %}
-                    <a href="{% url tod_children row.pk %}" class="keynav_btn">
+                    <a href="{% url tod_children row.pk %}" class="btn">
                         {{ row.title }}
                     </a>
                 {% else %}
@@ -48,5 +48,5 @@
 
         </li>
     {% endfor %}
-</ul>
 </div>
+</ul>
