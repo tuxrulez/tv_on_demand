@@ -18,22 +18,34 @@
 <ul class="row {{ rows.0.mediafile.media_type|default:'entry' }}">
     {% for row in rows %}
         <li class="{{ row.mediafile.media_type|default:'entry' }} menu">
-            {% if row.children.all %}
-                <a href="{% url tod_children row.pk %}" class="keynav_btn">
-                    {{ row.title }}
-                </a>
-            {% else %}
-                {% if row.mediafile.media_type == 'video' %}
-                    <a href="{% url tod_serve_video father_row.pk row.pk %}">
+                {% ifequal row.mediafile.media_type 'video'%}
+                    <div class="video_box" id="video_box">
+                {% endifequal %} 
+                {% if row.children.all %}
+                    <a href="{% url tod_children row.pk %}" class="keynav_btn">
                         {{ row.title }}
-                        {% thumbnail row.mediafile.video_image "200x140" crop='center' as thumb %}
-                            <img src="{{ thumb.url }}" alt="" />
-                        {% endthumbnail %}
-                    </a>               
+                    </a>
                 {% else %}
-                    {{ row.title }}
+                    {% if row.mediafile.media_type == 'video' %}
+                        <a href="{% url tod_serve_video father_row.pk row.pk %}"
+                        onmouseover="this.parentNode.style.background='rgba(1,1,1,0.4)';"
+                        onmouseout="this.parentNode.style.background=''">
+                            {% thumbnail row.mediafile.video_image "200x140" crop='center' as thumb %}
+                                <img src="{{ thumb.url }}" alt="" />
+                            {% endthumbnail %}
+                        </a>               
+                        <div class="video_box_desc" id='testeteste' >
+                            <h1 id="teste21">{{ row }}</h1>
+                        </div>
+                    {% else %}
+                        {{ row.title }}
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+
+                {% ifequal row.mediafile.media_type 'video'%}
+                    </div>
+                {% endifequal %} 
+
         </li>
     {% endfor %}
 </ul>
