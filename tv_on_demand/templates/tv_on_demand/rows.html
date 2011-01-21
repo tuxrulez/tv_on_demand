@@ -16,11 +16,16 @@
         </a>
         
         <a href="{% url tod_pure_main %}" class="home">Inicio</a>
-    </p>
 
 {% endblock %}
 
 {% block row_body %}
+
+    <p class="home menu">
+        <a href="{% url tod_pure_main %}"> Inicio </a>
+    </p>
+</span>
+
 <ul class="row {{ rows.0.mediafile.media_type|default:'entry' }}">
 <div class="main_menu_box_container">
     {% for row in rows %}
@@ -35,8 +40,7 @@
                 {% else %}
                     {% if row.mediafile.media_type == 'video' %}
                         <a href="{% url tod_serve_video father_row.pk row.pk %}"
-                        onmouseover="this.parentNode.style.background='rgba(1,1,1,0.4)';"
-                        onmouseout="this.parentNode.style.background=''">
+                        onmouseover="lighton(this)" onmouseout="lightoff(this)">
                             {% thumbnail row.mediafile.video_image "200x140" crop='center' as thumb %}
                                 <img src="{{ thumb.url }}" alt="" />
                             {% endthumbnail %}
