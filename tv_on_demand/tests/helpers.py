@@ -136,7 +136,7 @@ class TestLiveFileReader(TestCase):
         time.sleep(1)
         invalidfile_by_size = self.create_file(part='0066', content_loop=1)
         time.sleep(1)
-        invalid_by_ext = self.create_file(part='0077', ext='jpg')     
+        invalid_by_ext = self.create_file(part='')     
         
         # mock para diminuir o tempo de validade do arquivo para 3 segundos
         # facilitando assim os testes
@@ -160,7 +160,7 @@ class TestLiveFileReader(TestCase):
         os.remove(validfile_one)
         os.remove(invalidfile_by_size)
         os.remove(validfile_two)
-        os.remove(invalid_by_ext)
+        
         
         
         

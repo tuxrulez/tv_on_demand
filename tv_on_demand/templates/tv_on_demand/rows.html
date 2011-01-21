@@ -1,19 +1,26 @@
 {% load thumbnail %}
-<h2 class="row">{{ father_row.title }}:</h2>
-<span class="backmenubars">
-    <p class="back menu">
+
+{% block row_header %}
+    <h2 class="row">
+        {{ father_row.title }} <br />
+        <span>Selecione o item desejado</span>
+    </h2>
+
+    <p id="backmenus" class="menu">
         <a href="{% if father_row.parent %}
                     {% url tod_children father_row.parent.pk %}
-                 {% else %}
+                {% else %}
                     {% url tod_pure_main %}
-                 {% endif %}">
+                {% endif %}" class="back">
             Voltar
         </a>
+        
+        <a href="{% url tod_pure_main %}" class="home">Inicio</a>
     </p>
-    <p class="home menu">
-        <a href="{% url tod_pure_main %}"%> Inicio </a>
-    </p>
-</span>
+
+{% endblock %}
+
+{% block row_body %}
 <ul class="row {{ rows.0.mediafile.media_type|default:'entry' }}">
 <div class="main_menu_box_container">
     {% for row in rows %}
@@ -50,3 +57,4 @@
     {% endfor %}
 </div>
 </ul>
+{% endblock %}

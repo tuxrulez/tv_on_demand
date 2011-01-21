@@ -1,0 +1,23 @@
+{% extends 'tv_on_demand/rows.html' %}
+{% load thumbnail %}
+
+{% block row_body %}
+    <ul id="row" class="{{ rows.0.mediafile.media_type|default:'menu' }}">
+        {% for row in rows %}
+            <li class="menu">
+                <a href="{% if row.mediafile.media_type == 'video' %}
+                            {% url tod_serve_video father_row.pk row.pk %}
+                         {% else %}
+                            {% url tod_children row.pk %}
+                        {% endif %}" class="btn">
+                    <!--
+                    {% thumbnail row.mediafile.path "240x140" as thumb %}
+                        <img src="{{ thumb.url }}" alt="" />
+                    {% endthumbnail %}  
+                    -->             
+                    
+                </a>            
+            </li>   
+        {% endfor %}
+    </ul>
+{% endblock %}
