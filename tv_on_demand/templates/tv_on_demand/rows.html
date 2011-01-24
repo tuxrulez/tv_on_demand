@@ -3,7 +3,7 @@
 {% block row_header %}
     <h2 class="row">
         {{ father_row.title }} <br />
-        <span>Selecione o item desejado</span>
+        <span>{{ father_row.description|default:"Selecione o item desejado" }}</span>
     </h2>
 
     <p id="backmenus" class="menu">

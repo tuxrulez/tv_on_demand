@@ -10,11 +10,22 @@
                          {% else %}
                             {% url tod_children row.pk %}
                         {% endif %}" class="btn">
-                    <!--
-                    {% thumbnail row.mediafile.path "240x140" as thumb %}
-                        <img src="{{ thumb.url }}" alt="" />
-                    {% endthumbnail %}  
-                    -->             
+                    
+                    {% if not row.mediafile.media_type == 'video' %}
+                        <img src="{{ row.mediafile.path.url }}" alt="" /> 
+                        <span>{{ row.title }}</span>
+                    {% else %}
+                        {% thumbnail row.mediafile.video_image "170x120" crop='center' as thumb %}
+                            <p class="left">
+                                <img src="{{ thumb.url }}" alt="" />
+                            </p>
+                            
+                            <p class="right">
+                                <strong>{{ row.title }}</strong>
+                                <span>{{ row.description }}</span>
+                            </p>                            
+                        {% endthumbnail %}
+                    {% endif %}                    
                     
                 </a>            
             </li>   
