@@ -3,6 +3,7 @@
 
 {% block row_body %}
     <ul id="row" class="{{ rows.0.mediafile.media_type|default:'menu' }}">
+        {% if rows %}
         {% for row in rows %}
             <li class="menu">
                 <a href="{% if row.mediafile.media_type == 'video' %}
@@ -31,5 +32,11 @@
                 </a>            
             </li>   
         {% endfor %}
+        {% else %}
+            <p class="no-content">
+                Não há itens cadastrados nessa sessão.
+            </p>        
+        {% endif %}
+        
     </ul>
 {% endblock %}
