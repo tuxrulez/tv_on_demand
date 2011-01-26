@@ -1,6 +1,13 @@
 {% load thumbnail %}
-<h2 class="row">{{ father_row.title }}:</h2>
-<div class="video-list">
+
+<style>
+    body{
+        background: #000;
+        color: #fff;
+    }
+</style>
+
+{% comment %}
     <p>
         {{ selected_row.title }}
         <span>{{ selected_row.label|default:"" }}</span>
@@ -51,5 +58,13 @@
             Voltar
         </a>
     </p>
+{% endcomment %}
+
+<h2 class="row">{{ selected_row.title }}:</h2>
+<div class="video-list">
+    <embed type="application/x-vlc-plugin" id="vlc" class="video" autoplay="yes" style="width: 100%; height: 80%;"
+           loop="no" volume="100" target="{% url mediafiles_serve selected_row.mediafile.pk %}" />
 
 </div>
+<p>{{ selected_row.description }}</p>
+
