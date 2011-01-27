@@ -3,8 +3,8 @@
 from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('tv_on_demand.views',
-    url(r'^tv_on_demand/main/$', 'main', name='tod_main'),
-    url(r'^tv_on_demand/pure-main/$', 'pure_main', name='tod_pure_main'),
+    url(r'^tv_on_demand/main/(?P<structure_id>\d+)/$', 'main', name='tod_main'),
+    url(r'^tv_on_demand/pure-main/(?P<structure_id>\d+)/$', 'pure_main', name='tod_pure_main'),
     url(r'^tv_on_demand/main/children/(?P<father_id>\d+)/$', 'children_of', name='tod_children'),
     url(r'^tv_on_demand/main/video/(?P<row_id>\d+)/(?P<video_id>\d+)/$', 'serve_video', name='tod_serve_video'),
     url(r'^tv_on_demand/structure/add/$', 'structure_add', name='tod_structure_add'),

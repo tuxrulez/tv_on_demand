@@ -76,20 +76,22 @@ def structurerow_ajax_delete(request, object_id):
     
     return HttpResponse('deleted')
     
-def generic_main(request, template='tv_on_demand/main.html'):
-    root_rows = StructureRow.objects.filter(parent=None).order_by('order')
-    context = {'root_rows': root_rows}
+def generic_main(request, structure_id, template='tv_on_demand/main.html'):
+    structure = get_object_or_404(Structure, pk=structure_id)
+    root_rows = StructureRow.objects.filter(parent=None, structure=structure).order_by('order')
+    context = {'structure': structure,
+               'root_rows': root_rows}
     
     response = direct_to_template(request, template=template, extra_context=context)
     return response    
     
     
-def main(request):
-    return generic_main(request)
+def main(request, structure_id):
+    return generic_main(request, structure_id)
     
 
-def pure_main(request):
-    return generic_main(request, template='tv_on_demand/pure_main.html')
+def pure_main(request, structure_id):
+    return generic_main(request, structure_id, template='tv_on_demand/pure_main.html')
     
 
 def children_of(request, father_id):

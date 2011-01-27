@@ -10,12 +10,12 @@
         <a href="{% if father_row.parent %}
                     {% url tod_children father_row.parent.pk %}
                 {% else %}
-                    {% url tod_pure_main %}
+                    {% url tod_pure_main 1 %}
                 {% endif %}" class="back">
             Voltar
         </a>
         
-        <a href="{% url tod_pure_main %}" class="home">Inicio</a>
+        <a href="{% url tod_pure_main 1 %}" class="home">Inicio</a>
 
 {% endblock %}
 
