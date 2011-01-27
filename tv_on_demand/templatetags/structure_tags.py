@@ -99,12 +99,13 @@ def menu_content(instance):
                 <input type="hidden" name="fake_media_id" value="%(media_id)s" />
                 <input type="hidden" name="fake_order" value="%(order)i" /> 
                 <input type="hidden" name="fake_object_id" value="%(object_id)i" />
+                <input type="hidden" name="fake_parent" value="%(parent)s" />
                 <input type="button" name="save_menu" value="Salvar" class="save" />
             </span>
         </p>
     </h2>''' %{'title': instance.title, 'label': instance.label, 'date_start': instance.br_datetime('date_start'),
                'date_end': instance.br_datetime('date_end'), 'media_id': instance.mediafile and instance.mediafile.pk or '',
-               'order': instance.order, 'object_id': instance.pk, 'users': user_content}
+               'order': instance.order, 'object_id': instance.pk, 'users': user_content, 'parent': instance.parent and instance.parent.pk or ''}
                     
     return content
 
