@@ -13,7 +13,9 @@
                         {% endif %}" class="btn">
                     
                     {% if not row.mediafile.media_type == 'video' %}
-                        <img src="{{ row.mediafile.path.url }}" /> 
+                        {% if row.mediafile.path %}
+                            <img src="{{ row.mediafile.path.url }}" />
+                        {% endif %}
                         <span>{{ row.title }}</span>
                     {% else %}
                         {% thumbnail row.mediafile.video_image "170x120" crop='center' as thumb %}
