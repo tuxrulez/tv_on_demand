@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
+from django.template import TemplateDoesNotExist
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
 from tv_on_demand.helpers import LiveFileReader
@@ -93,10 +94,16 @@ def pure_main(request):
 
 def children_of(request, father_id):
     father_row = get_object_or_404(StructureRow, pk=father_id)
-    rows = father_row.children.all()    
+    rows = father_row.children.all()
     context = {'rows': rows, 'father_row': father_row}
     
-    response = direct_to_template(request, template='tv_on_demand/rows.html', extra_context=context)
+    client_tmpl = 'tv_on_demand/%s/rows.html' % father_row.structure.skin.slug
+
+    try:
+        response = direct_to_template(request, template=client_tmpl, extra_context=context)
+    except TemplateDoesNotExist:
+        response = direct_to_template(request, template='tv_on_demand/rows.html', extra_context=context)
+        
     return response
     
     

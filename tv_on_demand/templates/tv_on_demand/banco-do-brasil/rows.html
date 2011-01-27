@@ -1,0 +1,42 @@
+{% extends 'tv_on_demand/rows.html' %}
+{% load thumbnail %}
+
+{% block row_body %}
+    <ul id="row" class="{{ rows.0.mediafile.media_type|default:'menu' }}">
+        {% if rows %}
+        {% for row in rows %}
+            <li class="menu">
+                <a href="{% if row.mediafile.media_type == 'video' %}
+                            {% url tod_serve_video father_row.pk row.pk %}
+                         {% else %}
+                            {% url tod_children row.pk %}
+                        {% endif %}" class="btn">
+                    
+                    {% if not row.mediafile.media_type == 'video' %}
+                        <img src="{{ row.mediafile.path.url }}" /> 
+                        <span>{{ row.title }}</span>
+                    {% else %}
+                        {% thumbnail row.mediafile.video_image "170x120" crop='center' as thumb %}
+                            <p class="left">
+                                <img src="{{ thumb.url }}" alt="" />
+                            </p>
+                            
+                            <p class="right">
+                                <strong>{{ row.title }}</strong>
+                                <span>{{ row.description }}</span>
+                            </p>
+                                                        
+                        {% endthumbnail %}
+                    {% endif %}                    
+                    
+                </a>            
+            </li>   
+        {% endfor %}
+        {% else %}
+            <p class="no-content">
+                Não há itens cadastrados nessa sessão.
+            </p>        
+        {% endif %}
+        
+    </ul>
+{% endblock %}

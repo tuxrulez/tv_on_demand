@@ -231,7 +231,7 @@ class XmlToTod(object):
                 media_data['video_image'] = self.fix_media_url(get_mdata('video_image'))
                                 
                 media_instance, media_created = MediaFile.objects.get_or_create(external_id=int(media_id), defaults=media_data)
-                if media_created:
+                if not media_created:
                     media_instance.title = media_data['title']
                     media_instance.label = media_data['label']
                     media_instance.media_type = media_data['media_type']
