@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import template
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from mmutils.tags import quick_tag
 from news.models import ENTRY_TYPES
@@ -36,6 +37,7 @@ def item_content(instance):
         <a href="#" class="media-link" target="_blank">
             <img src="/media/style/%(row_icon)s.png">
         </a><br />
+        <a href="%(item_url)s" class="view-item">Ver</a> / 
         <a href="#" class="properties">Editar</a> / 
         <a href="#" class="row-rm">Remover</a>
         <p class="edit ghost">
@@ -60,7 +62,7 @@ def item_content(instance):
             </span>
         </p>
     </li>''' %{'row_icon': media_type, 'title': instance.title, 'label': instance.label, 'date_start': instance.br_datetime('date_start'),
-               'date_end': instance.br_datetime('date_end'), 'media_id': instance.mediafile and instance.mediafile.pk or '',
+               'date_end': instance.br_datetime('date_end'), 'media_id': instance.mediafile and instance.mediafile.pk or '', 'item_url': reverse('admin:mediafiles_mediafile_change', args=[instance.mediafile.pk]),
                'order': instance.order, 'object_id': instance.pk, 'parent': instance.parent and instance.parent.pk or '', 'entries': entry_content}
         
     return content
