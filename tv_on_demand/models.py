@@ -20,6 +20,10 @@ class Skin(models.Model):
     title = models.CharField(_('title'), max_length=45)
     slug = models.SlugField(max_length=45, editable=False)
     external_id = models.PositiveIntegerField(_('external id'), null=True, blank=True)
+    accept_video = models.BooleanField()
+    accept_audio = models.BooleanField()
+    accept_entry = models.BooleanField()
+    accept_image = models.BooleanField()
     
     class Meta:
         verbose_name = _('skin')
@@ -27,6 +31,11 @@ class Skin(models.Model):
         
     def __unicode__(self):
         return self.title
+        
+    def get_allowed_medias(self):
+        formated_val = '%s,%s,%s,%s' %(self.accept_video and 'video' or '', self.accept_audio and 'audio' or '',
+                                       self.accept_entry and 'entry' or '', self.accept_image and 'image' or '')
+        return formated_val
         
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

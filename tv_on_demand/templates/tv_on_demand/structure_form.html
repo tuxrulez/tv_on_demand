@@ -61,6 +61,8 @@
                     {% trans 'Preview' %}
                 </a>
             </h2>
+            
+            <p id="allowed-medias">menu,{{ object.skin.get_allowed_medias }}</p>
 
             <div id="rows-frame">
                 {% load_structurerows object %}
