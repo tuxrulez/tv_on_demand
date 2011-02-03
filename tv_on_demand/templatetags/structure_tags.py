@@ -42,9 +42,9 @@ def item_content(instance):
         <a href="#" class="row-rm">Remover</a>
         <p class="edit ghost">
             <strong>Selecione um tipo de item</strong> <br />
-            <a href="/admin/mediafiles/mediafile/" class="select-media">Mídia</a> <br />''' %{'row_icon': media_type, 'title': instance.title, 'label': instance.label, 'date_start': instance.br_datetime('date_start'),
-               'date_end': instance.br_datetime('date_end'), 'media_id': instance.mediafile and instance.mediafile.pk or '', 'item_url': reverse('admin:mediafiles_mediafile_change', args=[instance.mediafile.pk]),
-               'order': instance.order, 'object_id': instance.pk, 'parent': instance.parent and instance.parent.pk or '', 'entries': entry_content}
+            <a href="/admin/mediafiles/mediafile/" class="select-media">Mídia</a> <br />
+            ''' % {'row_icon': media_type, 'title': instance.title,
+                   'item_url': instance.mediafile and reverse('admin:mediafiles_mediafile_change', args=[instance.mediafile.pk]) or '#'}
             
     if instance.structure.skin.accept_entry:
         content += u'''Notícia: <br /> 
@@ -67,7 +67,8 @@ def item_content(instance):
             </span>
         </p>
     </li>''' %{'row_icon': media_type, 'title': instance.title, 'label': instance.label, 'date_start': instance.br_datetime('date_start'),
-               'date_end': instance.br_datetime('date_end'), 'media_id': instance.mediafile and instance.mediafile.pk or '', 'item_url': reverse('admin:mediafiles_mediafile_change', args=[instance.mediafile.pk]),
+               'date_end': instance.br_datetime('date_end'), 'media_id': instance.mediafile and instance.mediafile.pk or '',
+               'item_url': instance.mediafile and reverse('admin:mediafiles_mediafile_change', args=[instance.mediafile.pk]) or '#',
                'order': instance.order, 'object_id': instance.pk, 'parent': instance.parent and instance.parent.pk or '', 'entries': entry_content}
         
     return content

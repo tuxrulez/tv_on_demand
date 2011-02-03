@@ -8,7 +8,7 @@ from tv_on_demand.models import Structure
 
 class StructureTemplateTest(TestCase):
     
-    fixtures = ['structures.json', 'structurerows.json', 'mediafiles.json']
+    fixtures = ['structures.json', 'structurerows.json', 'mediafiles.json', 'skins.json']
     
     def render(self, extra_context={}):
         t = Template('''{% load structure_tags %}
