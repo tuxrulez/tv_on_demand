@@ -9,6 +9,7 @@ from elementtree.ElementTree import parse
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core import serializers
+from django.contrib.auth.models import User
 from mediafiles.models import MediaFile
 from tv_on_demand.models import Structure, StructureRow, Skin
 
@@ -238,7 +239,7 @@ class XmlToTod(object):
             row_data['date_end'] = row.find('date_end').text
             
             allowed_users = []
-            for xml_user in row.findall('users'):
+            for xml_user in row.findall('user'):
                 username = xml_user.find('username').text
                 email = xml_user.find('email').text
                 password = xml_user.find('password').text
