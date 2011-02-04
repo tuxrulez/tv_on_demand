@@ -4,7 +4,7 @@ import os
 import urllib
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User, Permission, Group
 from django.conf import settings
 from mediafiles.models import MediaFile
 from tv_on_demand.models import Structure, StructureRow, Skin
@@ -96,13 +96,14 @@ class StructureRowViewTest(TestCase):
         delete_perm = Permission.objects.get(codename='delete_structurerow')
         self.user.user_permissions.add(add_perm, change_perm, delete_perm)
         self.client.login(username=self.userdata['username'], password=self.userdata['password'])
+        self.group = Group.objects.create(name='staff')
         
         structure = Structure.objects.all()[0]
         mediafile = MediaFile.objects.all()[0]
         
         self.default_data = {'structure': structure.pk, 'title': 'test title xdv8', 'label': 'test label',
                              'mediafile': mediafile.pk, 'date_start': '14/05/1989 14:15', 'external_id': 0,
-                             'date_end': '21/12/2098 21:10', 'order': 0, 'users': [self.user.pk]}    
+                             'date_end': '21/12/2098 21:10', 'order': 0, 'groups': [self.group.pk]}    
     
     def test_ajax_add_response(self):
         url = reverse('tod_structurerow_ajax_add')
@@ -131,7 +132,7 @@ class StructureRowViewTest(TestCase):
         self.assertContains(response, data['date_start'])
         self.assertContains(response, data['date_end'])
         self.assertContains(response, 'order')
-        self.assertContains(response, 'users')
+        self.assertContains(response, 'groups')
         self.assertContains(response, 'structure')
         self.assertContains(response, 'mediafile')
         self.assertContains(response, 'entry')

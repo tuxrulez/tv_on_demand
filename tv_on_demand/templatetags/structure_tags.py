@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from django import template
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 from mmutils.tags import quick_tag
 from news.models import ENTRY_TYPES
 from tv_on_demand.forms import StructureRowForm
@@ -75,15 +75,15 @@ def item_content(instance):
     
 
 def menu_content(instance):
-    user_ids = [u.pk for u in instance.users.all()]
+    group_ids = [g.pk for g in instance.groups.all()]
     
-    user_content = '<select multiple="multiple" name="users" id="id_users">'
-    for user in User.objects.all():
-        if user.pk in user_ids:
-            user_content += '<option value="%i" selected="selected">%s</option>' %(user.pk, user.username)
+    group_content = '<select multiple="multiple" name="groups" id="id_groups">'
+    for group in Group.objects.all():
+        if group.pk in group_ids:
+            group_content += '<option value="%i" selected="selected">%s</option>' %(group.pk, group.name)
         else:
-            user_content += '<option value="%i">%s</option>' %(user.pk, user.username)            
-    user_content += '</select>'
+            group_content += '<option value="%i">%s</option>' %(group.pk, group.name)            
+    group_content += '</select>'
     
     content = u'''
     <h2>
@@ -100,8 +100,8 @@ def menu_content(instance):
             <span class="ghost" style="display: block;">
                 Título<br /> <input type="text" name="fake_title" value="%(title)s" /> <br />
                 Descrição<br /> <input type="text" name="fake_description" value="%(label)s" /> <br />
-                Usuários permitidos<br /> 
-                %(users)s<br />
+                Grupos permitidos<br /> 
+                %(groups)s<br />
                 Data de início<br> <input type="text" name="fake_date_start" value="%(date_start)s" /> <br />
                 Data de término<br> <input type="text" name="fake_date_end" value="%(date_end)s" /> <br />
                 <input type="hidden" name="fake_media_id" value="%(media_id)s" />
@@ -113,7 +113,7 @@ def menu_content(instance):
         </p>
     </h2>''' %{'title': instance.title, 'label': instance.label, 'date_start': instance.br_datetime('date_start'),
                'date_end': instance.br_datetime('date_end'), 'media_id': instance.mediafile and instance.mediafile.pk or '',
-               'order': instance.order, 'object_id': instance.pk, 'users': user_content, 'parent': instance.parent and instance.parent.pk or ''}
+               'order': instance.order, 'object_id': instance.pk, 'groups': group_content, 'parent': instance.parent and instance.parent.pk or ''}
                     
     return content
 

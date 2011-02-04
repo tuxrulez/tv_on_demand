@@ -36,7 +36,7 @@ def create_structurerow(skin, structure=None, title='test title', label='test la
     data.update(**kwargs)
     
     instance = StructureRow.objects.create(**data)
-    instance.users.add(create_user())
+    #instance.users.add(create_user())
 
     return instance
 

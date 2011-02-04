@@ -123,6 +123,26 @@ class TodToXml(object):
             row_order = ElementTree.SubElement(row_element, 'order')
             row_order.text = str(row.order)            
             
+            usernames = []
+            for group_instance in row.groups.all():
+                for user_instance in group_instance.user_set.all():
+                    # TODO: melhorar isso, evita-se que um usuário que pertença
+                    # à outros grupos seja incluido novamente
+                    if user_instance.username in usernames:
+                        continue
+                    
+                    row_user = ElementTree.SubElement(row_element, 'user')
+                    
+                    user_name = ElementTree.SubElement(row_user, 'username')
+                    user_name.text = user_instance.username
+                    user_passwd = ElementTree.SubElement(row_user, 'password')
+                    user_passwd.text = user_instance.password
+                    user_email = ElementTree.SubElement(row_user, 'email')
+                    user_email.text = user_instance.email
+                    
+                    usernames.append(user_instance.username)       
+    
+            
             mf = row.mediafile
             if mf:
                 try:
@@ -144,9 +164,9 @@ class TodToXml(object):
             row_date_end = ElementTree.SubElement(row_element, 'date_end')
             row_date_end.text = fix_date(row.date_end)
             
-            for user in row.users.all():
-                row_user = ElementTree.SubElement(row_element, 'user', username=user.username, password=user.password,
-                                                  email=user.email)
+            for group in row.groups.all():
+                row_group = ElementTree.SubElement(row_element, 'group', name=group.name)
+                #TODO: implementar loop de users
             
             children_qs = row.get_children()            
             if children_qs:
@@ -217,6 +237,19 @@ class XmlToTod(object):
             row_data['date_start'] = row.find('date_start').text
             row_data['date_end'] = row.find('date_end').text
             
+            allowed_users = []
+            for xml_user in row.findall('users'):
+                username = xml_user.find('username').text
+                email = xml_user.find('email').text
+                password = xml_user.find('password').text
+                
+                user_instance, user_created = User.objects.get_or_create(username=username, defaults={'email': email, 'password': password})
+                if not user_created:
+                    user_instance.email = email
+                    user_instance.password = password
+                
+                allowed_users.append(user_instance)
+            
             row_data['mediafile'] = row.find('mediafile')
             media_id = row_data['mediafile'].attrib.get('id', None)
             if media_id:
@@ -255,6 +288,10 @@ class XmlToTod(object):
                 row_instance.date_end = row_data['date_end']
                 row_instance.mediafile = row_data['mediafile']
                 row_instance.save()
+                
+                for u_instance in allowed_users:
+                    row_instance.users.add(u_instance)
+                
                 
             new_rows = row.findall('row')
             if new_rows:
