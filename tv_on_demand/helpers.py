@@ -290,8 +290,8 @@ class XmlToTod(object):
                 row_instance.mediafile = row_data['mediafile']
                 row_instance.save()
                 
-                for u_instance in allowed_users:
-                    row_instance.users.add(u_instance)
+            for u_instance in allowed_users:
+                row_instance.users.add(u_instance)
                 
                 
             new_rows = row.findall('row')
