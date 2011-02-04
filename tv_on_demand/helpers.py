@@ -241,7 +241,7 @@ class XmlToTod(object):
             allowed_users = []
             for xml_user in row.findall('user'):
                 username = xml_user.find('username').text
-                email = xml_user.find('email').text
+                email = xml_user.find('email').text or 'default@default.com'
                 password = xml_user.find('password').text
                 
                 user_instance, user_created = User.objects.get_or_create(username=username, defaults={'email': email, 'password': password})
