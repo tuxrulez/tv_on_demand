@@ -102,7 +102,12 @@ class StructureRow(MPTTModel):
         return value.strftime('%d/%m/%Y %H:%M')
         
     def serialize(self):
-        return auto_serialize(self, datetime_format='%d/%m/%Y %H:%M')   
+        return auto_serialize(self, datetime_format='%d/%m/%Y %H:%M') 
+        
+    def restricted(self):
+        #retorna se o objeto tem restrições de usuários ou não
+        return self.users.all() and True or False    
+    
     
     
       

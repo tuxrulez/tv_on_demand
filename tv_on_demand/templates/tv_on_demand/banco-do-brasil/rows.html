@@ -10,7 +10,7 @@
                             {% url tod_serve_video father_row.pk row.pk %}
                          {% else %}
                             {% url tod_children row.pk %}
-                        {% endif %}" class="btn">
+                        {% endif %}" class="btn{% if row.restricted %} restricted{% endif %}">
                     
                     {% if not row.mediafile.media_type == 'video' %}
                         {% if row.mediafile.path %}

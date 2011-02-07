@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>MegaMidia Box - Mobox</title>
+    
+    
+    <style>
+        body{
+            margin: 0 auto;
+            background: #00387E;
+            font-size: 1.5em;
+            color: #fff;
+            padding: 2%;
+        }
+        #login{
+            text-align: center;
+        }
+            #login input.text{
+                width: 70%;
+                padding: 1.2%;               
+                background: #FFF001;
+                -moz-border-radius: 0.9em;
+                border-radius: 0.9em;
+                font-size: 1.4em;
+                color: #002F73;
+                text-align: center;
+            }
+            #login p.button input{
+                font-size: 1em;
+                padding: 2%;
+                color: #002F73;
+                background: #fff;
+                -moz-border-radius: 0.9em;
+                border-radius: 0.9em;
+            }
+                #login p.button input:hover{
+                }
+    </style>
+    
+</head>
+
+<body>
+    <div id="login">
+        <form method="POST" name="do_login" action=".">
+            {% csrf_token %}
+        
+            <p>
+                <span>Usuário</span>: <br />
+                <input type="text" name="username" class="text" />
+            </p>
+            <p>
+                <span>Senha</span>: <br />
+                <input type="password" name="password" class="text" />        
+            </p>
+            <p>
+                <input type="hidden" name="row_url" value="{{ row_url }}" />
+            </p>
+        
+            <p class="button">
+                <input type="submit" name="login-send" id="login-send" value="Autenticar" />
+            </p>        
+        </form>
+    </div>
+    
+    <script type="text/javascript" src="/media/js/j.js"></script>
+    <script type="text/javascript" src="/media/tod_skins/js/base.js"></script>
+</body>
+</html>

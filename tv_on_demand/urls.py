@@ -17,4 +17,6 @@ urlpatterns = patterns('tv_on_demand.views',
         name='tod_structurerow_ajax_delete'),
     url(r'^tv_on_demand/live-media/(?P<filename>.+)/$', 'live_media', name='tod_live_media'),
     url(r'^tv_on_demand/live/$', 'live', name='tod_live'),
+    url(r'tv_on_demand/do-login/(?P<row_id>\d+)/$', 'do_login', name='tod_login'),
+    url(r'tv_on_demand/do-logout/$', 'do_logout', name='tod_logout'),
 )

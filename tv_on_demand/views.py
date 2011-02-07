@@ -5,9 +5,11 @@ from django.conf import settings
 from django.views.generic.create_update import create_object, update_object
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils import simplejson
+from django.core.urlresolvers import reverse
 from django.template import TemplateDoesNotExist
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
@@ -96,6 +98,17 @@ def pure_main(request, structure_id):
 
 def children_of(request, father_id):
     father_row = get_object_or_404(StructureRow, pk=father_id)
+    allowed_users = father_row.users.all()
+    
+    # TODO: fazer verificação para os filhos
+    
+    if allowed_users:
+        if not request.user.is_authenticated():
+            return HttpResponse('not_allowed')
+            
+        if not request.user in allowed_users:
+            return HttpResponse('not_allowed')
+    
     rows = father_row.children.all()
     context = {'rows': rows, 'father_row': father_row}
     
@@ -149,9 +162,33 @@ def live(request):
     return response
     
     
+def do_login(request, row_id):
+    row = get_object_or_404(StructureRow, pk=row_id)    
+    
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        
+        user = authenticate(username=username, password=password)
+        
+        if user != None:
+            if user.is_active and user in row.users.all():                
+                login(request, user)
+                response = HttpResponse('login_true')
+            else:
+                response = HttpResponse('login_false')
+                
+        else:
+            response = HttpResponse('login_false')
+            
+    else:
+        response = direct_to_template(request, template='tv_on_demand/login.html',
+                                      extra_context={'row_url': reverse('tod_login', args=[row_id])})
+        
+    return response
     
     
-    
-    
-    
-    
+def do_logout(request):
+    logout(request)
+    return HttpResponse('ok')
+  

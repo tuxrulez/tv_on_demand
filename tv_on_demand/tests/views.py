@@ -262,12 +262,7 @@ class LiveViewTest(TestCase):
         url = reverse('tod_live')
         response = self.client.get(url)
         
-        self.assertEqual(response.status_code, 200)
-        
-        
-        
-        
-        
+        self.assertEqual(response.status_code, 200)        
         
         
         
