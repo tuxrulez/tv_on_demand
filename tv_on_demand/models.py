@@ -109,5 +109,21 @@ class StructureRow(MPTTModel):
         return self.users.all() and True or False    
     
     
+# signal que remove usuários que já não pertecem mais à determinados grupos
+def structurerow_create_update(signal, instance, sender, created, **kwargs):
+    allowed_users = []
     
+    for group in instance.groups.all():
+        for user_group in group.user_set.all():
+            allowed_users.append(user_group)    
+    
+    for user in instance.users.all():
+        if not user in allowed_users:
+            instance.users.remove(user)
+            
+            
+    user_rows = StructureRow.objects.filter(users=instance)
+        
+models.signals.post_save.connect(structurerow_create_update, sender=StructureRow)
+
       

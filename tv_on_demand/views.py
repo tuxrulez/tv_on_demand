@@ -46,6 +46,12 @@ def generic_structure_ajax(request, modelform, **kwargs):
         
         if form.is_valid():
             instance = form.save()
+            
+            #salva os usuários, se houverem grupos
+            for group in instance.groups.all():
+                for user_group in group.user_set.all():
+                    instance.users.add(user_group)
+            
             json_data = instance.serialize()
             if instance.mediafile:
                 json_data['media_type'] = instance.mediafile.media_type
