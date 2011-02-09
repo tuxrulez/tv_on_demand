@@ -101,9 +101,8 @@ $(function(){
     
     //logout ( a cada 60 segundos o usuário é deslogado, se não for uma preview )
     var do_logout = function(){
-        var is_preview = $('#is-preview').text();
+        var is_preview = $('#is_preview').text();
         if(is_preview == 'no'){
-            alert('logout');
             $.get('/admin/tv_on_demand/do-logout/');
         }
     }
