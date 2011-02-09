@@ -99,9 +99,13 @@ $(function(){
     });
     
     
-    //logout ( a cada 60 segundos o usuário é deslogado )
+    //logout ( a cada 60 segundos o usuário é deslogado, se não for uma preview )
     var do_logout = function(){
-        $.get('/admin/tv_on_demand/do-logout/');        
+        var is_preview = $('#is-preview').text();
+        if(is_preview == 'no'){
+            alert('logout');
+            $.get('/admin/tv_on_demand/do-logout/');
+        }
     }
     window.setInterval(do_logout, 60000);    
     
