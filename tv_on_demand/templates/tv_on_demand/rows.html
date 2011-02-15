@@ -16,6 +16,7 @@
         </a>
         
         <a href="{% url tod_pure_main father_row.structure.pk %}" class="home">Inicio</a>
+    </p>
 
 {% endblock %}
 
@@ -44,9 +45,6 @@
                                 <img src="{{ thumb.url }}" alt="" />
                             {% endthumbnail %}
                         </a>               
-                        <div class="video_box_desc" id='testeteste' >
-                            <h1 id="teste21">{{ row }}</h1>
-                        </div>
                     {% else %}
                         {{ row.title }}
                     {% endif %}
