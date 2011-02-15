@@ -204,6 +204,8 @@ ul#row{
     text-align: right;
     padding-top: 2%;
     float: left;
+    position: absolute;
+    bottom: 0px;
 }
 #is_preview{
     display: none;
