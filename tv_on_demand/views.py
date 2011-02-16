@@ -159,13 +159,14 @@ def live_media(request, filename):
     
     
 def live(request):
-    live_reader = LiveFileReader()
-    live_reader.select_file()
+    #live_reader = LiveFileReader()
+    #live_reader.select_file()
     
-    context = {'live_filename': live_reader.file_name or 'nofile'}
-    response = direct_to_template(request, template='tv_on_demand/live.html', extra_context=context)
+    #context = {'live_filename': live_reader.file_name or 'nofile'}
+    #response = direct_to_template(request, template='tv_on_demand/live.html', extra_context=context)
+    os.system('cvlc mms://10.0.100.14:8080 --fullscreen')  
     
-    return response
+    return HttpResponse('ok')
     
     
 def do_login(request, row_id):
