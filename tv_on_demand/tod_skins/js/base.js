@@ -54,7 +54,7 @@ $(function(){
                         var re_id = RegExp(/\d+\b/);
                         var row_id = self.attr('href').match(re_id);
                         var login_url = '/admin/tv_on_demand/do-login/' + row_id;
-                        $.fn.colorbox({href:login_url, width:"30%", height:"50%", iframe:true, open:true});
+                        $.fn.colorbox({href:login_url, width:"30%", height:"45%", iframe:true, open:true});
 
                     }else{
                         $('#content').html(result);
