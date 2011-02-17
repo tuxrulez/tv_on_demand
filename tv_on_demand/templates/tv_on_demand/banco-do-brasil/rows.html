@@ -20,7 +20,8 @@
                     {% else %}
                         {% thumbnail row.mediafile.video_image "170x120" crop='center' as thumb %}
                             <p class="left">
-                                <img src="{{ thumb.url }}" alt="" />
+                                <img src="{{ thumb.url }}" alt=""
+                                onload="resize(this,window.innerHeight,window.innerWidth);" />
                             </p>
                             
                             <p class="right">

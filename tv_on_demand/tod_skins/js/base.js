@@ -107,7 +107,7 @@ $(function(){
 
 });
 
-function test(val,height,width) {
+function resize(val,height,width) {
     var nHeight = ( height * 13.556 / 100);
     var nWidth  = ( width * 11.805 / 100 );
     val.style.height = nHeight + "px" ;
