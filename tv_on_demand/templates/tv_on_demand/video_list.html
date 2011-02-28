@@ -14,10 +14,7 @@
                
                 {% if selected_row.mediafile.path %}
                     player = VLCobject.embedPlayer('vlc1', 1024, 768, true);
-                    player.play('{{ selected_row.mediafile.path.url }}');
-                    
-                    // faz um get para a url que incrementa os logs
-                    $.get('{% url mediafiles_serve selected_row.mediafile.pk %}?user_pk={{ request.user.pk }}')
+                    player.play('{% url mediafiles_serve selected_row.mediafile.pk %}?user_pk={{ request.user.pk }}');
                 {% endif %}               
 
                 
