@@ -10,6 +10,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core import serializers
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from mediafiles.models import MediaFile
 from tv_on_demand.models import Structure, StructureRow, Skin
 
@@ -380,7 +381,98 @@ class LiveFileReader(object):
         
             
         
-        
-        
-        
-        
+def call_vlc(source):
+    # the following syntax does not allow vlc starts with any hotkey than
+    # specified avoiding any unexpected command by hotkey, tho.
+    # although fullscreen is locked, its still possible to leave it with
+    # double click with the mouse.
+    ret = os.system("vlc --fullscreen                    \
+                    --key-toggle-fullscreen=''           \
+                    --global-key-toggle-fullscreen=''    \
+                    --key-leave-fullscreen=''            \
+                    --global-key-leave-fullscreen=''     \
+                    --key-play-pause=''                  \
+                    --global-key-play-pause=''           \
+                    --key-faster=''                      \
+                    --global-key-faster=''               \
+                    --key-slower=''                      \
+                    --global-key-slower=''               \
+                    --key-rate-normal=''                 \
+                    --global-key-rate-normal=''          \
+                    --key-rate-faster-fine=''            \
+                    --global-key-rate-faster-fine=''     \
+                    --key-rate-slower-fine=''            \
+                    --global-key-rate-slower-fine=''     \
+                    --key-next=''                        \
+                    --global-key-next=''                 \
+                    --key-prev=''                        \
+                    --global-key-prev=''                 \
+                    --key-stop=''                        \
+                    --global-key-stop=''                 \
+                    --key-jump-extrashort=''             \
+                    --global-key-jump-extrashort=''      \
+                    --key-jump+extrashort=''             \
+                    --global-key-jump+extrashort=''      \
+                    --key-jump-short=''                  \
+                    --global-key-jump-short=''           \
+                    --key-jump+short=''                  \
+                    --global-key-jump+short=''           \
+                    --key-jump-medium=''                 \
+                    --global-key-jump-medium=''          \
+                    --key-jump+medium=''                 \
+                    --global-key-jump+medium=''          \
+                    --key-jump-long=''                   \
+                    --global-key-jump-long=''            \
+                    --key-jump+long=''                   \
+                    --global-key-jump+long=''            \
+                    --key-frame-next=''                  \
+                    --global-key-frame-next=''           \
+                    --key-quit=''                        \
+                    --global-key-quit='v'                \
+                    --key-vol-up=''                      \
+                    --global-key-vol-up=''               \
+                    --key-vol-down=''                    \
+                    --global-key-vol-down=''             \
+                    --key-vol-mute=''                    \
+                    --global-key-vol-mute=''             \
+                    --key-audio-track=''                 \
+                    --global-key-audio-track=''          \
+                    --key-audiodevice-cycle=''           \
+                    --global-key-audiodevice-cycle=''    \
+                    --key-subtitle-track=''              \
+                    --global-key-subtitle-track=''       \
+                    --key-aspect-ratio=''                \
+                    --global-key-aspect-ratio=''         \
+                    --key-crop=''                        \
+                    --global-key-crop=''                 \
+                    --key-toggle-autoscale=''            \
+                    --global-key-toggle-autoscale=''     \
+                    --key-incr-scalefactor=''            \
+                    --global-key-incr-scalefactor=''     \
+                    --key-decr-scalefactor=''            \
+                    --global-key-decr-scalefactor=''     \
+                    --key-deinterlace=''                 \
+                    --global-key-deinterlace=''          \
+                    --key-wallpaper=''                   \
+                    --global-key-wallpaper=''            \
+                    --key-random=''                      \
+                    --global-key-random=''               \
+                    --key-loop=''                        \
+                    --global-key-loop=''                 \
+                    --play-and-exit                      \
+                    %s " % source )
+    if ret == 0:
+        # for some wicked reason, vlc fires up sleep 50 after it closes up,
+        # this kills it allowing vlc to be triggered again w/o delay.
+        try:
+            os.system("ps aux | grep sleep | grep -v grep | awk '{print $2}' | xargs kill -9")
+        except OSError:
+            pass
+        return HttpResponse('ok')
+    else:
+        return HttpResponse('Some Error Occurred')
+
+
+
+
+
