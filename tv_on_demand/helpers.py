@@ -381,12 +381,13 @@ class LiveFileReader(object):
 
 
 
-VLC_BASE_COMMAND =  "vlc --fullscreen                    \
+VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
+					--no-video-title-show                \
                     --key-toggle-fullscreen=''           \
                     --global-key-toggle-fullscreen=''    \
                     --key-leave-fullscreen=''            \
                     --global-key-leave-fullscreen=''     \
-                    --key-play-pause=''                  \
+                    --key-play-pause='p'                 \
                     --global-key-play-pause=''           \
                     --key-faster=''                      \
                     --global-key-faster=''               \
