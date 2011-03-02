@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 from django.conf import settings
@@ -14,7 +14,7 @@ from django.template import TemplateDoesNotExist
 from pyamf.remoting.gateway.django import DjangoGateway
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
-from tv_on_demand.helpers import LiveFileReader, call_vlc
+from tv_on_demand.helpers import LiveFileReader, VLC_BASE_COMMAND
 
 @permission_required('tv_on_demand.add_structure')
 @permission_required('tv_on_demand.change_structure')
@@ -97,8 +97,18 @@ def serve_video(request, row_id, video_id):
 
 
 def live(request):
-    ret = call_vlc(settings.SOURCE_TO_LOAD)
-    return ret
+    if not settings.SOURCE_TO_LOAD:
+        return HttpResponse('no_signal')
+
+    ret = os.system(VLC_BASE_COMMAND+" "+settings.SOURCE_TO_LOAD)
+    if ret == 0:
+        try:
+            os.system("ps aux | grep sleep | grep -v grep | awk '{print $2}' | xargs kill -9")
+        except OSError:
+            pass
+        return HttpResponse('ok')
+    else:
+        return HttpResponse('Some Error Occurred')
 
 
 def do_logout(request):
