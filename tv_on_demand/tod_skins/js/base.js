@@ -54,7 +54,7 @@ $(function(){
                         var re_id = RegExp(/\d+\b/);
                         var row_id = self.attr('href').match(re_id);
                         var login_url = '/admin/tv_on_demand/do-login/' + row_id;
-                        $.fn.colorbox({href:login_url, width:"30%", height:"50%", iframe:true, open:true});
+                        $.fn.colorbox({href:login_url, width:"30%", height:"360em", iframe:true, open:true});
 
                     }else{
                         $('#content').html(result);
@@ -85,7 +85,6 @@ $(function(){
             data: {username: username, password: password},
             success: function(result){
                 var login_div = $('#login');
-
                 if(result == 'login_true'){
                     login_div.html('<p>Permissão concedida. Por favor, retorne ao menu desejado e acesse nosso conteúdo.</p>');
                 }else{
@@ -105,5 +104,24 @@ $(function(){
     }
     window.setInterval(do_logout, 60000);
 
+
 });
 
+function resize(val,height,width) {
+    var nHeight = ( height * 13.556 / 100);
+    var nWidth  = ( width * 11.805 / 100 );
+    val.style.height = nHeight + "px" ;
+    val.style.width  = nWidth + "px" ;
+    /*val.parentNode.parentNode.style.height = nHeight * 1.25 + "px";*/
+    var ratio = 1.25;
+    if ( nWidth/nHeight > 1.55 ) {
+        if ( nWidth/nHeight < 1.65 ) {
+            ratio = 1.235;
+        } else {
+            ratio = 1.28;
+        }
+    } else {
+        ratio = 1.25;
+    }
+    val.parentNode.parentNode.style.height = ( nHeight * ratio ) + "px";
+}

@@ -83,25 +83,25 @@ p#backmenus{
     margin-top: 12%;
     margin-left: 3%;
 }
-    p#backmenus a{
-       display: block;
-       margin-bottom: 10%;
-       color: #fff;
-       border-radius: 0.75em;
-       -moz-border-radius: 0.75em;
-       border: 0.2em solid #fff;
-    }
-        p#backmenus a.back{
-            background: #66BA60;
-            border-color: #66BA60;
-        }
-        p#backmenus a.home{
-            background: #EA8B36;
-            border-color: #EA8B36;
-        }
-        p#backmenus a:hover{
-            border-color: #fff;
-        }
+p#backmenus a{
+    display: block;
+    margin-bottom: 10%;
+    color: #fff;
+    border-radius: 0.75em;
+    -moz-border-radius: 0.75em;
+    border: 0.2em solid #fff;
+}
+p#backmenus a.back{
+    background: #66BA60;
+    border-color: #66BA60;
+}
+p#backmenus a.home{
+    background: #EA8B36;
+    border-color: #EA8B36;
+}
+p#backmenus a:hover{
+    border-color: #fff;
+}
 
 ul#row{
     float: left;
@@ -112,83 +112,83 @@ ul#row{
     margin-left: 5%;
     overflow: hidden;
 }
-    ul#row img{
-        border: none;
-    }
+ul#row img{
+    border: none;
+}
 
-    /* MENU */
-    ul#row.menu{
-        
-    }
-        ul#row.menu li{
-            float: left;
-            margin: 0 8% 8% 0;
-        }
-            ul#row.menu li a{
-                display: block;
-                -moz-border-radius: 0.75em;
-                border-radius: 0.75em;
-                background: #FFCC0B;
-                width: 220px; /*DEIXAR FLUIDO !!!!!! */
-                height: 140px;
-                border: 0.2em solid #FFCC0B;
-                text-align: center;
-            }
-            ul#row.menu li a:hover{
-                border-color: #fff;
-            }
-            ul#row.menu li a span{
-                font-size: 16px;
-                color: #165AAE;
-                display: block;
-                margin-top: -28px;
-            }
+/* MENU */
+ul#row.menu{
+
+}
+ul#row.menu li{
+    float: left;
+    margin: 0 8% 8% 0;
+}
+ul#row.menu li a{
+    display: block;
+    -moz-border-radius: 0.75em;
+    border-radius: 0.75em;
+    background: #FFCC0B;
+    width: 220px; /*DEIXAR FLUIDO !!!!!! */
+    height: 140px;
+    border: 0.2em solid #FFCC0B;
+    text-align: center;
+}
+ul#row.menu li a:hover{
+    border-color: #fff;
+}
+ul#row.menu li a span{
+    font-size: 16px;
+    color: #165AAE;
+    display: block;
+    margin-top: -28px;
+}
             
-    /* VIDEO */
-    ul#row.video{ 
+/* VIDEO */
+ul#row.video{ 
         background: #36555F;
         -moz-border-radius: 0.75em;
         border-radius: 0.75em;
         padding-left: 3%;
         padding-right: 2%;
-    }
-        ul#row.video li{
+}
+ul#row.video li{
             float: left;
             width: 47.1%;
             margin: 2% 2% 2% 0;
             height: 5.3em;
-        }
-            ul#row.video li a{
-                display: block;
-                width: 100%;
-                font-size: 0.8em;
-                height: 100%;
-                border-radius: 0.75em;
-                -moz-border-radius: 0.75em;
-            }
-            ul#row.video li a:hover{
-                background: #66848E;
-            }
-                ul#row.video li a p.left{
-                    float: left;
-                    padding: 3% 2% 2% 2%;
-                    background: #FDDB00;
-                    text-align: center;
-                    border-radius: 0.75em;
-                    -moz-border-radius: 0.75em;
-                }
-                ul#row.video li p.right{
-                    float: right;
-                    width: 52%;
-                }
-                    ul#row.video li p.right strong{
-                        color: #FDDB00;
-                        display: block;
-                    }
-                    ul#row.video li p.right span{
-                        display: block;
-                        font-size: 0.7em;
-                    }
+}
+ul#row.video li a{
+    display: block;
+    width: 100%;
+    font-size: 0.8em;
+    height: 100%;
+    border-radius: 0.75em;
+    -moz-border-radius: 0.75em;
+}
+ul#row.video li a:hover{
+    background: #66848E;
+}
+ul#row.video li a p.left{
+    float: left;
+    padding: 3% 2% 2% 2%;
+    background: #FDDB00;
+    text-align: center;
+    border-radius: 0.75em;
+    -moz-border-radius: 0.75em;
+}
+ul#row.video li p.right{
+    float: right;
+    width: 52%;
+}
+ul#row.video li p.right strong{
+    color: #FDDB00;
+    display: block;
+}
+ul#row.video li p.right span{
+    display: block;
+    font-size: 0.7em;
+}
 
 .no-content{
     background: #36555F;
@@ -204,6 +204,8 @@ ul#row{
     text-align: right;
     padding-top: 2%;
     float: left;
+    position: absolute;
+    bottom: 0px;
 }
 #is_preview{
     display: none;

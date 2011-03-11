@@ -216,54 +216,19 @@ class StructureRowNoPermissions(TestCase):
         self.assertEqual(StructureRow.objects.filter(pk=structurerow.pk).count(), 1)
         
         
-class LiveMediaViewTest(TestCase):
-    
-    def create_fake_media(self, name='hi_im_live.avi.0003'):
-        live_dir = os.path.join(settings.MODPATH, 'importer', 'tv_on_demand', 'live')
-        if not os.path.exists(live_dir):
-            os.makedirs(live_dir)
-            
-        live_file_path = os.path.join(live_dir, name)
-        if os.path.exists(live_file_path):
-            return live_file_path
-            
-        live_file = open(live_file_path, 'wb')
-        live_file.write('fake content')
-        live_file.close()
-        
-        return live_file_path                
-    
-    def setUp(self):
-        self.url = reverse('tod_live_media', args=['anything.avi.0001'])
-    
-    def test_live_response(self):
-        response = self.client.get(self.url)        
-        self.assertEqual(response.status_code, 403)
-    
-    #TODO: é necessário implementar esses testes novamente
-    def _test_live_content(self):        
-        file_path = self.create_fake_media()
-        filename = file_path.split('/')[-1]
-        url = reverse('tod_live_media', args=[filename])
-        response = self.client.get(url)
-        
-        expected_mimetype = 'video/x-msvideo'
-        response_mimetype = response.items()[0][1]
-        
-        self.assertEqual(expected_mimetype, response_mimetype)
-        self.assertEqual(response.status_code, 200)
-        
-        os.remove(file_path)
-        
-        
 class LiveViewTest(TestCase):
     
     def test_response(self):
+        old_source_to_load = settings.SOURCE_TO_LOAD
+        settings.SOURCE_TO_LOAD = ''
+
         url = reverse('tod_live')
         response = self.client.get(url)
         
         self.assertEqual(response.status_code, 200)        
-        
+        self.assertContains(response, 'no_signal')
+
+        settings.SOURCE_TO_LOAD = old_source_to_load
         
         
 
