@@ -157,7 +157,7 @@ class TodToXml(object):
                     video_image_url = ''
                 ElementTree.SubElement(row_element, 'mediafile', id=str(mf.pk), media_type=mf.media_type,
                                        title=mf.title, label=mf.label, path=real_path, created=fix_date(mf.created),
-                                       video_image=video_image_url)
+                                       video_image=video_image_url, duration=str(mf.duration))
             else:
                 ElementTree.SubElement(row_element, 'mediafile')
 
@@ -264,6 +264,7 @@ class XmlToTod(object):
                 media_data['created'] = get_mdata('created')
                 media_data['path'] = self.fix_media_url(get_mdata('path'))
                 media_data['video_image'] = self.fix_media_url(get_mdata('video_image'))
+                media_data['duration'] = get_mdata('duration')
 
                 media_instance, media_created = MediaFile.objects.get_or_create(external_id=int(media_id), defaults=media_data)
                 if not media_created:
@@ -289,6 +290,7 @@ class XmlToTod(object):
                 row_instance.date_start = row_data['date_start']
                 row_instance.date_end = row_data['date_end']
                 row_instance.mediafile = row_data['mediafile']
+                row_instance.duration = row_data['duration']
                 row_instance.save()
 
             for u_instance in allowed_users:

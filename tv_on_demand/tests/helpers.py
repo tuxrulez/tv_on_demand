@@ -48,24 +48,27 @@ class TestTodToXml(TestCase):
     def test_save(self):
         self.exporter.save()        
         self.assertTrue(os.path.exists(self.exporter.xml_path))
-        self.clean_path()
+        #self.clean_path()
         
     def test_content(self):
-       self.exporter.save()
-       content = open(self.exporter.xml_path, 'r').read()
+        self.exporter.save()
+        content = open(self.exporter.xml_path, 'r').read()
        
-       self.assertTrue('structure' in content)
-       self.assertTrue(str(self.structure_instance.pk) in content)
-       self.assertTrue('name' in content)
-       self.assertTrue(self.structure_instance.name in content)
+        self.assertTrue('structure' in content)
+        self.assertTrue(str(self.structure_instance.pk) in content)
+        self.assertTrue('name' in content)
+        self.assertTrue(self.structure_instance.name in content)
+        
        
-       for row in self.structure_instance.structurerow_set.all():
-           self.assertTrue('title' in content)
-           self.assertTrue(row.title in content)
-           self.assertTrue('label' in content)
-           self.assertTrue(row.label in content)
+        for row in self.structure_instance.structurerow_set.all():
+            self.assertTrue('title' in content)
+            self.assertTrue(row.title in content)
+            self.assertTrue('label' in content)
+            self.assertTrue(row.label in content)
+            self.assertTrue('duration' in content)
+            self.assertTrue(row.mediafile and str(row.mediafile.duration) or '' in content)
 
-       self.clean_path()
+        #self.clean_path()
 
        
 class TestXmlToTod(TestCase):
@@ -95,6 +98,7 @@ class TestXmlToTod(TestCase):
         new_skin = Skin.objects.all()[0]
         new_structure = Structure.objects.all()[0]
         
+        
         self.assertEqual(new_skin.external_id, structure.skin.pk)
         self.assertEqual(new_skin.title, structure.skin.title)
         self.assertEqual(new_skin.slug, structure.skin.slug)
@@ -106,7 +110,7 @@ class TestXmlToTod(TestCase):
         self.assertEqual(new_structure.structurerow_set.filter(mediafile__isnull=False).count(), ini_mediafiles_number)       
         
         # clean trash
-        os.remove(exporter.xml_path)
+        #os.remove(exporter.xml_path)
         
         
 class TestLiveFileReader(TestCase):
