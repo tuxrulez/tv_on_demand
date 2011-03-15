@@ -23,7 +23,7 @@ def create_user(username='nobody'):
 def create_structure(skin, name='test name', **kwargs):
     mediadatabase = mommy.make_one(MediaDatabase)
 
-    data = {'name': name, 'skin': skin} 
+    data = {'name': name, 'skin': skin, 'mediadatabase': mediadatabase}
     data.update(kwargs)
     
     return Structure.objects.create(**data)

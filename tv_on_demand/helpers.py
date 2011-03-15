@@ -11,7 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core import serializers
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from mediafiles.models import MediaFile
+from mediafiles.models import MediaFile, MediaDatabase
 from tv_on_demand.models import Structure, StructureRow, Skin
 
 
@@ -190,6 +190,8 @@ class TodToXml(object):
         structure_skin_slug.text = instance.skin.slug
         structure_skin_external_id = ElementTree.SubElement(structure_skin, 'external_id')
         structure_skin_external_id.text = str(instance.skin.pk)
+        structure_mediadatabase = ElementTree.SubElement(root, 'mediadatabase', name=instance.mediadatabase.name,
+                                                                                slug=instance.mediadatabase.slug)
 
         row_qs = instance.structurerow_set.filter(parent=None)
         self._parse_rows(row_qs, root)
@@ -265,6 +267,7 @@ class XmlToTod(object):
                 media_data['path'] = self.fix_media_url(get_mdata('path'))
                 media_data['video_image'] = self.fix_media_url(get_mdata('video_image'))
                 media_data['duration'] = get_mdata('duration')
+                
 
                 media_instance, media_created = MediaFile.objects.get_or_create(external_id=int(media_id), defaults=media_data)
                 if not media_created:
@@ -313,13 +316,21 @@ class XmlToTod(object):
         skin_data['title'] = skin.find('title').text
         skin_data['slug'] = skin.find('slug').text
 
+        mediadatabase_data = dict()
+        mediadatabase = self.xml.find('mediadatabase')
+        mediadatabase_data['name'] = mediadatabase.attrib['name']
+        mediadatabase_data['slug'] = mediadatabase.attrib['slug']
+
         skin_instance, skin_created = Skin.objects.get_or_create(external_id=skin_external_id, defaults=skin_data)
         if not skin_created:
             skin_instance.title = skin_data['title']
             skin_instance.slug = skin_data['slug']
             skin_instance.save()
 
+        mediadatabase_instance, mediadatabase_created = MediaDatabase.objects.get_or_create(**mediadatabase_data)
+
         data['skin'] = skin_instance
+        data['mediadatabase'] = mediadatabase_instance
         structure_instance, structure_created = Structure.objects.get_or_create(external_id=structure_id, defaults=data)
         if not structure_created:
             structure_instance.name = data['name']

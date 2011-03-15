@@ -8,14 +8,14 @@ from datetime import date
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
-from mediafiles.models import MediaFile
+from mediafiles.models import MediaFile, MediaDatabase
 from tv_on_demand.models import Structure,StructureRow,Skin
 from tv_on_demand.helpers import ExportToLog, TodToXml, XmlToTod, LiveFileReader
 
 
 class TestTodToXml(TestCase):
     
-    fixtures = ['structurerows.json', 'structures.json', 'skins.json', 'mediafiles.json']
+    fixtures = ['structurerows.json', 'structures.json', 'skins.json', 'mediafiles.json', 'mediadatabases.json']
     
     def setUp(self):
         self.structure_instance = Structure.objects.all()[0]
@@ -59,6 +59,9 @@ class TestTodToXml(TestCase):
         self.assertTrue('name' in content)
         self.assertTrue(self.structure_instance.name in content)
         
+        self.assertTrue('mediadatabase' in content)
+        self.assertTrue(self.structure_instance.mediadatabase.name in content)
+        self.assertTrue(self.structure_instance.mediadatabase.slug in content)
        
         for row in self.structure_instance.structurerow_set.all():
             self.assertTrue('title' in content)
@@ -66,7 +69,6 @@ class TestTodToXml(TestCase):
             self.assertTrue('label' in content)
             self.assertTrue(row.label in content)
             self.assertTrue('duration' in content)
-            self.assertTrue(row.mediafile and str(row.mediafile.duration) or '' in content)
 
         #self.clean_path()
 
@@ -74,7 +76,7 @@ class TestTodToXml(TestCase):
 class TestXmlToTod(TestCase):
     
     fixtures = ['mediafiles.json', 'structures.json', 'structurerows.json',
-                'skins.json']
+                'skins.json', 'mediadatabases.json']
                 
     def test_import(self):
         structure = Structure.objects.all()[0]

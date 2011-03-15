@@ -12,7 +12,7 @@ from django.template.defaultfilters import slugify
 from django.conf import settings
 from sorl.thumbnail import get_thumbnail
 from mmutils.common import auto_serialize
-from mediafiles.models import MediaFile
+from mediafiles.models import MediaFile, MediaDatabase
 from news.models import ENTRY_TYPES
 
 
@@ -56,6 +56,7 @@ class Structure(models.Model):
     external_id = models.PositiveIntegerField(_('external id'), null=True, blank=True)
     
     content_object = generic.GenericForeignKey(ct_field='content_type', fk_field='object_id')
+    mediadatabase = models.ForeignKey(MediaDatabase, verbose_name=_('media database'))
     
     
     class Meta:

@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from mediafiles.models import MediaFile
+from model_mommy import mommy
+from mediafiles.models import MediaFile, MediaDatabase
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, Skin
 
@@ -23,7 +24,7 @@ class StructureFormTest(TestCase):
         skin = Skin.objects.all()[0]
         data = {'name': 'test', 'users': [self.create_user().pk],
                 'date_start': '14/05/1989 14:15', 'date_end': '21/12/2098 18:22',
-                'skin': skin.pk}
+                'skin': skin.pk, 'mediadatabase': mommy.make_one(MediaDatabase).pk}
         return data    
    
      

@@ -6,7 +6,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Permission, Group
 from django.conf import settings
-from mediafiles.models import MediaFile
+from model_mommy import mommy
+from mediafiles.models import MediaFile, MediaDatabase
 from tv_on_demand.models import Structure, StructureRow, Skin
 
 FILEPATH = os.path.abspath(os.path.dirname(__file__))
@@ -30,7 +31,9 @@ class StructureViewTest(TestCase):
         
         self.client.login(username=self.userdata['username'], password=self.userdata['password'])
         self.skin = Skin.objects.all()[0]
-        self.default_data = {'name': 'test add', 'skin': self.skin.pk}
+        
+        mediadatabase = mommy.make_one(MediaDatabase)
+        self.default_data = {'name': 'test add', 'skin': self.skin.pk, 'mediadatabase': mediadatabase.pk}
         
     
     def test_add_response(self):
@@ -51,7 +54,7 @@ class StructureViewTest(TestCase):
     def test_change_post(self):
         instance = Structure.objects.all()[0]
         url = reverse('admin:tv_on_demand_structure_change', args=[instance.pk])
-        data = {'name': 'changed name', 'skin': self.skin.pk}
+        data = {'name': 'changed name', 'skin': self.skin.pk, 'mediadatabase': instance.mediadatabase.pk}
         response = self.client.post(url, data)
         
         structure = Structure.objects.get(pk=instance.pk)
@@ -62,7 +65,7 @@ class StructureViewTest(TestCase):
         
 class StructureNoPermissions(TestCase):
     
-    fixtures = ['structures.json']
+    fixtures = ['structures.json','mediadatabases.json']
     
     def test_add(self):
         url = reverse('admin:tv_on_demand_structure_add')
@@ -86,7 +89,8 @@ class StructureNoPermissions(TestCase):
 
 class StructureRowViewTest(TestCase):
     
-    fixtures = ['structures.json', 'mediafiles.json', 'structurerows.json']    
+    fixtures = ['structures.json', 'mediafiles.json', 'structurerows.json',
+                                                            'mediadatabases.json']    
     userdata = {'username': 'admin', 'password': '123', 'email': 'admin@admin.com'}
     
     def setUp(self):

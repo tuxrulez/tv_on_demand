@@ -26,6 +26,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if object %}
+        <p id="meadiadatabase_pk" style="display:none;">{{ object.mediadatabase.pk }}</p>
+    {% endif %}
     <div id="tv-on-demand">
         <div id="cont">
             <h1>TV On Demand - {% trans 'Structure' %}</h1>
@@ -86,7 +89,8 @@
                         </em>
                         
                         <p class="ghost">
-                            <a href="/admin/mediafiles/mediafile/?media_type__exact=menu" class="select-media">Selecionar um menu</a> <br/><br/>
+                            <a href="/admin/mediafiles/mediafile/?media_type__exact=menu&mediadatabase__id__exact={{ object.mediadatabase.pk }}"
+                                 class="select-media">Selecionar um menu</a> <br/><br/>
                             <span class="ghost">
                                 Título<br /> <input type="text" name="fake_title" /> <br />
                                 Descrição<br /> <input type="text" name="fake_description" /> <br />
