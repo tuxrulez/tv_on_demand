@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from model_mommy import mommy
 from tv_on_demand.models import Structure, StructureRow, Skin
-from mediafiles.models import MediaFile
+from mediafiles.models import MediaFile, MediaDatabase
 
 #helpers
 now = datetime.now()
@@ -20,6 +21,8 @@ def create_user(username='nobody'):
 
 
 def create_structure(skin, name='test name', **kwargs):
+    mediadatabase = mommy.make_one(MediaDatabase)
+
     data = {'name': name, 'skin': skin} 
     data.update(kwargs)
     
