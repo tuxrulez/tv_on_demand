@@ -3,7 +3,7 @@
 
 from pyamf.remoting.client import RemotingService as RE
 
-url = 'http://localhost:8000/admin/tv_on_demand/amf-structure/'
+url = 'http://10.0.100.73/admin/tv_on_demand/amf-structure/'
 gw = RE(url)
 service = gw.getService('structure')
 
