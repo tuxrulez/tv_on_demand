@@ -89,15 +89,18 @@ def structurerow_ajax_delete(request, object_id):
 def serve_video(request, row_id, video_id):
     cur_row = get_object_or_404(StructureRow, pk=row_id)
     selected_video = get_object_or_404(StructureRow, pk=video_id)
+    import subprocess
 
     if not selected_video.mediafile.path:
         return HttpResponse('file_not_found')
 
     try:
-        os.system(VLC_BASE_COMMAND+' '+selected_video.mediafile.path.path)
+        value = os.system(VLC_BASE_COMMAND+' '+selected_video.mediafile.path.path)
     except OSError:
-        pass
+        return HttpResponse('no_player')
 
+    # TODO: cuidado com o windows
+    os.system("ps aux | grep sleep | grep -v grep | awk '{print $2}' | xargs kill -9")
     return HttpResponse('ok')
 
 
