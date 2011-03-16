@@ -87,18 +87,18 @@ def structurerow_ajax_delete(request, object_id):
 
 
 def serve_video(request, row_id, video_id):
-	cur_row = get_object_or_404(StructureRow, pk=row_id)
-	selected_video = get_object_or_404(StructureRow, pk=video_id)
+    cur_row = get_object_or_404(StructureRow, pk=row_id)
+    selected_video = get_object_or_404(StructureRow, pk=video_id)
 
-	if not selected_video.mediafile.path:
-		return HttpResponse('file_not_found')
+    if not selected_video.mediafile.path:
+        return HttpResponse('file_not_found')
 
-	try:
-		os.system(VLC_BASE_COMMAND+' '+selected_video.mediafile.path.path)
-	except OSError:
-		pass
-	
-	return HttpResponse('ok')
+    try:
+        os.system(VLC_BASE_COMMAND+' '+selected_video.mediafile.path.path)
+    except OSError:
+        pass
+
+    return HttpResponse('ok')
 
 
 def live(request):
@@ -190,6 +190,13 @@ def amf_login(request, amf_data):
             return False
 
     return False
+
+
+def home(request, structure_id=1):
+    structure = get_object_or_404(Structure, pk=structure_id)
+    context = {'structure': structure}
+    return direct_to_template(request, template='tv_on_demand/flash_home.html',
+                              extra_context=context)
 
 
 amf_services = {

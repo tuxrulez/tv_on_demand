@@ -59,12 +59,10 @@
             {% if object %}
             <h2>
                 <strong>{% trans 'Structure montage' %}</strong> 
-                {% comment %}
                 <a href="{% url tod_preview object.pk %}" target="_blank" class="top">
                     <img src="/media/style/preview_icon.png" />
                     {% trans 'Preview' %}
                 </a>
-                {% endcomment %}
             </h2>
             
             <p id="allowed-medias">menu,{{ object.skin.get_allowed_medias }}</p>
