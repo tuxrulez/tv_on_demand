@@ -1,6 +1,7 @@
 #/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+from threading import Thread
 from django.conf import settings
 from django.views.generic.create_update import create_object, update_object
 from django.views.generic.simple import direct_to_template
@@ -86,21 +87,28 @@ def structurerow_ajax_delete(request, object_id):
     return HttpResponse('deleted')
 
 
+def do_serve_video_th(row_instance):
+    print row_instance.mediafile.path.path
+    os.system(VLC_BASE_COMMAND+' '+row_instance.mediafile.path.path)
+
+
 def serve_video(request, row_id, video_id):
     cur_row = get_object_or_404(StructureRow, pk=row_id)
     selected_video = get_object_or_404(StructureRow, pk=video_id)
-    import subprocess
 
     if not selected_video.mediafile.path:
         return HttpResponse('file_not_found')
 
     try:
-        value = os.system(VLC_BASE_COMMAND+' '+selected_video.mediafile.path.path)
+        video_url = selected_video.mediafile.path.url
+        video_path = settings.MODPATH + video_url
+        os.system(VLC_BASE_COMMAND+' '+video_path)        
     except OSError:
         return HttpResponse('no_player')
 
     # TODO: cuidado com o windows
     os.system("ps aux | grep sleep | grep -v grep | awk '{print $2}' | xargs kill -9")
+
     return HttpResponse('ok')
 
 
