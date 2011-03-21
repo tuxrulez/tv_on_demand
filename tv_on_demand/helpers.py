@@ -398,13 +398,12 @@ VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
                     --aspect 4:3                         \
                     --no-video-title-show                \
                     --random                             \
-                    --loop                               \
                     --key-toggle-fullscreen=''           \
                     --global-key-toggle-fullscreen=''    \
                     --key-leave-fullscreen=''            \
                     --global-key-leave-fullscreen=''     \
                     --key-play-pause='p'                 \
-                    --global-key-play-pause=''           \
+                    --global-key-play-pause='p'           \
                     --key-faster=''                      \
                     --global-key-faster=''               \
                     --key-slower=''                      \
@@ -417,8 +416,8 @@ VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
                     --global-key-rate-slower-fine=''     \
                     --key-next='n'                       \
                     --global-key-next=''                 \
-                    --key-prev=''                        \
-                    --global-key-prev=''                 \
+                    --key-prev='b'                        \
+                    --global-key-prev='b'                 \
                     --key-stop=''                        \
                     --global-key-stop=''                 \
                     --key-jump-extrashort=''             \
