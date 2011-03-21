@@ -395,7 +395,8 @@ class LiveFileReader(object):
 
 
 VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
-					--no-video-title-show                \
+                    --aspect 16:9                        \
+                    --no-video-title-show                \
                     --key-toggle-fullscreen=''           \
                     --global-key-toggle-fullscreen=''    \
                     --key-leave-fullscreen=''            \
