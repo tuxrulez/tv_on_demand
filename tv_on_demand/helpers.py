@@ -395,8 +395,10 @@ class LiveFileReader(object):
 
 
 VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
-                    --aspect 16:9                        \
+                    --aspect 4:3                         \
                     --no-video-title-show                \
+                    --random                             \
+                    --loop                               \
                     --key-toggle-fullscreen=''           \
                     --global-key-toggle-fullscreen=''    \
                     --key-leave-fullscreen=''            \
@@ -413,7 +415,7 @@ VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
                     --global-key-rate-faster-fine=''     \
                     --key-rate-slower-fine=''            \
                     --global-key-rate-slower-fine=''     \
-                    --key-next=''                        \
+                    --key-next='n'                       \
                     --global-key-next=''                 \
                     --key-prev=''                        \
                     --global-key-prev=''                 \
@@ -437,7 +439,7 @@ VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
                     --global-key-jump+long=''            \
                     --key-frame-next=''                  \
                     --global-key-frame-next=''           \
-                    --key-quit='v'                        \
+                    --key-quit='v'                       \
                     --global-key-quit='v'                \
                     --key-vol-up=''                      \
                     --global-key-vol-up=''               \
