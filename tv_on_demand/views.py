@@ -102,7 +102,7 @@ def serve_video(request, row_id, video_id):
     try:
         video_url = selected_video.mediafile.path.url
         video_path = settings.MODPATH + video_url
-        os.system(VLC_BASE_COMMAND+' '+video_path)        
+        os.system(VLC_BASE_COMMAND+' '+video_path+' --play-and-exit')        
     except OSError:
         return HttpResponse('no_player')
 
