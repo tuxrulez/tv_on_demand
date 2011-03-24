@@ -398,6 +398,7 @@ VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
                     --aspect 4:3                         \
                     --no-video-title-show                \
                     --random                             \
+                    --loop                                \
                     --key-toggle-fullscreen=''           \
                     --key-leave-fullscreen=''            \
                     --key-play-pause='p'                 \
