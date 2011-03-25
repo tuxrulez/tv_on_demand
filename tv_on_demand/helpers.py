@@ -394,7 +394,11 @@ class LiveFileReader(object):
 
 
 
-VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
+VLC_BASE_COMMAND = """export DISPLAY=:0.0; --no-video-title-show --fullscreen --aspect=4:3 --key-quit='*' --key-play-pause='Down'
+--key-faster='' --key-slower=''
+"""
+
+OLD_VLC_BASE_COMMAND =  "cvlc --fullscreen               \
                     --aspect 4:3                         \
                     --no-video-title-show                \
                     --random                             \
@@ -428,4 +432,3 @@ VLC_BASE_COMMAND =  "cvlc --fullscreen                   \
                     --key-random=''                      \
                     --key-loop=''                        \
                     "
-
