@@ -206,6 +206,12 @@ def amf_login(request, amf_data):
 def home(request, structure_id=1):
     structure = get_object_or_404(Structure, pk=structure_id)
     context = {'structure': structure}
+
+    try:
+        os.system("xte -x :0.0 'mousemove 10 10' 'mousedown 1' 'mouseup 1'")
+    except OSError:
+        print 'falhou ao tentar dar foco ao flash'
+    
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
                               extra_context=context)
 
