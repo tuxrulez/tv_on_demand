@@ -394,7 +394,7 @@ class LiveFileReader(object):
 
 
 
-VLC_BASE_COMMAND = "export DISPLAY=:0.0; cvlc --fullscreen --no-video-title-show --aspect='%s' --key-play-pause='Down' --key-faster='' --key-slower=''" %getattr(settings, 'VLC_ASPECT_RATIO')
+VLC_BASE_COMMAND = "cvlc --fullscreen --no-video-title-show --aspect='%s' --key-play-pause='Down' --key-faster='' --key-slower=''" %getattr(settings, 'VLC_ASPECT_RATIO')
 
 
 OLD_VLC_BASE_COMMAND =  "cvlc --fullscreen               \
