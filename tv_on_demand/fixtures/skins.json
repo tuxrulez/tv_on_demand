@@ -3,27 +3,26 @@
         "pk": 1, 
         "model": "tv_on_demand.skin", 
         "fields": {
+            "accept_image": false, 
+            "title": "McDonalds", 
+            "accept_entry": false, 
+            "accept_video": true, 
             "external_id": null, 
-            "slug": "red-skin", 
-            "title": "Red Skin"
+            "slug": "mcdonalds", 
+            "accept_audio": false
         }
     }, 
     {
         "pk": 2, 
         "model": "tv_on_demand.skin", 
         "fields": {
+            "accept_image": false, 
+            "title": "Berlanda", 
+            "accept_entry": false, 
+            "accept_video": true, 
             "external_id": null, 
-            "slug": "blue-skin", 
-            "title": "Blue Skin"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "tv_on_demand.skin", 
-        "fields": {
-            "external_id": null, 
-            "slug": "green-skin", 
-            "title": "Green Skin"
+            "slug": "berlanda", 
+            "accept_audio": false
         }
     }
 ]
