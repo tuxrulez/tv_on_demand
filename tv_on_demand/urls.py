@@ -15,4 +15,5 @@ urlpatterns = patterns('tv_on_demand.views',
     url(r'^tv_on_demand/live/$', 'live', name='tod_live'),
     url(r'tv_on_demand/do-logout/$', 'do_logout', name='tod_logout'),
     url(r'^tv_on_demand/amf-structure/$', 'amf_structure', name='tod_amf_structure'),
+    url(r'^format-screen/$', 'format_screen', name='format_screen'),
 )

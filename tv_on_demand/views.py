@@ -102,7 +102,7 @@ def serve_video(request, row_id, video_id):
     try:
         video_url = selected_video.mediafile.path.url
         video_path = settings.MODPATH + video_url
-        os.system("export DISPLAY=:0.0; %s --play-and-exit --key-quit='*' %s" %(VLC_BASE_COMMAND, video_path))        
+        os.system("%s --play-and-exit --key-quit='*' %s" %(VLC_BASE_COMMAND, video_path))        
     except OSError:
         return HttpResponse('no_player')
 
@@ -206,14 +206,16 @@ def amf_login(request, amf_data):
 def home(request, structure_id=1):
     structure = get_object_or_404(Structure, pk=structure_id)
     context = {'structure': structure}
-
-    try:
-        os.system("xte -x :0.0 'mousemove 10 10' 'mousedown 1' 'mouseup 1'")
-    except OSError:
-        print 'falhou ao tentar dar foco ao flash'
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
                               extra_context=context)
+
+
+def format_screen(request):
+    #focus
+    os.system("xte -x :0.0 'mousemove 10 10' 'mousedown 1' 'mouseup 1'")
+    return HttpResponse('ok')
+    
 
 
 amf_services = {
