@@ -8,6 +8,10 @@ class StructureAdmin(admin.ModelAdmin):
     list_filter = ['mediadatabase', 'skin']
     
 
+class StructureRowAdmin(admin.ModelAdmin):
+    list_filter = ['structure']
+
+
 admin.site.register(Skin)
 admin.site.register(Structure,StructureAdmin)
-admin.site.register(StructureRow)
+admin.site.register(StructureRow, StructureRowAdmin)
