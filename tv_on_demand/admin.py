@@ -10,7 +10,7 @@ class StructureAdmin(admin.ModelAdmin):
 
 class StructureRowAdmin(admin.ModelAdmin):
     list_filter = ['structure']
-
+    search_fields = ['title']
 
 admin.site.register(Skin)
 admin.site.register(Structure,StructureAdmin)
