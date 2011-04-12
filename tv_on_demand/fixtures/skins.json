@@ -24,5 +24,18 @@
             "slug": "berlanda", 
             "accept_audio": false
         }
+    },
+    {
+        "pk": 3, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "accept_image": false, 
+            "title": "Sicredi", 
+            "accept_entry": false, 
+            "accept_video": true, 
+            "external_id": null, 
+            "slug": "sicredi", 
+            "accept_audio": false
+        }
     }
 ]
