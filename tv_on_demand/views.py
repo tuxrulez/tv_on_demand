@@ -15,7 +15,7 @@ from django.template import TemplateDoesNotExist
 from pyamf.remoting.gateway.django import DjangoGateway
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
-from tv_on_demand.helpers import LiveFileReader, VLC_BASE_COMMAND
+from tv_on_demand.helpers import LiveFileReader
 
 @permission_required('tv_on_demand.add_structure')
 @permission_required('tv_on_demand.change_structure')
@@ -87,46 +87,6 @@ def structurerow_ajax_delete(request, object_id):
     return HttpResponse('deleted')
 
 
-def do_serve_video_th(row_instance):
-    print row_instance.mediafile.path.path
-    os.system(VLC_BASE_COMMAND+' '+row_instance.mediafile.path.path)
-
-
-def serve_video(request, row_id, video_id):
-    cur_row = get_object_or_404(StructureRow, pk=row_id)
-    selected_video = get_object_or_404(StructureRow, pk=video_id)
-
-    if not selected_video.mediafile.path:
-        return HttpResponse('file_not_found')
-
-    try:
-        video_url = selected_video.mediafile.path.url
-        video_path = settings.MODPATH + video_url
-        os.system("%s --play-and-exit --key-quit='*' %s" %(VLC_BASE_COMMAND, video_path))        
-    except OSError:
-        return HttpResponse('no_player')
-
-    # TODO: cuidado com o windows
-    os.system("ps aux | grep sleep | grep -v grep | awk '{print $2}' | xargs kill -9")
-
-    return HttpResponse('ok')
-
-
-def live(request):
-    if not settings.SOURCE_TO_LOAD:
-        return HttpResponse('no_signal')
-
-    ret = os.system(VLC_BASE_COMMAND+" "+settings.SOURCE_TO_LOAD)
-    if ret == 0:
-        try:
-            os.system("ps aux | grep sleep | grep -v grep | awk '{print $2}' | xargs kill -9")
-        except OSError:
-            pass
-        return HttpResponse('ok')
-    else:
-        return HttpResponse('Some Error Occurred')
-
-
 def do_logout(request):
     logout(request)
     return HttpResponse('ok')
@@ -159,7 +119,7 @@ def amf_rows(request, amf_data):
                       'restricted': row.users.all() and True or False,
                       'video_image': row.mediafile.video_image and row.mediafile.video_image.url or ''}
         if row.mediafile.media_type == 'video':
-            local_data['video_play_url'] = reverse('tod_serve_video', args=[row.id, row.mediafile.pk])
+            local_data['video_play_url'] = reverse('player_single', args=[row.id, row.mediafile.pk])
 
         amf_output.append(local_data)
 
