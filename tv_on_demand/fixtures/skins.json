@@ -39,7 +39,7 @@
         }
     },
     {
-        "pk": 3, 
+        "pk": 4, 
         "model": "tv_on_demand.skin", 
         "fields": {
             "accept_image": false, 
