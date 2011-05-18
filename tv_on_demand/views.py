@@ -165,10 +165,12 @@ def amf_login(request, amf_data):
 
 def home(request, structure_id=1):
     wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
-    live_channels = ','.join(settings.CHANNELS.keys())
+    live_channels = ''
+    for item_channel in settings.CHANNELS.items():
+        live_channels += '%s;%s,' % (item_channel[0], item_channel[1][1])
 
     structure = get_object_or_404(Structure, pk=structure_id)
-    context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels}
+    context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1]}
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
                               extra_context=context)
