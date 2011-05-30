@@ -13,8 +13,9 @@ from django.conf import settings
 from sorl.thumbnail import get_thumbnail
 from mmutils.common import auto_serialize
 from mediafiles.models import MediaFile, MediaDatabase
-from news.models import ENTRY_TYPES
 
+
+ENTRY_TYPES = (('feed', 'Feed'),)
 
 class Skin(models.Model):
     title = models.CharField(_('title'), max_length=45)
