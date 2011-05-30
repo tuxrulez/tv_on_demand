@@ -4,7 +4,7 @@ from django import template
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Group
 from mmutils.tags import quick_tag
-from news.models import ENTRY_TYPES
+from tv_on_demand.models import ENTRY_TYPES
 from tv_on_demand.forms import StructureRowForm
 
 register = template.Library()
