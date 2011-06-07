@@ -50,5 +50,18 @@
             "slug": "boticario", 
             "accept_audio": false
         }
+    },
+    {
+        "pk": 5,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "accept_image": false,
+            "title": "Subway",
+            "accept_entry": false,
+            "accept_video": true,
+            "external_id": null,
+            "slug": "subway",
+            "accept_audio": false
+        }
     }
 ]
