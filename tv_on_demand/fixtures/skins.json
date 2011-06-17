@@ -63,5 +63,18 @@
             "slug": "subway",
             "accept_audio": false
         }
+    },
+        {
+        "pk": 6,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "accept_image": false,
+            "title": "IMap",
+            "accept_entry": false,
+            "accept_video": true,
+            "external_id": null,
+            "slug": "imap",
+            "accept_audio": false
+        }
     }
 ]
