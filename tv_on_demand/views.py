@@ -16,7 +16,6 @@ from pyamf.remoting.gateway.django import DjangoGateway
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
 from tv_on_demand.helpers import LiveFileReader
-from clients.models import Store
 
 @permission_required('tv_on_demand.add_structure')
 @permission_required('tv_on_demand.change_structure')
@@ -98,13 +97,12 @@ def amf_rows(request, amf_data):
         structure_id = amf_data['structure_id']
         structure = Structure.objects.get(pk=structure_id)
     except KeyError:
-        print 'structure_id key error'
         return ''
     except Structure.DoesNotExist:
-        print 'structure_id not found'
         return ''
 
     parent_id = amf_data.get('parent_id', '')
+
     if not parent_id:
         rows = StructureRow.objects.filter(parent=None, structure=structure).order_by('order')
     else:
@@ -118,12 +116,13 @@ def amf_rows(request, amf_data):
     for row in rows:
         local_data = {'id': row.pk, 'title': row.title, 'description': row.label, 'type': row.mediafile.media_type,
                       'file': row.mediafile.path and row.mediafile.path.url or '', 'structure_id': row.structure.id,
-                      'restricted': False,
+                      'restricted': row.users.all() and True or False,
                       'video_image': row.mediafile.video_image and row.mediafile.video_image.url or ''}
         if row.mediafile.media_type == 'video':
             local_data['video_play_url'] = reverse('player_single', args=[row.id, row.mediafile.pk])
 
         amf_output.append(local_data)
+
     return amf_output
 
 
@@ -164,14 +163,13 @@ def amf_login(request, amf_data):
     return False
 
 
-def home(request):
+def home(request, structure_id=1):
     wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
     live_channels = ''
     for item_channel in getattr(settings, 'CHANNELS', []):
         live_channels += '%s;%s,' % (item_channel[0], item_channel[2])
-    
-    store_structure = Store.objects.get(slug=getattr(settings, 'STORE_SLUG')).structure.pk
-    structure = get_object_or_404(Structure, id=store_structure)
+
+    structure = get_object_or_404(Structure, pk=structure_id)
     context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1]}
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
