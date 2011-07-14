@@ -170,8 +170,9 @@ def home(request):
     for item_channel in getattr(settings, 'CHANNELS', []):
         live_channels += '%s;%s,' % (item_channel[0], item_channel[2])
     
-    store_structure = Store.objects.get(slug=getattr(settings, 'STORE_SLUG')).structure.pk
-    structure = get_object_or_404(Structure, id=store_structure)
+    store = get_object_or_404(Store, slug=getattr(settings, 'STORE_SLUG', ''))
+    structures = store.structure_set.all().order_by('-id')
+    structure = structures and structures[0] or None
     context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1]}
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
