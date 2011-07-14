@@ -3,6 +3,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
+from clients.models import Chain, Store
 from mediafiles.models import MediaFile, MediaDatabase
 
 
@@ -26,7 +27,9 @@ class Skin(models.Model):
 class Structure(models.Model):
     name = models.CharField(_('name'), max_length=100)
     skin = models.ForeignKey(Skin, verbose_name=_('skin'))    
-    mediadatabase = models.ForeignKey(MediaDatabase, verbose_name=_('media database'))    
+    mediadatabase = models.ForeignKey(MediaDatabase, verbose_name=_('media database'))
+    chain = models.ForeignKey(Chain, verbose_name=_('chain'), null=True, blank=True)
+    store = models.ForeignKey(Store, verbose_name=_('store'), null=True, blank=True)
     
     class Meta:
         verbose_name = _('structure')
