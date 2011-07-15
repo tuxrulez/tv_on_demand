@@ -165,18 +165,20 @@ def amf_login(request, amf_data):
 
 
 def home(request, structure_id=None):
-    wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
+    
     live_channels = ''
     for item_channel in getattr(settings, 'CHANNELS', []):
         live_channels += '%s;%s,' % (item_channel[0], item_channel[2])
     
     if not structure_id:
+        wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
         store_slug = getattr(settings, 'STORE_SLUG', 'not-found')
         try:
             structure = Structure.objects.filter(store__slug=store_slug)[0]
         except IndexError:
             raise Http404('structure not found')
     else:
+        wait_page_url = '/'
         try:
             structure = Structure.objects.get(pk=structure_id)
         except Structure.DoesNotExist:
