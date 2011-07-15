@@ -164,15 +164,24 @@ def amf_login(request, amf_data):
     return False
 
 
-def home(request):
+def home(request, structure_id=None):
     wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
     live_channels = ''
     for item_channel in getattr(settings, 'CHANNELS', []):
         live_channels += '%s;%s,' % (item_channel[0], item_channel[2])
     
-    store = get_object_or_404(Store, slug=getattr(settings, 'STORE_SLUG', ''))
-    structures = store.structure_set.all().order_by('-id')
-    structure = structures and structures[0] or None
+    if not structure_id:
+        store_slug = getattr(settings, 'STORE_SLUG', 'not-found')
+        try:
+            structure = Structure.objects.filter(store__slug=store_slug)[0]
+        except IndexError:
+            raise Http404('structure not found')
+    else:
+        try:
+            structure = Structure.objects.get(pk=structure_id)
+        except Structure.DoesNotExist:
+            raise Http404('structure not found')
+
     context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1]}
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
