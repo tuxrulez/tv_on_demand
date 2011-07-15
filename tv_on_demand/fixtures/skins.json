@@ -3,52 +3,34 @@
         "pk": 1, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "McDonalds", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "mcdonalds", 
-            "accept_audio": false
+            "slug": "mcdonalds"
+
         }
     }, 
     {
         "pk": 2, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "Berlanda", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "berlanda", 
-            "accept_audio": false
+            "slug": "berlanda"
         }
     },
     {
         "pk": 3, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "Sicredi", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "sicredi", 
-            "accept_audio": false
+            "slug": "sicredi"
         }
     },
     {
         "pk": 4, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "Boticario", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "boticario", 
-            "accept_audio": false
+            "slug": "boticario" 
+
         }
     }
 ]
