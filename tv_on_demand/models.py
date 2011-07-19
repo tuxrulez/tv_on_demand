@@ -20,7 +20,10 @@ class Skin(models.Model):
         
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Skin, self).save(*args, **kwargs)
+        try:
+            super(Skin, self).save(*args, **kwargs)
+        except:
+            pass
         
         
 
