@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from datetime import datetime, date
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
@@ -39,7 +40,16 @@ class Structure(models.Model):
         verbose_name_plural = _('structures')
         
     def __unicode__(self):
-        return self.name        
+        return self.name
+
+
+class StructureRowManager(models.Manager):
+    
+    def active(self):
+        now = datetime.now().strftime('%H:%M:%S')
+        today = date.today()
+        return self.filter(mediafile__date_start__lte=today, mediafile__date_end__gte=today,
+                           mediafile__time_start__lte=now, mediafile__time_end__gte=now)
         
         
 class StructureRow(models.Model):
@@ -49,6 +59,7 @@ class StructureRow(models.Model):
     label = models.TextField(_('description'), null=True, blank=True)
     mediafile = models.ForeignKey(MediaFile, verbose_name=_('media'), null=True, blank=True)
     order = models.PositiveIntegerField(_('order'))
+    objects = StructureRowManager()
     
     class Meta:
         verbose_name = _('row')

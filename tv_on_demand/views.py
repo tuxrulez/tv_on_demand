@@ -106,13 +106,13 @@ def amf_rows(request, amf_data):
 
     parent_id = amf_data.get('parent_id', '')
     if not parent_id:
-        rows = StructureRow.objects.filter(parent=None, structure=structure).order_by('order')
+        rows = StructureRow.objects.active().filter(parent=None, structure=structure).order_by('order')
     else:
         try:
             parent = StructureRow.objects.get(pk=parent_id)
         except StructureRow.DoesNotExist:
             return ''
-        rows = StructureRow.objects.filter(parent=parent, structure=structure).order_by('order')
+        rows = StructureRow.objects.active().filter(parent=parent, structure=structure).order_by('order')
 
     amf_output = []
     for row in rows:
