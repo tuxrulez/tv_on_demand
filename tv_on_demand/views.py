@@ -170,6 +170,7 @@ def home(request, structure_id=None):
     for item_channel in getattr(settings, 'CHANNELS', []):
         live_channels += '%s;%s,' % (item_channel[0], item_channel[2])
     
+    store_slug = ''
     if not structure_id:
         wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
         store_slug = getattr(settings, 'STORE_SLUG', 'not-found')
@@ -184,7 +185,10 @@ def home(request, structure_id=None):
         except Structure.DoesNotExist:
             raise Http404('structure not found')
 
-    context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1]}
+    client_password = '0'+store_slug    
+
+    context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1],
+              'client_password': client_password}
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
                               extra_context=context)
