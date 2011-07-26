@@ -185,7 +185,7 @@ def home(request, structure_id=None):
         except Structure.DoesNotExist:
             raise Http404('structure not found')
 
-    client_password = '0'+store_slug    
+    client_password = '1234' #'0'+store_slug    
 
     context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1],
               'client_password': client_password}
