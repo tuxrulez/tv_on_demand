@@ -32,5 +32,13 @@
             "slug": "boticario" 
 
         }
+    },
+    {
+        "pk": 5,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Armazem Paraiba",
+            "slug": "armazem_paraiba"
+        }
     }
 ]
