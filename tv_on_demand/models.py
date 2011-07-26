@@ -34,6 +34,7 @@ class Structure(models.Model):
     mediadatabase = models.ForeignKey(MediaDatabase, verbose_name=_('media database'))
     chain = models.ForeignKey(Chain, verbose_name=_('chain'), null=True, blank=True)
     store = models.ForeignKey(Store, verbose_name=_('store'), null=True, blank=True)
+    password = models.PositiveSmallIntegerField(_('password'), null=True, blank=True)
     
     class Meta:
         verbose_name = _('structure')
