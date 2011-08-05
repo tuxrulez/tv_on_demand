@@ -7,8 +7,8 @@ class StructureAdmin(admin.ModelAdmin):
     list_filter = ['chain', 'store']
 
 class StructureRowAdmin(admin.ModelAdmin):
-    search_fields = ['title']
-
+    search_fields = ['title', 'label']
+    list_filter = ['order']
 
 admin.site.register(Skin)
 admin.site.register(Structure, StructureAdmin)
