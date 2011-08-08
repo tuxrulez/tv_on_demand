@@ -40,5 +40,13 @@
             "title": "Armazem Paraiba",
             "slug": "armazem_paraiba"
         }
+    },
+    {
+        "pk": 6,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Sadia",
+            "slug": "sadia"
+        }
     }
 ]
