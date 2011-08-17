@@ -116,6 +116,15 @@ def amf_rows(request, amf_data):
 
     amf_output = []
     for row in rows:
+        if row.mediafile:
+            if row.mediafile.path:
+                if not os.path.exists(row.mediafile.path.path):
+                    continue
+
+            if row.mediafile.video_image:
+                if not os.path.exists(row.mediafile.video_image.path):
+                    continue
+
         local_data = {'id': row.pk, 'title': row.title, 'description': row.label, 'type': row.mediafile.media_type,
                       'file': row.mediafile.path and row.mediafile.path.url or '', 'structure_id': row.structure.id,
                       'restricted': False,
