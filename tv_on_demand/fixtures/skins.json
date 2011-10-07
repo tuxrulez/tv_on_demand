@@ -48,5 +48,15 @@
             "title": "Sadia",
             "slug": "sadia"
         }
+    },
+    {
+        "pk": 7,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Atlantica Hotels",
+            "slug": "atlantica"
+        }
+
     }
+
 ]
