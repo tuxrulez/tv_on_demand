@@ -52,11 +52,19 @@
     {
         "pk": 7,
         "model": "tv_on_demand.skin",
-        "fields": {
+        "fields":{
+            "title": "Atlantica Hotels",
+            "slug": "atlantica"
+        }
+
+    },
+    {
+        "pk": 8,
+        "model": "tv_on_demand.skin",
+        "fields":{
             "title": "FGV",
             "slug": "fgv"
         }
+
     }
-
-
 ]
