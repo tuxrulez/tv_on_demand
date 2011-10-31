@@ -66,5 +66,14 @@
             "slug": "fgv"
         }
 
+    },
+    {
+        "pk": 9,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Pernambucanas",
+            "slug": "pernambucanas"
+        }
+
     }
 ]
