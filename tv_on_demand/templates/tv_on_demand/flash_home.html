@@ -20,16 +20,18 @@
             id="index" width="100%" height="100%"
             codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
             <param name="movie" value="/media/tod_skins/{{ structure.skin.slug }}.swf" />
-            <param name='flashVars' value="structure_id={{ structure.id }}&endpoint=http://{{ request.get_host }}{% url tod_amf_structure %}&service=structure&video_url=http://{{ request.get_host }}/player/media/&password={{ client_password }}"/>
+            <param name='flashVars' value="structure_id={{ structure.id }}&endpoint=http://{{ request.get_host }}{% url tod_amf_structure %}&video_url=http://{{ request.get_host }}/player/media/&tv_url=http://{{ request.get_host }}{{ wait_page_url }}&wait_time=20&channels={{ live_channels }}&channel_url=http://{{ request.get_host }}/player/live&password={{ client_password }}" />
             <param name="quality" value="high" />
             <param name="bgcolor" value="#000000" />
             <param name="allowScriptAccess" value="always" />
+            <param name="wmode" value="opaque" />
             <embed src="/media/tod_skins/{{ structure.skin.slug }}.swf" quality="high" bgcolor="#000000"
                 width="100%" height="100%" name="index" align="middle"
                 flashVars="structure_id={{ structure.id }}&endpoint=http://{{ request.get_host }}{% url tod_amf_structure %}&video_url=http://{{ request.get_host }}/player/media/&tv_url=http://{{ request.get_host }}{{ wait_page_url }}&wait_time=20&channels={{ live_channels }}&channel_url=http://{{ request.get_host }}/player/live&password={{ client_password }}" 
                 play="true"
                 loop="false"
                 quality="high"
+                wmode="opaque"
                 allowScriptAccess="always"
                 type="application/x-shockwave-flash"
                 pluginspage="http://www.adobe.com/go/getflashplayer">
