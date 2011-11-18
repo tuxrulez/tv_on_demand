@@ -1,6 +1,7 @@
 #/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import time
 from threading import Thread
 from django.conf import settings
 from django.views.generic.create_update import create_object, update_object
@@ -205,6 +206,7 @@ def home(request, structure_id=None):
 
 def format_screen(request):
     #focus
+    time.sleep(3)
     os.system("xte -x :0.0 'mousemove 10 10' 'mousedown 1' 'mouseup 1'")
     return HttpResponse('ok')
     
