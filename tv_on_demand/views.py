@@ -130,6 +130,14 @@ def amf_rows(request, amf_data):
                       'file': row.mediafile.path and row.mediafile.path.url or '', 'structure_id': row.structure.id,
                       'restricted': False,
                       'video_image': row.mediafile.video_image and row.mediafile.video_image.url or ''}
+
+        quiz = row.mediafile.quiz
+        if quiz:
+            local_data['quiz_id'] = quiz.pk
+            local_data['quiz_question'] = quiz.title
+            local_data['quiz_options'] = [{'option': o.title, 'correct': o.right_option, 'option_id': o.pk} for o in quiz.quizoption_set.all().order_by('order')]
+
+
         if row.mediafile.media_type == 'video':
             local_data['video_play_url'] = reverse('player_single', args=[row.id, row.mediafile.pk])
 
@@ -202,6 +210,16 @@ def home(request, structure_id=None):
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
                               extra_context=context)
+
+
+def quiz_answer(request, quiz_id, option_id):
+    # mantendo compatibilidade
+    from mediafiles.models import Quiz, QuizOption, QuizStats
+    quiz = get_object_or_404(Quiz, pk=quiz_id)
+    option = get_object_or_404(QuizOption, pk=option_id)
+
+    QuizStats.objects.create(quiz=quiz, option=option)
+    return HttpResponse('ok')
 
 
 def format_screen(request):
