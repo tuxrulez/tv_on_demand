@@ -182,7 +182,18 @@ def amf_login(request, amf_data):
     return False
 
 
-def home(request, structure_id=None):
+def home(request, structure_id=None, is_promo=None):
+    
+    chain_slug = getattr(settings, 'CHAIN_SLUG', 'deploy')
+    
+    if chain_slug == 'deploy':
+        deploy = True
+    else:
+        deploy = False
+    
+    if 'mcdonalds' in chain_slug and not is_promo:
+        context = {'title': 'Special Flash', 'deploy': deploy}
+        return direct_to_template(request, template='tv_on_demand/special/flash_special.html', extra_context=context)
     
     live_channels = ''
     for item_channel in getattr(settings, 'CHANNELS', []):
@@ -190,7 +201,10 @@ def home(request, structure_id=None):
     
     store_slug = ''
     if not structure_id:
-        wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
+        if is_promo:
+            wait_page_url = '/'
+        else:
+            wait_page_url = reverse(request.GET.get('wait_page', 'call_tv_wall'))
         store_slug = getattr(settings, 'STORE_SLUG', 'not-found')
         try:
             structure = Structure.objects.filter(store__slug=store_slug)[0]
@@ -206,7 +220,7 @@ def home(request, structure_id=None):
     client_password = structure.password or '123' 
 
     context = {'structure': structure, 'wait_page_url': wait_page_url, 'live_channels': live_channels[:-1],
-              'client_password': client_password}
+              'client_password': client_password, 'deploy': deploy}
     
     return direct_to_template(request, template='tv_on_demand/flash_home.html',
                               extra_context=context)
