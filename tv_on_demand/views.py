@@ -190,9 +190,12 @@ def home(request, structure_id=None, is_promo=None):
         deploy = True
     else:
         deploy = False
+        
+    special_home = getattr(settings, 'SPECIAL_HOME', False)
     
-    if 'mcdonalds' in chain_slug and not is_promo:
-        context = {'title': 'Special Flash', 'deploy': deploy}
+    if special_home and not is_promo:
+        flash = 'special_%s.swf' %chain_slug
+        context = {'title': 'Special Flash', 'flash': flash, 'deploy': deploy}
         return direct_to_template(request, template='tv_on_demand/special/flash_special.html', extra_context=context)
     
     live_channels = ''
