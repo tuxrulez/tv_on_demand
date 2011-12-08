@@ -15,4 +15,5 @@ urlpatterns = patterns('tv_on_demand.views',
     url(r'^tv_on_demand/amf-structure/$', 'amf_structure', name='tod_amf_structure'),
     url(r'^format-screen/$', 'format_screen', name='format_screen'),
     url(r'^quiz-answer/(?P<quiz_id>\d+)/(?P<option_id>\d+)/$', 'quiz_answer', name='quiz_answer'),
+    url(r'^entries-list/$', 'entries_list', name='entries_list'),
 )

@@ -17,6 +17,7 @@ from pyamf.remoting.gateway.django import DjangoGateway
 from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
 from tv_on_demand.helpers import LiveFileReader
+from mediafiles.models import MediaFile
 from clients.models import Store
 
 @permission_required('tv_on_demand.add_structure')
@@ -246,6 +247,19 @@ def format_screen(request):
     return HttpResponse('ok')
     
 
+def entries_list(request):
+    
+    data = list()
+    for entry in MediaFile.objects.filter(media_type='entry').order_by('-date_start', '-time_start')[:20]:
+        sub_data = {'title': entry.title, 'label': entry.label,
+                    'time': entry.time_start.strftime('%H:%M:%S'),
+                    'date': entry.date_start.strftime('%d/%m/%Y')} 
+        data.append(sub_data)
+        
+    response = simplejson.dumps(data)
+    
+    return HttpResponse(response)
+    
 
 amf_services = {
     'structure.rows': amf_rows,
