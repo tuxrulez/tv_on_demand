@@ -250,7 +250,7 @@ def format_screen(request):
 def entries_list(request):
     
     data = list()
-    for entry in MediaFile.objects.filter(media_type='entry').order_by('-date_start', '-time_start')[:20]:
+    for entry in MediaFile.objects.active().filter(media_type='entry').order_by('-date_start', '-time_start')[:20]:
         sub_data = {'title': entry.title, 'label': entry.label,
                     'time': entry.time_start.strftime('%H:%M:%S'),
                     'date': entry.date_start.strftime('%d/%m/%Y')} 
