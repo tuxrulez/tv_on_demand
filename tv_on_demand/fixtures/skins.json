@@ -76,4 +76,13 @@
         }
 
     }
+    {
+        "pk": 10,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Subway",
+            "slug": "subway"
+        }
+
+    }
 ]
