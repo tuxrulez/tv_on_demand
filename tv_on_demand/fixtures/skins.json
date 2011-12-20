@@ -75,7 +75,7 @@
             "slug": "pernambucanas"
         }
 
-    }
+    },
     {
         "pk": 10,
         "model": "tv_on_demand.skin",
