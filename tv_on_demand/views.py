@@ -238,7 +238,34 @@ def quiz_answer(request, quiz_id, option_id):
 
     QuizStats.objects.create(quiz=quiz, option=option)
     return HttpResponse('ok')
-
+    
+def full_views_verify(row):
+    childrens =  StructureRow.objects.filter(parent=row)
+    
+    if not childrens:
+        return False
+    for children in childrens:
+        media_log = StoreMediaLog.objects.filter(mediafile=children.mediafile)
+        if media_log.full_views_number != 0
+            continue
+        else:
+            return False
+     
+    return True
+        
+def view_verify(request, amf_data):
+    row_id = amf_data.get('row_id', None)
+    if not row_id:
+        return HttpResponse('not row id')
+    try:
+        row = StructureRow.objects.get(id=row_id)
+    except StructureRow.DoesNotExist:
+        return HttpResponse('row not exists')
+    
+    if row.parent.mediafile.quiz == None:
+        return False
+        
+    return full_views_verify(row.parent)
 
 def format_screen(request):
     #focus
@@ -263,6 +290,7 @@ def entries_list(request):
 
 amf_services = {
     'structure.rows': amf_rows,
+    'structure.view_verify': view_verify,
     'structure.verify_user': amf_verify_user,
     'structure.login': amf_login,
 }
