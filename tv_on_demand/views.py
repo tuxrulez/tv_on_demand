@@ -262,7 +262,7 @@ def view_verify(request, amf_data):
     except StructureRow.DoesNotExist:
         return HttpResponse('row not exists')
     
-    if row.parent.mediafile.quiz == None:
+    if row.mediafile.quiz == None:
         return False
         
     return full_views_verify(row.parent)
