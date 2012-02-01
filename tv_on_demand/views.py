@@ -245,12 +245,12 @@ def full_views_verify(row):
     if not childrens:
         return False
     for children in childrens:
-        media_log = StoreMediaLog.objects.filter(mediafile=children.mediafile)
-        if media_log.full_views_number != 0:
-            continue
-        else:
-            return False
-     
+        media_logs = StoreMediaLog.objects.filter(mediafile=children.mediafile)
+        for media_log in media_logs:
+            if media_log.full_views_number != 0:
+                continue
+            else:
+                return False
     return True
         
 def view_verify(request, amf_data):
