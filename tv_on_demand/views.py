@@ -246,7 +246,7 @@ def full_views_verify(row):
         return False
     for children in childrens:
         media_log = StoreMediaLog.objects.filter(mediafile=children.mediafile)
-        if media_log.full_views_number != 0
+        if media_log.full_views_number != 0:
             continue
         else:
             return False
