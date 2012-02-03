@@ -20,6 +20,7 @@ from tv_on_demand.models import Structure, StructureRow
 from tv_on_demand.helpers import LiveFileReader
 from mediafiles.models import MediaFile
 from clients.models import Store, StoreMediaLog
+from mediafiles.models import Quiz, QuizOption, QuizStats
 
 @permission_required('tv_on_demand.add_structure')
 @permission_required('tv_on_demand.change_structure')
@@ -232,8 +233,6 @@ def home(request, structure_id=None, is_promo=None):
 
 
 def quiz_answer(request, quiz_id, option_id):
-    # mantendo compatibilidade
-    from mediafiles.models import Quiz, QuizOption, QuizStats
     quiz = get_object_or_404(Quiz, pk=quiz_id)
     option = get_object_or_404(QuizOption, pk=option_id)
 
@@ -246,8 +245,7 @@ def full_views_verify(row):
     if not childrens:
         return False
     for children in childrens:
-        media_logs_instances = StoreMediaLog.objects.filter(mediafile=children.mediafile)
-        media_logs = media_logs_instances.filter(last_view__day=now.day, last_view__month=now.month, last_view__year=now.year)
+        media_logs = StoreMediaLog.objects.filter(mediafile=children.mediafile)
         for media_log in media_logs:
             if media_log.full_views_number != 0:
                 continue
@@ -266,12 +264,22 @@ def view_verify(request, amf_data):
     
     if row.mediafile.quiz == None:
         return False
-        
+    try:
+        quiz_instance = QuizStats.objects.get(quiz=row.mediafile.quiz)
+        return False
+    except MultipleObjectsReturned:
+        return False
+    except QuizStats.DoesNotExist:
+        pass
+    
+    if row.mediafile.media_type == 'video':
+        return True
+    
     return full_views_verify(row.parent)
 
 def format_screen(request):
     #focus
-    time.sleep(3)
+    time.sleep(2)
     os.system("xte -x :0.0 'mousemove 10 10' 'mousedown 1' 'mouseup 1'")
     return HttpResponse('ok')
     
