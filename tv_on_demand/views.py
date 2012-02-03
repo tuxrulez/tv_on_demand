@@ -243,6 +243,7 @@ def full_views_verify(row):
     childrens =  StructureRow.objects.filter(parent=row)
     now = datetime.now()
     if not childrens:
+        os.system('echo "not childrens" >> /root/middleware.log')
         return False
     for children in childrens:
         media_logs = StoreMediaLog.objects.filter(mediafile=children.mediafile)
@@ -250,6 +251,7 @@ def full_views_verify(row):
             if media_log.full_views_number != 0:
                 continue
             else:
+                os.system('echo "not full view" >> /root/middleware.log')
                 return False
     return True
         
@@ -264,17 +266,19 @@ def view_verify(request, amf_data):
     
     if row.mediafile.quiz == None:
         return False
+    
     try:
         quiz_instance = QuizStats.objects.get(quiz=row.mediafile.quiz)
+        os.system('echo "quiz encontrado" >> /root/middleware.log')
         return False
     except MultipleObjectsReturned:
+        os.system('echo "multiple" >> /root/middleware.log')
         return False
     except QuizStats.DoesNotExist:
+        os.system('echo "autorizado" >> /root/middleware.log')
         pass
-    
-    if row.mediafile.media_type == 'video':
-        return True
-    
+
+    os.system('echo "indo para segunda checagem" >> /root/middleware.log')
     return full_views_verify(row.parent)
 
 def format_screen(request):
