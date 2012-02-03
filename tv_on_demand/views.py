@@ -18,7 +18,7 @@ from tv_on_demand.forms import StructureForm, StructureRowForm
 from tv_on_demand.models import Structure, StructureRow
 from tv_on_demand.helpers import LiveFileReader
 from mediafiles.models import MediaFile
-from clients.models import Store
+from clients.models import Store, StoreMediaLog
 
 @permission_required('tv_on_demand.add_structure')
 @permission_required('tv_on_demand.change_structure')
@@ -241,11 +241,12 @@ def quiz_answer(request, quiz_id, option_id):
     
 def full_views_verify(row):
     childrens =  StructureRow.objects.filter(parent=row)
-    
+    now = datetime.now()
     if not childrens:
         return False
     for children in childrens:
-        media_logs = StoreMediaLog.objects.filter(mediafile=children.mediafile)
+        media_logs_instances = StoreMediaLog.objects.filter(mediafile=children.mediafile)
+        media_logs = media_logs_instances.filter(last_view.day=now.day, last_view.month=now.month, last_view.year=now.year)
         for media_log in media_logs:
             if media_log.full_views_number != 0:
                 continue
