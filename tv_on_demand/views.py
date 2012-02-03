@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import time
+from datetime import datetime
 from threading import Thread
 from django.conf import settings
 from django.views.generic.create_update import create_object, update_object
@@ -246,7 +247,7 @@ def full_views_verify(row):
         return False
     for children in childrens:
         media_logs_instances = StoreMediaLog.objects.filter(mediafile=children.mediafile)
-        media_logs = media_logs_instances.filter(last_view.day=now.day, last_view.month=now.month, last_view.year=now.year)
+        media_logs = media_logs_instances.filter(last_view__day=now.day, last_view__month=now.month, last_view__year=now.year)
         for media_log in media_logs:
             if media_log.full_views_number != 0:
                 continue
