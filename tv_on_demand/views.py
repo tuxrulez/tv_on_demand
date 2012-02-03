@@ -13,6 +13,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, Http404
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
+from django.core.exceptions import MultipleObjectsReturned
 from django.template import TemplateDoesNotExist
 from pyamf.remoting.gateway.django import DjangoGateway
 from tv_on_demand.forms import StructureForm, StructureRowForm
