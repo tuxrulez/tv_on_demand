@@ -242,17 +242,16 @@ def quiz_answer(request, quiz_id, option_id):
     
 def full_views_verify(row):
     childrens =  StructureRow.objects.filter(parent=row)
-    now = datetime.now()
     if not childrens:
-        os.system('echo "not childrens" >> /root/middleware.log')
         return False
     for children in childrens:
         media_logs = StoreMediaLog.objects.filter(mediafile=children.mediafile)
+        if not media_logs:
+            return False
         for media_log in media_logs:
             if media_log.full_views_number != 0:
-                continue
+                pass
             else:
-                os.system('echo "not full view" >> /root/middleware.log')
                 return False
     return True
         
@@ -264,23 +263,19 @@ def view_verify(request, amf_data):
         row = StructureRow.objects.get(id=row_id)
     except StructureRow.DoesNotExist:
         return HttpResponse('row not exists')
-    
     if row.mediafile.quiz == None:
         return False
-    
     try:
         quiz_instance = QuizStats.objects.get(quiz=row.mediafile.quiz)
-        os.system('echo "quiz encontrado" >> /root/middleware.log')
         return False
     except MultipleObjectsReturned:
-        os.system('echo "multiple" >> /root/middleware.log')
         return False
     except QuizStats.DoesNotExist:
-        os.system('echo "autorizado" >> /root/middleware.log')
         pass
+    if row.mediafile.media_type == 'video':
+        return True
 
-    os.system('echo "indo para segunda checagem" >> /root/middleware.log')
-    return full_views_verify(row.parent)
+    return full_views_verify(row)
 
 def format_screen(request):
     #focus
@@ -311,4 +306,3 @@ amf_services = {
 }
 
 amf_structure = DjangoGateway(amf_services)
-
