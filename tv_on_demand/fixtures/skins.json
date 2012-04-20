@@ -84,5 +84,14 @@
             "slug": "subway"
         }
 
+    },
+    {
+        "pk": 11,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Gazin",
+            "slug": "gazin"
+        }
+
     }
 ]
