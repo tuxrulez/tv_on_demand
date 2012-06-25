@@ -93,5 +93,14 @@
             "slug": "gazin"
         }
 
+    },
+    {
+        "pk": 12,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Burger_King",
+            "slug": "burger_king"
+        }
+
     }
 ]
