@@ -3,78 +3,104 @@
         "pk": 1, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "McDonalds", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "mcdonalds", 
-            "accept_audio": false
+            "slug": "mcdonalds"
+
         }
     }, 
     {
         "pk": 2, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "Berlanda", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "berlanda", 
-            "accept_audio": false
+            "slug": "berlanda"
         }
     },
     {
         "pk": 3, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "Sicredi", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "sicredi", 
-            "accept_audio": false
+            "slug": "sicredi"
         }
     },
     {
         "pk": 4, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "accept_image": false, 
             "title": "Boticario", 
-            "accept_entry": false, 
-            "accept_video": true, 
-            "external_id": null, 
-            "slug": "boticario", 
-            "accept_audio": false
+            "slug": "boticario" 
+
         }
     },
     {
         "pk": 5,
         "model": "tv_on_demand.skin",
-        "fields": {
-            "accept_image": false,
-            "title": "Subway",
-            "accept_entry": false,
-            "accept_video": true,
-            "external_id": null,
-            "slug": "subway",
-            "accept_audio": false
+        "fields":{
+            "title": "Armazem Paraiba",
+            "slug": "armazem_paraiba"
         }
     },
-        {
+    {
         "pk": 6,
         "model": "tv_on_demand.skin",
-        "fields": {
-            "accept_image": false,
-            "title": "IMap",
-            "accept_entry": false,
-            "accept_video": true,
-            "external_id": null,
-            "slug": "imap",
-            "accept_audio": false
+        "fields":{
+            "title": "Sadia",
+            "slug": "sadia"
         }
+    },
+    {
+        "pk": 7,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Atlantica Hotels",
+            "slug": "atlantica"
+        }
+
+    },
+    {
+        "pk": 8,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "FGV",
+            "slug": "fgv"
+        }
+
+    },
+    {
+        "pk": 9,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Pernambucanas",
+            "slug": "pernambucanas"
+        }
+
+    },
+    {
+        "pk": 10,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Subway",
+            "slug": "subway"
+        }
+
+    },
+    {
+        "pk": 11,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Gazin",
+            "slug": "gazin"
+        }
+
+    },
+    {
+        "pk": 12,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Burger_King",
+            "slug": "burger_king"
+        }
+
     }
 ]
