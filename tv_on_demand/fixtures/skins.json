@@ -111,5 +111,14 @@
             "slug": "agiplan"
         }
 
+    },
+    {
+        "pk": 14,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Uninter",
+            "slug": "uninter"
+        }
+
     }
 ]
