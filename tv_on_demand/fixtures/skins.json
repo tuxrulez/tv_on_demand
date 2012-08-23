@@ -120,5 +120,14 @@
             "slug": "uninter"
         }
 
-    }
+    },
+    {
+        "pk": 15,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Unicopel",
+            "slug": "unicopel"
+        }
+
+    }    
 ]
