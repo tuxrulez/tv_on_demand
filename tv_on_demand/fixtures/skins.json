@@ -129,5 +129,14 @@
             "slug": "unicopel"
         }
 
+    },
+    {
+        "pk": 16,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "FAE",
+            "slug": "fae"
+        }
+
     }    
 ]
