@@ -138,5 +138,14 @@
             "slug": "fae"
         }
 
-    }    
+    },
+    {
+        "pk": 17,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "GBarbosa",
+            "slug": "gbarbosa"
+        }
+
+    }
 ]
