@@ -147,5 +147,14 @@
             "slug": "gbarbosa"
         }
 
+    },
+        {
+        "pk": 18,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Curso_Positivo",
+            "slug": "curso_positivo"
+        }
+
     }
 ]
