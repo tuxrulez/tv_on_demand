@@ -156,5 +156,14 @@
             "slug": "curso_positivo"
         }
 
+    },
+        {
+        "pk": 19,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Romera",
+            "slug": "romera"
+        }
+
     }
 ]
