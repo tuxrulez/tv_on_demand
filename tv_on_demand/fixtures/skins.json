@@ -173,5 +173,13 @@
             "title": "Telha_Norte",
             "slug": "telha_norte"
         }
-    }                                 
+    },
+        {
+        "pk": 21,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "BK_Teste",
+            "slug": "bk_teste"
+        }
+    }                                   
  ]   
