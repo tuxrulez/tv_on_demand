@@ -181,5 +181,13 @@
             "title": "BK_Teste",
             "slug": "bk_teste"
         }
-    }                                   
- ]   
+    },
+        {
+        "pk": 22,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Colombo",
+            "slug": "colombo"
+        }
+    }            
+ ]
