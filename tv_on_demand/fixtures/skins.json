@@ -189,5 +189,21 @@
             "title": "Colombo",
             "slug": "colombo"
         }
-    }            
+    },
+        {
+        "pk": 23,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Condor",
+            "slug": "condor"
+        }
+    },
+        {
+        "pk": 24,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Rodobens",
+            "slug": "rodobens"
+        }
+    },
  ]
