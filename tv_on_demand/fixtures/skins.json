@@ -205,5 +205,13 @@
             "title": "Rodobens",
             "slug": "rodobens"
         }
+    },
+        {
+        "pk": 25,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "extra_minimercado_mobox.swf",
+            "slug": "extra_minimercado_mobox"
+        }
     }
  ]
