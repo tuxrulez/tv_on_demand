@@ -213,5 +213,21 @@
             "title": "extra_minimercado_mobox.swf",
             "slug": "extra_minimercado_mobox"
         }
+    },
+	{
+        "pk": 26,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "mercantil_promo_mobox.swf",
+            "slug": "mercantil_promo_mobox"
+        }
+    },
+	 {
+        "pk": 27,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "perini_promo_mobox.swf",
+            "slug": "perini_promo_mobox"
+        }
     }
  ]
