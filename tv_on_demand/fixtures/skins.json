@@ -229,5 +229,13 @@
             "title": "perini_promo_mobox.swf",
             "slug": "perini_promo_mobox"
         }
+    },
+	{
+	"pk": 28,
+	"model": "tv_on_demand.skin",
+	"fields": {
+	    "title": "via_varejo_promo_mobox.swf",
+	    "slug": "via_varejo_promo_mobox"
+	}
     }
  ]
