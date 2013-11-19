@@ -237,5 +237,13 @@
 	    "title": "via_varejo_promo_mobox.swf",
 	    "slug": "via_varejo_promo_mobox"
 	}
+    },
+	{
+	"pk": 29,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "mare_mansa.swf",
+            "slug": "mare_mansa"
+        }
     }
  ]
