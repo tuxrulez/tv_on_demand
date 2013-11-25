@@ -245,5 +245,13 @@
             "title": "mare_mansa.swf",
             "slug": "mare_mansa"
         }
+    },
+        {
+        "pk": 30,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "carrefour.swf",
+            "slug": "carrefour"
+        }
     }
  ]
