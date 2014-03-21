@@ -253,5 +253,13 @@
             "title": "carrefour.swf",
             "slug": "carrefour"
         }
+    },
+        {
+        "pk": 31,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "socic.swf",
+            "slug": "socic"
+        }
     }
  ]
