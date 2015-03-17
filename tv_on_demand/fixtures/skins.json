@@ -102,5 +102,164 @@
             "slug": "burger_king"
         }
 
+    },
+    {
+        "pk": 13,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Agiplan",
+            "slug": "agiplan"
+        }
+
+    },
+    {
+        "pk": 14,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Uninter",
+            "slug": "uninter"
+        }
+
+    },
+    {
+        "pk": 15,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Unicopel",
+            "slug": "unicopel"
+        }
+
+    },
+    {
+        "pk": 16,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "FAE",
+            "slug": "fae"
+        }
+
+    },
+    {
+        "pk": 17,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "GBarbosa",
+            "slug": "gbarbosa"
+        }
+
+    },
+        {
+        "pk": 18,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Curso_Positivo",
+            "slug": "curso_positivo"
+        }
+
+    },
+        {
+        "pk": 19,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Romera",
+            "slug": "romera"
+        }
+
+    },
+        {
+        "pk": 20,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Telha_Norte",
+            "slug": "telha_norte"
+        }
+    },
+        {
+        "pk": 21,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "BK_Teste",
+            "slug": "bk_teste"
+        }
+    },
+        {
+        "pk": 22,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Colombo",
+            "slug": "colombo"
+        }
+    },
+        {
+        "pk": 23,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Condor",
+            "slug": "condor"
+        }
+    },
+        {
+        "pk": 24,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Rodobens",
+            "slug": "rodobens"
+        }
+    },
+        {
+        "pk": 25,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "extra_minimercado_mobox.swf",
+            "slug": "extra_minimercado_mobox"
+        }
+    },
+	{
+        "pk": 26,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "mercantil_promo_mobox.swf",
+            "slug": "mercantil_promo_mobox"
+        }
+    },
+	 {
+        "pk": 27,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "perini_promo_mobox.swf",
+            "slug": "perini_promo_mobox"
+        }
+    },
+	{
+	"pk": 28,
+	"model": "tv_on_demand.skin",
+	"fields": {
+	    "title": "via_varejo_promo_mobox.swf",
+	    "slug": "via_varejo_promo_mobox"
+	}
+    },
+	{
+	"pk": 29,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "mare_mansa.swf",
+            "slug": "mare_mansa"
+        }
+    },
+        {
+        "pk": 30,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "carrefour.swf",
+            "slug": "carrefour"
+        }
+    },
+        {
+        "pk": 31,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "socic.swf",
+            "slug": "socic"
+        }
     }
-]
+ ]
