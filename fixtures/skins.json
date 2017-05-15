@@ -101,4 +101,14 @@
             "slug": "socic"
         }
     }
+    {
+        "pk": 32, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "condor_treinamento", 
+            "slug": "condor_treinamento"
+
+        }
+    }, 
+	
  ]
