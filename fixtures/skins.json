@@ -105,7 +105,7 @@
         "pk": 32, 
         "model": "tv_on_demand.skin", 
         "fields": {
-            "title": "condor_treinamento", 
+            "title": "condor_treinamento nova versao", 
             "slug": "condor_treinamento"
 
         }
