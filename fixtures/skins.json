@@ -9,54 +9,12 @@
         }
     }, 
     {
-        "pk": 2, 
-        "model": "tv_on_demand.skin", 
-        "fields": {
-            "title": "Berlanda", 
-            "slug": "berlanda"
-        }
-    },
-    {
-        "pk": 3, 
-        "model": "tv_on_demand.skin", 
-        "fields": {
-            "title": "Sicredi", 
-            "slug": "sicredi"
-        }
-    },
-    {
-        "pk": 4, 
-        "model": "tv_on_demand.skin", 
-        "fields": {
-            "title": "Boticario", 
-            "slug": "boticario" 
-
-        }
-    },
-    {
         "pk": 5,
         "model": "tv_on_demand.skin",
         "fields":{
             "title": "Armazem Paraiba",
             "slug": "armazem_paraiba"
         }
-    },
-    {
-        "pk": 6,
-        "model": "tv_on_demand.skin",
-        "fields":{
-            "title": "Sadia",
-            "slug": "sadia"
-        }
-    },
-    {
-        "pk": 7,
-        "model": "tv_on_demand.skin",
-        "fields":{
-            "title": "Atlantica Hotels",
-            "slug": "atlantica"
-        }
-
     },
     {
         "pk": 8,
@@ -68,29 +26,11 @@
 
     },
     {
-        "pk": 9,
-        "model": "tv_on_demand.skin",
-        "fields": {
-            "title": "Pernambucanas",
-            "slug": "pernambucanas"
-        }
-
-    },
-    {
         "pk": 10,
         "model": "tv_on_demand.skin",
         "fields": {
             "title": "Subway",
             "slug": "subway"
-        }
-
-    },
-    {
-        "pk": 11,
-        "model": "tv_on_demand.skin",
-        "fields": {
-            "title": "Gazin",
-            "slug": "gazin"
         }
 
     },
@@ -113,12 +53,52 @@
 
     },
     {
-        "pk": 14,
+        "pk": 17,
         "model": "tv_on_demand.skin",
         "fields": {
-            "title": "Uninter",
-            "slug": "uninter"
+            "title": "GBarbosa",
+            "slug": "gbarbosa"
         }
 
+    },
+    {
+        "pk": 23,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Condor",
+            "slug": "condor"
+        }
+    },
+        {
+        "pk": 25,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "extra_minimercado_mobox.swf",
+            "slug": "extra_minimercado_mobox"
+        }
+    },
+	{
+        "pk": 26,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "mercantil_promo_mobox.swf",
+            "slug": "mercantil_promo_mobox"
+        }
+    },
+	 {
+        "pk": 27,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "perini_promo_mobox.swf",
+            "slug": "perini_promo_mobox"
+        }
+    },
+        {
+        "pk": 31,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "socic.swf",
+            "slug": "socic"
+        }
     }
-]
+ ]
