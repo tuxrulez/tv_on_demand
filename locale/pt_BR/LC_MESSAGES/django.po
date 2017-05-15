@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-04 16:25-0300\n"
+"PO-Revision-Date: 2010-10-04 16:27-0300\n"
+"Last-Translator: Heigler Rocha <lordheigler@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:10
+#: forms.py:29
+#: models.py:50
+msgid "date start"
+msgstr "data de início"
+
+#: forms.py:11
+#: forms.py:30
+#: models.py:51
+msgid "date end"
+msgstr "data de término"
+
+#: forms.py:12
+#: models.py:54
+msgid "allowed users"
+msgstr "usuários permitidos"
+
+#: forms.py:18
+msgid "template must be a swf file"
+msgstr "o template precisa ser um arquivo swf"
+
+#: forms.py:38
+msgid "you must pick a row content: mediafile, entry or question"
+msgstr "você precisa escolher um tipo de conteúdo entre: mídia, notícia ou quiz"
+
+#: forms.py:41
+msgid "you cannot pick more than one row content"
+msgstr "você não pode escolher mais de um tipo de conteúdo para uma linha"
+
+#: models.py:17
+msgid "content type"
+msgstr "tipo de conteúdo"
+
+#: models.py:19
+msgid "object id"
+msgstr "id do objeto"
+
+#: models.py:20
+msgid "name"
+msgstr "nome"
+
+#: models.py:21
+msgid "template"
+msgstr "template"
+
+#: models.py:22
+#: models.py:52
+msgid "external id"
+msgstr "id externa"
+
+#: models.py:28
+#: models.py:43
+msgid "structure"
+msgstr "estrutura"
+
+#: models.py:29
+msgid "structures"
+msgstr "estruturas"
+
+#: models.py:45
+msgid "title"
+msgstr "título"
+
+#: models.py:46
+msgid "description"
+msgstr "descrição"
+
+#: models.py:47
+msgid "media"
+msgstr "mídia"
+
+#: models.py:48
+msgid "question"
+msgstr "quiz"
+
+#: models.py:49
+msgid "entry"
+msgstr "notícia"
+
+#: models.py:53
+msgid "order"
+msgstr "ordem"
+
+#: models.py:57
+msgid "row"
+msgstr "linha"
+
+#: models.py:58
+msgid "rows"
+msgstr "linhas"
+
+#: templates/tv_on_demand/structure_form.html:29
+msgid "Structure"
+msgstr "estrutura"
+
+#: templates/tv_on_demand/structure_form.html:31
+msgid "Structure configuration"
+msgstr "Configuração da estrutura"
+
+#: templates/tv_on_demand/structure_form.html:48
+msgid "Save"
+msgstr "Salvar"
+
+#: templates/tv_on_demand/structure_form.html:56
+msgid "Structure montage"
+msgstr "Montagem da estrutura"
+
+#: templates/tv_on_demand/structure_form.html:60
+msgid "menu"
+msgstr "menu"
+
+#: templates/tv_on_demand/structure_form.html:62
+#: templates/tv_on_demand/structure_form.html:64
+msgid "Level"
+msgstr "Nível"
+
+#: templates/tv_on_demand/structure_form.html:63
+msgid "Item"
+msgstr "Item"
+
+#: templates/tv_on_demand/widgets/structure_formfields.html:11
+msgid "current template"
+msgstr "template atual"
+

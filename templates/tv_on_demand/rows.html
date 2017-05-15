@@ -1,0 +1,61 @@
+{% load thumbnail %}
+
+{% block row_header %}
+    <h2 class="row">
+        {{ father_row.title }} <br />
+        <span>{{ father_row.description|default:"Selecione o item desejado" }}</span>
+    </h2>
+
+    <p id="backmenus" class="menu">
+        <a href="{% if father_row.parent %}
+                    {% url tod_children father_row.parent.pk %}
+                {% else %}
+                    {% url tod_pure_main father_row.structure.pk %}
+                {% endif %}" class="back">
+            Voltar
+        </a>
+        
+        <a href="{% url tod_pure_main father_row.structure.pk %}" class="home">Inicio</a>
+    </p>
+
+{% endblock %}
+
+{% block row_body %}
+
+<p class="home menu">
+    <a href="{% url tod_pure_main %}"> Inicio </a>
+</p>
+
+<ul class="row {{ rows.0.mediafile.media_type|default:'entry' }}">
+<div class="main_menu_box_container">
+    {% for row in rows %}
+        <li class="{{ row.mediafile.media_type|default:'entry' }} menu">
+                {% ifequal row.mediafile.media_type 'video'%}
+                    <div class="video_box" id="video_box">
+                {% endifequal %} 
+                {% if row.children.all %}
+                    <a href="{% url tod_children row.pk %}" class="btn">
+                        {{ row.title }}
+                    </a>
+                {% else %}
+                    {% if row.mediafile.media_type == 'video' %}
+                        <a href="{% url tod_serve_video father_row.pk row.pk %}"
+                        onmouseover="lighton(this)" onmouseout="lightoff(this)">
+                            {% thumbnail row.mediafile.video_image "200x140" crop='center' as thumb %}
+                                <img src="{{ thumb.url }}" alt="" />
+                            {% endthumbnail %}
+                        </a>               
+                    {% else %}
+                        {{ row.title }}
+                    {% endif %}
+                {% endif %}
+
+                {% ifequal row.mediafile.media_type 'video'%}
+                    </div>
+                {% endifequal %} 
+
+        </li>
+    {% endfor %}
+</div>
+</ul>
+{% endblock %}

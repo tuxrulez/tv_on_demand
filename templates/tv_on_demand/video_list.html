@@ -1,0 +1,39 @@
+<html>
+
+    <head>
+    
+    <!-- you dont need to host these files -->
+    <script language="javascript" src="/media/js/j.js"></script>
+    <script language="javascript" src="/media/tod_skins/video_player/jquery-vlc.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/tod_skins/video_player/styles.css" />
+    
+    
+        <script language="javascript">
+             
+            $(document).ready(function() {                
+               
+                {% if selected_row.mediafile.path %}
+                    player = VLCobject.embedPlayer('vlc1', 1024, 768, true);
+                    player.play('{% url mediafiles_serve selected_row.mediafile.pk %}?user_pk={{ request.user.pk }}');
+                {% endif %}               
+
+                
+               });
+
+        </script>
+        <style>
+            body {
+                font-family:courier
+                background: #000;
+            }
+            
+        </style>
+
+    </head>
+    <body>
+
+        <div id='vlc1'></div>
+   
+    </body>
+</html> 
+

@@ -1,0 +1,124 @@
+[
+    {
+        "pk": 1, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "McDonalds", 
+            "slug": "mcdonalds"
+
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "Berlanda", 
+            "slug": "berlanda"
+        }
+    },
+    {
+        "pk": 3, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "Sicredi", 
+            "slug": "sicredi"
+        }
+    },
+    {
+        "pk": 4, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "Boticario", 
+            "slug": "boticario" 
+
+        }
+    },
+    {
+        "pk": 5,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Armazem Paraiba",
+            "slug": "armazem_paraiba"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Sadia",
+            "slug": "sadia"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Atlantica Hotels",
+            "slug": "atlantica"
+        }
+
+    },
+    {
+        "pk": 8,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "FGV",
+            "slug": "fgv"
+        }
+
+    },
+    {
+        "pk": 9,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Pernambucanas",
+            "slug": "pernambucanas"
+        }
+
+    },
+    {
+        "pk": 10,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Subway",
+            "slug": "subway"
+        }
+
+    },
+    {
+        "pk": 11,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Gazin",
+            "slug": "gazin"
+        }
+
+    },
+    {
+        "pk": 12,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Burger_King",
+            "slug": "burger_king"
+        }
+
+    },
+    {
+        "pk": 13,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Agiplan",
+            "slug": "agiplan"
+        }
+
+    },
+    {
+        "pk": 14,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Uninter",
+            "slug": "uninter"
+        }
+
+    }
+]

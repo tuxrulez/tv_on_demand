@@ -1,0 +1,119 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n structure_tags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="/media/apps/colorbox/example1/colorbox.css"> 
+    <link rel="stylesheet" type="text/css" href="/media/style/tooltip.css" />
+    <link rel="stylesheet" type="text/css" href="/media/style/tv_on_demand.css" />
+
+    <script type="text/javascript" src="/media/js/j.js"></script>
+    <script type="text/javascript" src="/media/js/j.mask.js"></script>
+    <script type="text/javascript" src="/media/js/j.bgiframe.js"></script>
+    <script type="text/javascript" src="/media/js/j.dimensions.js"></script>
+    <script type="text/javascript" src="/media/js/j.tooltip.js"></script>
+    <script type="text/javascript" src="/media/apps/colorbox/colorbox/jquery.colorbox-min.js"></script> 
+
+    <script type="text/javascript" src="/media/js/tv_on_demand.js"></script>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="../../../">Início</a> &rsaquo;
+     <a href="../../">Tv_On_Demand</a> &rsaquo; 
+     <a href="../">Structure</a> 
+</div>
+{% endblock %}
+
+{% block content %}
+    {% if object %}
+        <p id="mediadatabase_pk" style="display:none;">{{ object.mediadatabase.pk }}</p>
+    {% endif %}
+    <div id="tv-on-demand">
+        <div id="cont">
+            <h1>TV On Demand - {% trans 'Structure' %}</h1>
+
+            <h2>{% trans 'Structure configuration' %}</h2>
+            <div id="structure-frame">               
+
+                <form method="post" action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        {% if object %}
+                            {% structure_as_p form 'users' object %}
+                        {% else %}
+                            {% structure_as_p form 'users' %}
+                            <span class="no-extra-fields">True</span>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {% structure_as_p form 'name,date_start,date_end,skin,mediadatabase' %}
+                        <p class="buttons">
+                            <input type="submit" value="{% trans 'Save' %}" name="structure_save" id="id_structure_save" /> <br />
+                        </p>
+                    </div>
+                </form>
+            </div>
+
+            {% if object %}
+            <h2>
+                <strong>{% trans 'Structure montage' %}</strong> 
+                <a href="{% url tod_preview object.pk %}" target="_blank" class="top">
+                    <img src="/media/style/preview_icon.png" />
+                    {% trans 'Preview' %}
+                </a>
+            </h2>
+            
+            <p id="allowed-medias">menu,{{ object.skin.get_allowed_medias }}</p>
+
+            <div id="rows-frame">
+                {% load_structurerows object %}
+                <p class="ghost">
+                    {{ row_form.entry }}
+                </p>
+                
+                {% if not rows_output %}
+                <!-- LEVEL -->
+                <div>
+                    <!-- MENU -->
+                    <h2>
+                        <span>Menu</span>
+                        <em>
+                            <a href="#" class="menu-properties" title="editar esse item">Editar</a> / 
+                            <a href="#" class="level-add" title="adicionar nível">{% trans 'Level' %} [+]</a> / 
+                            <a href="#" class="row-add" title="adicionar item">{% trans 'Item' %} [+]</a> /
+                            <a href="#" class="level-rm" title="remover este nível">{% trans 'Level' %} [-]</a>
+                        </em>
+                        
+                        <p class="ghost">
+                            <a href="/admin/mediafiles/mediafile/?media_type__exact=menu&media_database__id__exact={{ object.mediadatabase.pk }}"
+                                 class="select-media">Selecionar um menu</a> <br/><br/>
+                            <span class="ghost">
+                                Título<br /> <input type="text" name="fake_title" /> <br />
+                                Descrição<br /> <input type="text" name="fake_description" /> <br />
+                                Grupos permitidos<br /> {{ row_form.groups }}<br />
+                                Data de início<br /> <input type="text" name="fake_date_start" /> <br />
+                                Data de término<br /> <input type="text" name="fake_date_end" /> <br />
+                                <input type="hidden" name="fake_media_id" />
+                                <input type="hidden" name="fake_order" value="0" /> 
+                                <input type="hidden" name="fake_object_id" value="" />
+                                <input type="button" name="save_menu" value="Salvar" class="save" />
+                            </span>
+                        </p>
+                    </h2>
+                    <!-- END OF MENU -->
+
+                    <!-- items -->
+                    <ul></ul> 
+                    <!-- end of items -->		
+                </div>
+                <!-- END OF LEVEL -->               
+
+            {% else %}
+                {{ rows_output|safe }}    
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
