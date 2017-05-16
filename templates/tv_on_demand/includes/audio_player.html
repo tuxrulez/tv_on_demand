@@ -1,0 +1,7 @@
+                    {{ row.title }}
+                    {% if row.label %}
+                        <span>{{ row.label }}</span>
+                    {% endif %}
+
+<audio src="{% url mediafiles_serve object.mediafile.pk %}" controls preload="auto" autobuffer></audio>
+

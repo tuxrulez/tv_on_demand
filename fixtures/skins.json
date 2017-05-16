@@ -1,0 +1,114 @@
+[
+    {
+        "pk": 1, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "McDonalds", 
+            "slug": "mcdonalds"
+
+        }
+    }, 
+    {
+        "pk": 5,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "Armazem Paraiba",
+            "slug": "armazem_paraiba"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "tv_on_demand.skin",
+        "fields":{
+            "title": "FGV",
+            "slug": "fgv"
+        }
+
+    },
+    {
+        "pk": 10,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Subway",
+            "slug": "subway"
+        }
+
+    },
+    {
+        "pk": 12,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Burger_King",
+            "slug": "burger_king"
+        }
+
+    },
+    {
+        "pk": 13,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Agiplan",
+            "slug": "agiplan"
+        }
+
+    },
+    {
+        "pk": 17,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "GBarbosa",
+            "slug": "gbarbosa"
+        }
+
+    },
+    {
+        "pk": 23,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Condor",
+            "slug": "condor"
+        }
+    },
+        {
+        "pk": 25,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "extra_minimercado_mobox.swf",
+            "slug": "extra_minimercado_mobox"
+        }
+    },
+	{
+        "pk": 26,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "mercantil_promo_mobox.swf",
+            "slug": "mercantil_promo_mobox"
+        }
+    },
+	 {
+        "pk": 27,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "perini_promo_mobox.swf",
+            "slug": "perini_promo_mobox"
+        }
+    },
+        {
+        "pk": 31,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "socic.swf",
+            "slug": "socic"
+        }
+    }
+    {
+        "pk": 32, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "condor_treinamento nova versao", 
+            "slug": "condor_treinamento"
+
+        }
+    }, 
+	
+ ]

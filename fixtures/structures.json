@@ -1,0 +1,26 @@
+[
+    {
+        "pk": 1, 
+        "model": "tv_on_demand.structure", 
+        "fields": {
+            "skin": 1, 
+            "external_id": null, 
+            "object_id": null, 
+            "content_type": null, 
+            "name": "First Structure",
+            "mediadatabase": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tv_on_demand.structure", 
+        "fields": {
+            "skin": 3, 
+            "external_id": null, 
+            "object_id": null, 
+            "content_type": null, 
+            "name": "Second Structure",
+            "mediadatabase": 1
+        }
+    }
+]

@@ -1,0 +1,17 @@
+    <h2 class="main-breadcrumbs">SELECIONE O CONTEÚDO DESEJADO:</h2>
+    
+    <ul class="main">
+        {% for row in root_rows %}
+            <li class="menu">
+                <a href="{% url tod_children row.pk %}" class="keynav_btn{% if row.restricted %} restricted{% endif %}">
+                    {{ row.title }}
+                </a>
+            </li>
+        {% endfor %}
+        
+        <li class="menu">
+            <a href="{% url tod_live %}" class="keynav_btn">
+                Ao Vivo
+            </a>
+        </li>
+    </ul>
