@@ -109,6 +109,15 @@
             "slug": "condor_treinamento"
 
         }
+    },
+    {
+        "pk": 33, 
+        "model": "tv_on_demand.skin", 
+        "fields": {
+            "title": "Treinamento Condor", 
+            "slug": "treinamento_condor"
+
+        }
     } 
 	
  ]
