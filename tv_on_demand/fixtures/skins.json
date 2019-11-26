@@ -261,13 +261,21 @@
             "title": "socic.swf",
             "slug": "socic"
         }
-    }
+    },
         {
         "pk": 32,
         "model": "tv_on_demand.skin",
         "fields": {
             "title": "condor_treinamento.swf",
             "slug": "condor_treinamento.swf"
+        }
+    },
+        {
+        "pk": 33,
+        "model": "tv_on_demand.skin",
+        "fields": {
+            "title": "Treinamento Condor",
+            "slug": "treinamento_condor.swf"
         }
     }
  ]
